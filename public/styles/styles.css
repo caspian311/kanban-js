@@ -1,0 +1,61 @@
+body {
+   font: 16pt sans-serif;
+   color: #333;
+}
+
+a, a:visited {
+   color: blue;
+}
+
+table.resources {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+.resources td {
+   padding: 5px 10px 5px 10px;
+}
+
+.resources thead {
+   background: #333;
+   color: #fff;
+}
+
+.resources tr {
+   border: solid 1px #333
+}
+
+a.create {
+   background-image: url(/images/add.png);
+   display: block;
+   width: 32px;
+   height: 32px;
+}
+
+a.edit {
+   background-image: url(/images/edit.png);
+   display: block;
+   width: 32px;
+   height: 32px;
+}
+
+a.delete {
+   background-image: url(/images/delete.png);
+   display: block;
+   width: 32px;
+   height: 32px;
+}
+
+h1.header {
+   border-bottom: solid 2px #333;
+   margin-top: 0px;
+}
+
+div.content {
+   width: 500px;
+   margin-left: auto;
+   margin-right: auto;
+   background: #eee;
+   border: solid 2px #333;
+   padding: 20px;
+}

@@ -1,0 +1,40 @@
+<h1 class="header">People</h1>
+
+<table class="resources">
+<thead>
+<td>Last</td>
+<td>First</td>
+<td>Middle</td>
+<td colspan="2" align="center">
+<a class="create" href="/people/new" title="Enter a new person"></a>
+</td>
+</thead>
+<tbody>
+<% if (people.length == 0) { %>
+   <tr>
+   <td colspan="5">
+   No people have been entered yet. <br />
+   </td>
+   </tr>
+<% } %>
+<% people.each(function(person) { %>
+   <tr>
+   <td>
+   <%= person.lastName %>
+   </td>
+   <td>
+   <%= person.firstName %>
+   </td>
+   <td>
+   <%= person.middleName %>
+   </td>
+   <td>
+   <a class="edit" href="/people/<%= person.id %>/edit" title="Edit person"></a>
+   </td>
+   <td>
+   <a class="delete" href="#" id="<%= person.id %>" title="Remove person"></a>
+   </td>
+   </tr>
+<% }) %>
+</tbody>
+</table>
