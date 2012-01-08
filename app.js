@@ -8,6 +8,7 @@ app.configure(function() {
    this.use(express.bodyParser());
    this.use(express.methodOverride());
    this.use(express.static(__dirname + '/public'));
+   this.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 app.listen(1337);
 
@@ -16,6 +17,6 @@ app.get('/', function(req, res){
 });
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/sample1');
+mongoose.connect('mongodb://localhost/kanban-js');
 
-app.resource('people', require('./lib/people'));
+app.resource('stories', require('./lib/stories'));

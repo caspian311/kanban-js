@@ -1,10 +1,13 @@
 body {
    font: 16pt sans-serif;
    color: #333;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee));
+   background: -moz-linear-gradient(top,  #ffffff,  #eeeeee);
 }
 
 a, a:visited {
    color: blue;
+   text-decoration: none;
 }
 
 table.resources {
@@ -12,17 +15,19 @@ table.resources {
    width: 100%;
 }
 
-.resources td {
-   padding: 5px 10px 5px 10px;
+table.resources tbody tr:nth-child(odd) {
+   background: #ffffff;
+   border: solid 1px #333;
 }
 
-.resources thead {
-   background: #333;
+table.resources tbody tr:nth-child(even) {
+   background: #ddd;
+   border: solid 1px #333;
+}
+
+table.resources thead {
    color: #fff;
-}
-
-.resources tr {
-   border: solid 1px #333
+   background: #333;
 }
 
 a.create {
@@ -55,7 +60,29 @@ div.content {
    width: 500px;
    margin-left: auto;
    margin-right: auto;
-   background: #eee;
-   border: solid 2px #333;
+   background: #B2D1ED;
+   border: solid 2px #5896CC;
    padding: 20px;
 }
+
+textarea {
+   width: 100%;
+   padding: 3px;
+   border: solid 2px #5896CC;
+}
+
+input[type=text] {
+   border: solid 2px #5896CC;
+   padding: 3px;
+}
+
+input[type=submit],
+input[type=button] {
+   font-size: 12pt;
+   border: solid 2px #5896CC;
+   padding: 5px;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+   background: -moz-linear-gradient(top,  #ffffff,  #cccccc);
+   float: right;
+}
+

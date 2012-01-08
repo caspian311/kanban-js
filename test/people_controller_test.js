@@ -1,17 +1,17 @@
 require('should');
 
 var mongoose = require('mongoose');
-var Person = mongoose.model('Person',  new mongoose.Schema());
+var Story = mongoose.model('Story',  new mongoose.Schema());
 
-var testObject = require('../lib/people_controller.js');
+var testObject = require('../lib/stories_controller.js');
 
-describe('PeopleController', function() {
+describe('StoriesController', function() {
    describe('#index', function() {
-      it('should show all people', function() {
-         var people = [{}, {}];
+      it('should show all stories', function() {
+         var stories = [{}, {}];
 
-         Person.find = function(callback) {
-            callback({}, people);
+         Story.find = function(callback) {
+            callback({}, stories);
          };
 
          var _obj;
@@ -23,12 +23,12 @@ describe('PeopleController', function() {
 
          testObject.index({}, res);
 
-         _obj.should.have.property.people;
-         _obj.people.length.should.equal(2);
+         _obj.should.have.property.stories;
+         _obj.stories.length.should.equal(2);
       });
 
-      it('should display the people/index view', function() {
-         Person.find = function(callback) {
+      it('should display the stories/index view', function() {
+         Story.find = function(callback) {
             callback({}, {});
          };
 
@@ -41,7 +41,7 @@ describe('PeopleController', function() {
 
          testObject.index({}, res);
 
-         _view.should.equal('people/index');
+         _view.should.equal('stories/index');
       });
    });
 });
