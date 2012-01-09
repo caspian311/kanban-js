@@ -44,5 +44,21 @@ describe('StoriesController', function() {
          _view.should.equal('stories/index');
       });
    });
+
+   describe('#createView', function() {
+      it('should show the create view', function() {
+         var _view;
+         var res = {
+            render: function(view, obj) {
+               _view = view;
+            }
+         };
+
+         testObject.new({}, res);
+
+         _view.should.equal('stories/create');
+      });
+   });
+
 });
 
