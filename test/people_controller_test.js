@@ -60,5 +60,45 @@ describe('StoriesController', function() {
       });
    });
 
+   describe('#edit', function() {
+      it('should show the edit view', function() {
+         Story.findById = function(id, callback) {
+            callback(null, {});
+         };
+
+         var _view;
+         var res = {
+            render: function(view, obj) {
+               _view = view;
+            }
+         };
+
+         testObject.edit({params: {storie: 1}}, res);
+
+         _view.should.equal('stories/edit');
+      });
+
+      it('should have the object that\'s being edited', function() {
+         var expectedObject = { name: 'expected object to edit'};
+         Story.findById = function(id, callback) {
+            if (id == 123) {
+               callback(null, expectedObject);
+            }
+         };
+
+         var _obj;
+         var res = {
+            render: function(view, obj) {
+               _obj = obj;
+            }
+         };
+
+         testObject.edit({params: {storie: 123}}, res);
+
+         _obj.should.have.property.story;
+         _obj.story.should.have.property.name;
+         _obj.story.name.should.equal('expected object to edit');
+      });
+   });
 });
 
