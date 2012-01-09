@@ -1,4 +1,4 @@
-require('should');
+var should = require('should');
 
 var mongoose = require('mongoose');
 var Story = mongoose.model('Story',  new mongoose.Schema());
@@ -23,7 +23,7 @@ describe('StoriesController', function() {
 
          testObject.index({}, res);
 
-         _obj.should.have.property.stories;
+         _obj.should.have.property('stories');
          _obj.stories.length.should.equal(2);
       });
 
@@ -95,9 +95,48 @@ describe('StoriesController', function() {
 
          testObject.edit({params: {storie: 123}}, res);
 
-         _obj.should.have.property.story;
-         _obj.story.should.have.property.name;
-         _obj.story.name.should.equal('expected object to edit');
+         _obj.should.have.property('story');
+         _obj.story.should.have.property('name', 'expected object to edit');
+      });
+   });
+
+   describe('#destroy', function() {
+      it('should delete the object with the id given', function() {
+         var objectToBeDeleted = {
+            name: 'object to be deleted',
+            remove: function(callback) {
+               callback();
+            }
+         };
+         Story.findById = function(id, callback) {
+            if (id == 234) {
+               callback(null, objectToBeDeleted);
+            }
+         };
+
+         var _obj;
+         var res = {
+            send: function(obj) {
+               _obj = obj;
+            }
+         };
+
+         testObject.destroy({params: {storie: 234}}, res);
+
+         should.exist(_obj);
+      });
+
+      it('should throw an error if the object is not found', function() {
+         Story.findById = function(id, callback) {
+            callback({});
+         };
+
+         try {
+            testObject.destroy({params: {storie: 1}}, {});
+            should.fail('expected an error');
+         } catch(e) {
+            e.should.equal('Could not find story to delete: 1');
+         }
       });
    });
 });
