@@ -17,17 +17,30 @@ table.resources {
 
 table.resources tbody tr:nth-child(odd) {
    background: #ffffff;
-   border: solid 1px #333;
+   border: solid 1px #AED6F2;
 }
 
 table.resources tbody tr:nth-child(even) {
-   background: #ddd;
-   border: solid 1px #333;
+   background: #E6ECF0;
+   border: solid 1px #AED6F2;
 }
 
 table.resources thead {
    color: #fff;
-   background: #333;
+   font-weight: bold;
+   background: #AED6F2;
+}
+
+table.resources td {
+   padding: 5px;
+}
+
+table.form {
+   width: 100%;
+}
+
+table.form td {
+   padding: 5px;
 }
 
 a.create {
@@ -52,34 +65,36 @@ a.delete {
 }
 
 h1.header {
+   color: #333;
    border-bottom: solid 2px #333;
    margin-top: 0px;
 }
 
 div.content {
-   width: 500px;
+   width: 90%;
    margin-left: auto;
    margin-right: auto;
-   background: #B2D1ED;
-   border: solid 2px #5896CC;
+   background: #D3E4F0;
+   border: solid 2px #AED6F2;
    padding: 20px;
 }
 
 textarea {
    width: 100%;
+   height: 150px;
    padding: 3px;
-   border: solid 2px #5896CC;
+   border: solid 2px #AED6F2;
 }
 
 input[type=text] {
-   border: solid 2px #5896CC;
+   border: solid 2px #AED6F2;
    padding: 3px;
 }
 
 input[type=submit],
 input[type=button] {
    font-size: 12pt;
-   border: solid 2px #5896CC;
+   border: solid 2px #AED6F2;
    padding: 5px;
    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
    background: -moz-linear-gradient(top,  #ffffff,  #cccccc);

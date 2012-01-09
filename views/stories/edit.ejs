@@ -3,12 +3,12 @@
 <form method="POST" action="/stories/<%= story.id %>">
 <input type="hidden" name="story[id]" value="<%= story.id %>" />
 <input type="hidden" name="_method" value="put" />
-<table>
+<table class="form">
 <tr>
 <td>Name</td>
 </tr>
 <tr>
-<td><input type="text" name="story[name]" value="<%= story.name %>" /></td>
+<td><input type="text" name="story[name]" value="<%= story.name %>" size="50" /></td>
 </tr>
 <tr>
 <td>Description</td>
