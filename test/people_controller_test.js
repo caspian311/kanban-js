@@ -139,5 +139,15 @@ describe('StoriesController', function() {
          }
       });
    });
+
+   describe('#create', function() {
+      it('should save the story', function() {
+      });
+   });
+
+   describe('#update', function() {
+      it('should update the existing story', function() {
+      });
+   });
 });
 
