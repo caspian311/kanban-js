@@ -1,0 +1,2 @@
+default: --tags ~@wip --format progress --format junit --out=reports
+wip: --tags @wip --format progress

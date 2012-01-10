@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite errors="0" failures="0" name="Stories" skipped="1" tests="1" time="0.001117">
+<testcase classname="Stories.User can view, add, edit, and remove user stories" name="User can view, add, edit, and remove user stories" time="0.001117">
+  <skipped/>
+</testcase>
+</testsuite>
