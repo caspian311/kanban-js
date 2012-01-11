@@ -6,10 +6,13 @@ $LOAD_PATH.push File.dirname(__FILE__)
 
 require 'something_module'
 
-Capybara.configure do |config|
-   config.app_host = 'localhost:1337'
-   config.run_server = false
-   config.default_driver = :selenium
+Capybara.register_driver :selenium do |app|
+   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
+
+Capybara.default_selector = :css
+Capybara.default_driver = :selenium
+Capybara.app_host = 'localhost:1337'
+Capybara.run_server = false
 
 World(SomethingModule)

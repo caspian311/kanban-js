@@ -2,9 +2,9 @@ module SomethingModule
    def path_to(page_name)
       page = ''
       if page_name == 'home'
-         page = '/'
+         page = ''
       elsif page_name == 'stories'
-         page = '/stories'
+         page = 'stories'
       end
       "/#{page}"
    end
