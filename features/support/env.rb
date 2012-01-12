@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'mongo'
 require 'rspec'
 require 'bundler/setup'
 require 'capybara/cucumber'
@@ -14,5 +15,11 @@ Capybara.default_selector = :css
 Capybara.default_driver = :selenium
 Capybara.app_host = 'localhost:1337'
 Capybara.run_server = false
+
+Before do
+   db = Mongo::Connection.new.db("kanban-js")
+   collection = db.collection("stories")
+   collection.remove
+end
 
 World(SomethingModule)
