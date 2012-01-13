@@ -182,7 +182,42 @@ describe('StoriesController', function() {
    });
 
    describe('#update', function() {
-      it('should update the existing story', function() {
+      it('should redirect back', function() {
+         people_model.update = function(obj, callback) {
+            callback();
+         }
+         var _destination = null;
+         var res = {
+            redirect: function(destination) {
+               _destination = destination;
+            }
+         };
+
+         testObject.update({body: { story: {}}}, res);
+
+         _destination.should.equal('back');
+      });
+
+      it('should update object to model', function() {
+         var actual_object = null;
+         people_model.update = function(obj, callback) {
+            actual_object = obj
+            callback();
+         }
+         var _destination = null;
+         var res = {
+            redirect: function(destination) {
+               _destination = destination;
+            }
+         };
+
+         var expected_object = {
+            name: 'something'
+         };
+         testObject.update({body: { story: expected_object}}, res);
+
+         actual_object.should.have.property('name');
+         actual_object.name.should.equal('something');
       });
    });
 });
