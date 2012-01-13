@@ -3,7 +3,8 @@ var should = require('should');
 var mongoose = require('mongoose');
 var Story = mongoose.model('Story',  new mongoose.Schema());
 
-var testObject = require('../lib/stories_controller.js');
+var testObject = require('../lib/stories_controller');
+var people_model = require('../lib/people_model');
 
 describe('StoriesController', function() {
    describe('#index', function() {
@@ -141,7 +142,42 @@ describe('StoriesController', function() {
    });
 
    describe('#create', function() {
-      it('should save the story', function() {
+      it('should redirect back', function() {
+         people_model.save = function(obj, callback) {
+            callback();
+         }
+         var _destination = null;
+         var res = {
+            redirect: function(destination) {
+               _destination = destination;
+            }
+         };
+
+         testObject.create({body: { story: {}}}, res);
+
+         _destination.should.equal('back');
+      });
+
+      it('should save object to model', function() {
+         var actual_object = null;
+         people_model.save = function(obj, callback) {
+            actual_object = obj
+            callback();
+         }
+         var _destination = null;
+         var res = {
+            redirect: function(destination) {
+               _destination = destination;
+            }
+         };
+
+         var expected_object = {
+            name: 'something'
+         };
+         testObject.create({body: { story: expected_object}}, res);
+
+         actual_object.should.have.property('name');
+         actual_object.name.should.equal('something');
       });
    });
 
