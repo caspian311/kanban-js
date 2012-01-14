@@ -16,7 +16,4 @@ app.get('/', function(req, res){
    res.render('index');
 });
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/kanban-js');
-
 app.resource('stories', require('./lib/stories'));

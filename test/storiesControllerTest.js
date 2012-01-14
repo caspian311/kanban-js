@@ -1,14 +1,16 @@
 var should = require('should');
 
-var testObject = require('../lib/storiesController');
-var storiesModel = require('../lib/storiesModel');
+var StoriesController = require('../lib/storiesController');
+
+var storiesModelStub = {};
+testObject = new StoriesController(storiesModelStub);
 
 describe('StoriesController', function() {
    describe('#index', function() {
       it('should show all stories', function() {
          var stories = [{}, {}];
 
-         storiesModel.listAll = function(callback) {
+         storiesModelStub.listAll = function(callback) {
             callback(stories);
          };
 
@@ -26,7 +28,7 @@ describe('StoriesController', function() {
       });
 
       it('should display the stories/index view', function() {
-         storiesModel.listAll = function(callback) {
+         storiesModelStub.listAll = function(callback) {
             callback();
          };
 
@@ -60,7 +62,7 @@ describe('StoriesController', function() {
 
    describe('#edit', function() {
       it('should show the edit view', function() {
-         storiesModel.findById = function(id, callback) {
+         storiesModelStub.findById = function(id, callback) {
             callback({});
          };
 
@@ -78,7 +80,7 @@ describe('StoriesController', function() {
 
       it('should have the object that\'s being edited', function() {
          var expectedObject = { name: 'expected object to edit'};
-         storiesModel.findById = function(id, callback) {
+         storiesModelStub.findById = function(id, callback) {
             if (id == 123) {
                callback(expectedObject);
             } else {
@@ -103,7 +105,7 @@ describe('StoriesController', function() {
    describe('#destroy', function() {
       it('should delete the object with the id given', function() {
          var _id = 0;
-         storiesModel.deleteStory = function(id, callback) {
+         storiesModelStub.deleteStory = function(id, callback) {
             _id = id;
             callback();
          };
@@ -116,7 +118,7 @@ describe('StoriesController', function() {
 
    describe('#create', function() {
       it('should redirect back', function() {
-         storiesModel.save = function(obj, callback) {
+         storiesModelStub.save = function(obj, callback) {
             callback();
          }
          var _destination = null;
@@ -133,7 +135,7 @@ describe('StoriesController', function() {
 
       it('should save object to model', function() {
          var actual_object = null;
-         storiesModel.save = function(obj, callback) {
+         storiesModelStub.save = function(obj, callback) {
             actual_object = obj
             callback();
          }
@@ -156,7 +158,7 @@ describe('StoriesController', function() {
 
    describe('#update', function() {
       it('should redirect back', function() {
-         storiesModel.update = function(obj, callback) {
+         storiesModelStub.update = function(obj, callback) {
             callback();
          }
          var _destination = null;
@@ -173,7 +175,7 @@ describe('StoriesController', function() {
 
       it('should update object to model', function() {
          var actual_object = null;
-         storiesModel.update = function(obj, callback) {
+         storiesModelStub.update = function(obj, callback) {
             actual_object = obj
             callback();
          }

@@ -24,5 +24,5 @@
 All UATs are run from cucumber which means that you'll need all appropriate ruby, cucumber, mongo drivers installed to run them.
 
 ## install ruby pre-requisites
-```$ gem install mongo bson bson_ext```
+```$ gem install cucumber mongo bson bson_ext```
 
