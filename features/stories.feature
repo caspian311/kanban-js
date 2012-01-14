@@ -18,13 +18,15 @@ Feature: Stories
          And I fill in "name" with "different name"
          And I fill in "description" with "blah blah blah"
          And I press "Update story"
-      Then I should see "different name"
+      Then I should be on the "stories" page
+         And I should see "different name"
          And I should see "blah blah blah"
          And I should see "TODAY"
          And I should not see "story name"
          And I should not see "this is the story description"
       When I follow "Remove story"
-      Then I should see "No stories have been entered yet"
+      Then I should be on the "stories" page
+         And I should see "No stories have been entered yet"
          And I should not see "different name"
          And I should not see "blah blah blah"
 

@@ -5,7 +5,7 @@ clean:
 	rm -fR reports
 
 tests:
-	mocha --reporter spec test/*test.js
+	mocha --reporter spec test/*Test.js
 
 cukes:
 	mkdir reports
