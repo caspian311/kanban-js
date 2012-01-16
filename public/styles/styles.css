@@ -57,7 +57,14 @@ a.edit {
    height: 32px;
 }
 
-a.delete {
+a.deleteRelease {
+   background-image: url(/images/delete.png);
+   display: block;
+   width: 32px;
+   height: 32px;
+}
+
+a.deleteStory {
    background-image: url(/images/delete.png);
    display: block;
    width: 32px;

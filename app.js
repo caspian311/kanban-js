@@ -17,3 +17,4 @@ app.get('/', function(req, res){
 });
 
 app.resource('stories', require('./lib/stories'));
+app.resource('releases', require('./lib/releases'));

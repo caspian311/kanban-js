@@ -1,12 +1,12 @@
 var kanban = kanban || {};
-kanban.stories = {};
+kanban.releases = {};
 
-kanban.stories.delete = function(id) {
+kanban.releases.delete = function(id) {
    $.ajax({
-      url: '/stories/' + id, 
+      url: '/releases/' + id, 
       type: 'delete',
       success: function() {
-         window.location.href = '/stories';
+         window.location.href = '/releases';
       },
       error: function(data) {
          alert('failed to delete: ' + id + '\n' + data.responseText);
@@ -15,8 +15,8 @@ kanban.stories.delete = function(id) {
 }
 
 $(function() {
-   $('.deleteStory').click(function() {
-      kanban.stories.delete(this.id);
+   $('.deleteRelease').click(function() {
+      kanban.releases.delete(this.id);
       return false;
    });
 });

@@ -18,8 +18,8 @@ Capybara.run_server = false
 
 Before do
    db = Mongo::Connection.new.db("kanban-js")
-   collection = db.collection("stories")
-   collection.remove
+   db.collection("stories").remove
+   db.collection("releases").remove
 end
 
 World(SomethingModule)

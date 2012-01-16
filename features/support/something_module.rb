@@ -3,6 +3,8 @@ module SomethingModule
       page = ''
       if page_name == 'home'
          page = ''
+      elsif page_name == 'releases'
+         page = 'releases'
       elsif page_name == 'stories'
          page = 'stories'
       end
