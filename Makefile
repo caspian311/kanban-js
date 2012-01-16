@@ -10,4 +10,5 @@ tests:
 cukes:
 	mkdir reports
 	cucumber
+	cucumber -p wip
 
