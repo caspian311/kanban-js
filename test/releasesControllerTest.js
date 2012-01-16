@@ -1,6 +1,6 @@
 var should = require('should');
 
-var ReleasesController = require('../lib/releasesController');
+var ReleasesController = require('../lib/controllers/releasesController');
 
 var releasesModelStub = {};
 var testObject = new ReleasesController(releasesModelStub);

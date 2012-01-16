@@ -1,6 +1,6 @@
 var should = require('should');
 
-var StoriesController = require('../lib/storiesController');
+var StoriesController = require('../lib/controllers/storiesController');
 
 var storiesModelStub = {};
 var testObject = new StoriesController(storiesModelStub);

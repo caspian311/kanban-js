@@ -5,7 +5,7 @@ var Data = require('../lib/data');
 
 var _data = new Data();
 
-var StoriesModel = require('../lib/storiesModel');
+var StoriesModel = require('../lib/models/storiesModel');
 var testObject = new StoriesModel(_data);
 
 describe('StoriesModel', function() {
