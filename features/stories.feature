@@ -30,3 +30,15 @@ Feature: Stories
          And I should not see "different name"
          And I should not see "blah blah blah"
 
+   @wip
+   Scenario: User can associate a story with a release
+      Given I have a release name "Release 1.0"
+         And I have a release name "Release 2.0"
+         And I have a release name "Release 3.0"
+      When I go to the "stories" page
+         And I follow "Enter a new story"
+      Then I should see the following options in the "release" dropdown:
+         | Release 1.0  |
+         | Release 2.0  |
+         | Release 3.0  |
+
