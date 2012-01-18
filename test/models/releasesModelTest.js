@@ -1,11 +1,11 @@
 var should = require('should');
 var util = require('util');
 
-var Data = require('../lib/data');
+var Data = require('../../lib/data');
 
 var _data = new Data();
 
-var ReleasesModel = require('../lib/models/releasesModel');
+var ReleasesModel = require('../../lib/models/releasesModel');
 var testObject = new ReleasesModel(_data);
 
 describe('ReleasesModel', function() {

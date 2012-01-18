@@ -1,17 +1,17 @@
 var should = require('should');
 
-var ReleasesController = require('../lib/controllers/releasesController');
+var StoriesController = require('../../lib/controllers/storiesController');
 
-var releasesModelStub = {};
-var testObject = new ReleasesController(releasesModelStub);
+var storiesModelStub = {};
+var testObject = new StoriesController(storiesModelStub);
 
-describe('ReleasesController', function() {
+describe('StoriesController', function() {
    describe('#index', function() {
-      it('should show all releases', function() {
-         var releases = [{}, {}];
+      it('should show all stories', function() {
+         var stories = [{}, {}];
 
-         releasesModelStub.listAll = function(callback) {
-            callback(releases);
+         storiesModelStub.listAll = function(callback) {
+            callback(stories);
          };
 
          var _obj;
@@ -23,12 +23,12 @@ describe('ReleasesController', function() {
 
          testObject.index({}, res);
 
-         _obj.should.have.property('releases');
-         _obj.releases.length.should.equal(2);
+         _obj.should.have.property('stories');
+         _obj.stories.length.should.equal(2);
       });
 
-      it('should display the releases/index view', function() {
-         releasesModelStub.listAll = function(callback) {
+      it('should display the stories/index view', function() {
+         storiesModelStub.listAll = function(callback) {
             callback();
          };
 
@@ -41,7 +41,7 @@ describe('ReleasesController', function() {
 
          testObject.index({}, res);
 
-         _view.should.equal('releases/index');
+         _view.should.equal('stories/index');
       });
    });
 
@@ -56,13 +56,13 @@ describe('ReleasesController', function() {
 
          testObject.new({}, res);
 
-         _view.should.equal('releases/create');
+         _view.should.equal('stories/create');
       });
    });
 
    describe('#edit', function() {
       it('should show the edit view', function() {
-         releasesModelStub.findById = function(id, callback) {
+         storiesModelStub.findById = function(id, callback) {
             callback({});
          };
 
@@ -73,14 +73,14 @@ describe('ReleasesController', function() {
             }
          };
 
-         testObject.edit({params: {release: 1}}, res);
+         testObject.edit({params: {storie: 1}}, res);
 
-         _view.should.equal('releases/edit');
+         _view.should.equal('stories/edit');
       });
 
       it('should have the object that\'s being edited', function() {
          var expectedObject = { name: 'expected object to edit'};
-         releasesModelStub.findById = function(id, callback) {
+         storiesModelStub.findById = function(id, callback) {
             if (id == 123) {
                callback(expectedObject);
             } else {
@@ -95,22 +95,22 @@ describe('ReleasesController', function() {
             }
          };
 
-         testObject.edit({params: {release: 123}}, res);
+         testObject.edit({params: {storie: 123}}, res);
 
-         _obj.should.have.property('release');
-         _obj.release.should.have.property('name', 'expected object to edit');
+         _obj.should.have.property('story');
+         _obj.story.should.have.property('name', 'expected object to edit');
       });
    });
 
    describe('#destroy', function() {
       it('should delete the object with the id given', function() {
          var _id = 0;
-         releasesModelStub.deleteRelease = function(id, callback) {
+         storiesModelStub.deleteStory = function(id, callback) {
             _id = id;
             callback();
          };
 
-         testObject.destroy({params: {release: 234}}, {send: function() {}});
+         testObject.destroy({params: {storie: 234}}, {send: function() {}});
 
          _id.should.equal(234);
       });
@@ -118,7 +118,7 @@ describe('ReleasesController', function() {
 
    describe('#create', function() {
       it('should redirect back', function() {
-         releasesModelStub.save = function(obj, callback) {
+         storiesModelStub.save = function(obj, callback) {
             callback();
          }
          var _destination = null;
@@ -128,14 +128,14 @@ describe('ReleasesController', function() {
             }
          };
 
-         testObject.create({body: { release: {}}}, res);
+         testObject.create({body: { story: {}}}, res);
 
-         _destination.should.equal('/releases');
+         _destination.should.equal('/stories');
       });
 
       it('should save object to model', function() {
          var actual_object = null;
-         releasesModelStub.save = function(obj, callback) {
+         storiesModelStub.save = function(obj, callback) {
             actual_object = obj
             callback();
          }
@@ -149,7 +149,7 @@ describe('ReleasesController', function() {
          var expected_object = {
             name: 'something'
          };
-         testObject.create({body: { release: expected_object}}, res);
+         testObject.create({body: { story: expected_object}}, res);
 
          actual_object.should.have.property('name');
          actual_object.name.should.equal('something');
@@ -158,7 +158,7 @@ describe('ReleasesController', function() {
 
    describe('#update', function() {
       it('should redirect back', function() {
-         releasesModelStub.update = function(obj, callback) {
+         storiesModelStub.update = function(obj, callback) {
             callback();
          }
          var _destination = null;
@@ -168,14 +168,14 @@ describe('ReleasesController', function() {
             }
          };
 
-         testObject.update({body: { release: {}}}, res);
+         testObject.update({body: { story: {}}}, res);
 
-         _destination.should.equal('/releases');
+         _destination.should.equal('/stories');
       });
 
       it('should update object to model', function() {
          var actual_object = null;
-         releasesModelStub.update = function(obj, callback) {
+         storiesModelStub.update = function(obj, callback) {
             actual_object = obj
             callback();
          }
@@ -189,7 +189,7 @@ describe('ReleasesController', function() {
          var expected_object = {
             name: 'something'
          };
-         testObject.update({body: { release: expected_object}}, res);
+         testObject.update({body: { story: expected_object}}, res);
 
          actual_object.should.have.property('name');
          actual_object.name.should.equal('something');

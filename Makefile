@@ -6,7 +6,7 @@ clean:
 	mkdir reports
 
 tests:
-	mocha --reporter spec test/*Test.js
+	mocha --reporter spec test/**/*Test.js
 
 cukes:
 	cucumber
