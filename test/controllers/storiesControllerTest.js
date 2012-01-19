@@ -82,8 +82,9 @@ describe('StoriesController', function() {
 
          testObject.new({}, res);
 
-         _obj.should.have.property('woot');
-         _obj.woot.should.equal('monkey');
+         _obj.should.have.property('model');
+         _obj.model.should.have.property('woot');
+         _obj.model.woot.should.equal('monkey');
       });
    });
 
