@@ -30,7 +30,6 @@ Feature: Stories
          And I should not see "different name"
          And I should not see "blah blah blah"
 
-   @wip
    Scenario: User can associate a story with a release
       Given I have a release name "Release 1.0"
          And I have a release name "Release 2.0"

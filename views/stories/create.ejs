@@ -14,6 +14,15 @@
 <tr>
 <td><textarea id="description" name="story[description]"></textarea></td>
 </tr>
+<tr>
+<td>
+   <select id="release" name="story[release]">
+   <% model.releases.each(function(release) { %>
+      <option value="<%= release.id %>"><%= release.name %></option>
+   <% }); %>
+   </select>
+</td>
+</tr>
 </table>
 <input class="cancel" type="button" value="Cancel" />
 <input type="submit" value="Create new story" />
