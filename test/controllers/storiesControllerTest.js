@@ -47,6 +47,10 @@ describe('StoriesController', function() {
 
    describe('#createView', function() {
       it('should show the create view', function() {
+         storiesModelStub.getCreateViewModel = function(callback) {
+            callback({});
+         }
+
          var _view;
          var res = {
             render: function(view, obj) {
@@ -57,6 +61,29 @@ describe('StoriesController', function() {
          testObject.new({}, res);
 
          _view.should.equal('stories/create');
+      });
+   });
+
+   describe('#createView', function() {
+      it('should fetch the create view model from the stories model', function() {
+         var model = {
+            woot: "monkey"
+         };
+         storiesModelStub.getCreateViewModel = function(callback) {
+            callback(model);
+         }
+
+         var _obj;
+         var res = {
+            render: function(view, obj) {
+               _obj = obj;
+            }
+         };
+
+         testObject.new({}, res);
+
+         _obj.should.have.property('woot');
+         _obj.woot.should.equal('monkey');
       });
    });
 

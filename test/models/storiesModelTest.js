@@ -122,5 +122,25 @@ describe('StoriesModel', function() {
          });
       });
    });
+
+   describe('#getCreateViewModel', function() {
+      it('should return a view model with all releases', function(done) {
+         var release1 = new _data.Release();
+         release1.name = 'test1';
+         release1.save();
+         
+         var release2 = new _data.Release();
+         release2.name = 'test2';
+         release2.save();
+
+         testObject.getCreateViewModel(function(model) {
+            model.should.have.property("releases");
+            model.releases.length.should.equal(2);
+            model.releases[0].name.should.equal("test1");
+            model.releases[1].name.should.equal("test2");
+            done();
+         });
+      });
+   });
 });
 
