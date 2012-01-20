@@ -40,4 +40,7 @@ Then /^I should see the following options in the "(.*)" dropdown:$/ do |dropdown
    end
 end
 
+When /^I select "(.*)" from the "(.*)" dropdown$/ do |option, dropdown|
+   select(option, :from => dropdown)
+end
 

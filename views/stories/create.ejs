@@ -2,27 +2,31 @@
 
 <form method="POST" action="/stories">
 <table class="form">
-<tr>
-<td>Name</td>
-</tr>
-<tr>
-<td><input type="text" id="name" name="story[name]" size="50" /></td>
-</tr>
-<tr>
-<td>Description</td>
-</tr>
-<tr>
-<td><textarea id="description" name="story[description]"></textarea></td>
-</tr>
-<tr>
-<td>
-   <select id="release" name="story[release]">
-   <% model.releases.each(function(release) { %>
-      <option value="<%= release.id %>"><%= release.name %></option>
-   <% }); %>
-   </select>
-</td>
-</tr>
+   <tr>
+      <td>Name</td>
+   </tr>
+   <tr>
+      <td><input type="text" id="name" name="story[name]" size="50" /></td>
+   </tr>
+   <tr>
+      <td>Description</td>
+   </tr>
+   <tr>
+      <td><textarea id="description" name="story[description]"></textarea></td>
+   </tr>
+   <tr>
+      <td>Release</td>
+   </tr>
+   <tr>
+      <td>
+         <select id="release" name="story[release]">
+            <option>Select a release</option>
+         <% model.releases.each(function(release) { %>
+            <option value="<%= release.id %>"><%= release.name %></option>
+         <% }); %>
+         </select>
+      </td>
+   </tr>
 </table>
 <input class="cancel" type="button" value="Cancel" />
 <input type="submit" value="Create new story" />
