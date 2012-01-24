@@ -17,10 +17,10 @@ kanban.stories.delete = function() {
 }
 
 kanban.stories.updateCreateButton = function() {
-   if ($('#release').val()) {
-      $('#createStory').removeAttr('disabled');
+   if ($('#release').val() && $('#name').val()) {
+      $('#submitStory').removeAttr('disabled');
    } else {
-      $('#createStory').attr('disabled', 'disabled');
+      $('#submitStory').attr('disabled', 'disabled');
    }
 }
 
@@ -28,6 +28,8 @@ $(function() {
    $('.deleteStory').click(kanban.stories.delete);
 
    $('#release').change(kanban.stories.updateCreateButton);
+   $('#name').change(kanban.stories.updateCreateButton);
+   $('#name').keyup(kanban.stories.updateCreateButton);
 
    kanban.stories.updateCreateButton();
 });

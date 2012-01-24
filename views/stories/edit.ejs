@@ -26,7 +26,6 @@
    <tr>
       <td>
          <select id="release" name="story[release]">
-            <option>Select a release</option>
          <% model.releases.each(function(release) { %>
             <option <%= (model.story.release == release.id) ? "selected=\"selected\"" : "" %> 
                value="<%= release.id %>"><%= release.name %></option>
@@ -36,5 +35,5 @@
    </tr>
 </table>
 <input class="cancel" type="button" value="Cancel" />
-<input type="submit" value="Update story" />
+<input id="submitStory" type="submit" value="Update story" />
 </form>
