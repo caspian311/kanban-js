@@ -8,10 +8,10 @@ var testObject = new StoriesController(storiesModelStub);
 describe('StoriesController', function() {
    describe('#index', function() {
       it('should show all stories', function() {
-         var stories = [{}, {}];
+         var viewModel = { key: 'value' };
 
          storiesModelStub.listAll = function(callback) {
-            callback(stories);
+            callback(viewModel);
          };
 
          var _obj;
@@ -23,8 +23,9 @@ describe('StoriesController', function() {
 
          testObject.index({}, res);
 
-         _obj.should.have.property('stories');
-         _obj.stories.length.should.equal(2);
+         _obj.should.have.property('model');
+         _obj.model.should.have.property('key');
+         _obj.model.key.should.equal('value');
       });
 
       it('should display the stories/index view', function() {

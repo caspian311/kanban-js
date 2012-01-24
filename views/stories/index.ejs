@@ -4,6 +4,7 @@
 <thead>
 <td>Name</td>
 <td>Description</td>
+<td>Release</td>
 <td>Created On</td>
 <td>Modified On</td>
 <td colspan="2" align="center">
@@ -11,20 +12,23 @@
 </td>
 </thead>
 <tbody>
-<% if (stories.length == 0) { %>
+<% if (model.stories.length == 0) { %>
    <tr>
    <td colspan="5">
    No stories have been entered yet. <br />
    </td>
    </tr>
 <% } %>
-<% stories.each(function(story) { %>
+<% model.stories.each(function(story) { %>
    <tr>
    <td>
    <%= story.name %>
    </td>
    <td>
    <%= story.description %>
+   </td>
+   <td>
+   <%= story.release_name %>
    </td>
    <td>
    <%= story.createdOn.format('mm/dd/yyyy hh:MM TT') %>

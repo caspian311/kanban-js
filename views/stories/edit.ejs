@@ -1,7 +1,7 @@
 <h1 class="header">Edit</h1>
 
-<form method="POST" action="/stories/<%= story.id %>">
-<input type="hidden" name="story[id]" value="<%= story.id %>" />
+<form method="POST" action="/stories/<%= model.story.id %>">
+<input type="hidden" name="story[id]" value="<%= model.story.id %>" />
 <input type="hidden" name="_method" value="put" />
 <table class="form">
    <tr>
@@ -9,7 +9,7 @@
    </tr>
    <tr>
       <td>
-         <input type="text" id="name" name="story[name]" value="<%= story.name %>" size="50" />
+         <input type="text" id="name" name="story[name]" value="<%= model.story.name %>" size="50" />
       </td>
    </tr>
    <tr>
@@ -17,7 +17,7 @@
    </tr>
    <tr>
       <td>
-         <textarea id="description" name="story[description]"><%= story.description %></textarea>
+         <textarea id="description" name="story[description]"><%= model.story.description %></textarea>
       </td>
    </tr>
    <tr>
@@ -28,7 +28,7 @@
          <select id="release" name="story[release]">
             <option>Select a release</option>
          <% model.releases.each(function(release) { %>
-            <option <%= (story.release.id == release.id) ? "selected=\"selected\"" : "" %> 
+            <option <%= (model.story.release == release.id) ? "selected=\"selected\"" : "" %> 
                value="<%= release.id %>"><%= release.name %></option>
          <% }); %>
          </select>
