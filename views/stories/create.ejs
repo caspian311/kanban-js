@@ -20,7 +20,7 @@
    <tr>
       <td>
          <select id="release" name="story[release]">
-            <option>Select a release</option>
+            <option value="">Select a release</option>
          <% model.releases.each(function(release) { %>
             <option value="<%= release.id %>"><%= release.name %></option>
          <% }); %>
@@ -29,5 +29,5 @@
    </tr>
 </table>
 <input class="cancel" type="button" value="Cancel" />
-<input type="submit" value="Create new story" />
+<input id="createStory" type="submit" value="Create new story" />
 </form>
