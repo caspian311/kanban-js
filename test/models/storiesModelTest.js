@@ -38,27 +38,27 @@ describe('StoriesModel', function() {
          var release1 = new Release();
          release1.name = 'release 1';
          release1.stories = [story1];
-         release1.save();
+         release1.save(function() {
+            var release2 = new Release();
+            release2.name = 'release 2';
+            release2.stories = [story2];
+            release2.save(function() {
+               testObject.listAll(function(model) {
+                  model.should.have.property('stories');
+                  model.stories.should.have.property('length');
+                  model.stories.length.should.equal(2);
+                  model.stories[0].should.have.property('name');
+                  model.stories[0].name.should.equal('test1');
+                  model.stories[0].should.have.property('release_name');
+                  model.stories[0].release_name.should.equal('release 1');
+                  model.stories[1].should.have.property('name');
+                  model.stories[1].name.should.equal('test2');
+                  model.stories[1].should.have.property('release_name');
+                  model.stories[1].release_name.should.equal('release 2');
 
-         var release2 = new Release();
-         release2.name = 'release 2';
-         release2.stories = [story2];
-         release2.save();
-
-         testObject.listAll(function(model) {
-            model.should.have.property('stories');
-            model.stories.should.have.property('length');
-            model.stories.length.should.equal(2);
-            model.stories[0].should.have.property('name');
-            model.stories[0].name.should.equal('test2');
-            model.stories[0].should.have.property('release_name');
-            model.stories[0].release_name.should.equal('release 2');
-            model.stories[1].should.have.property('name');
-            model.stories[1].name.should.equal('test1');
-            model.stories[1].should.have.property('release_name');
-            model.stories[1].release_name.should.equal('release 1');
-
-            done();
+                  done();
+               });
+            });
          });
       });
    });
@@ -67,20 +67,25 @@ describe('StoriesModel', function() {
       it('should delete the specified story', function(done) {
          var story1 = new Story();
          story1.name = 'test1';
-         story1.save();
-         var idOfStoryToDelete = story1.id
          
          var story2 = new Story();
          story2.name = 'test2';
-         story2.save();
 
-         testObject.deleteStory(idOfStoryToDelete, function() {
-            Story.find(function(err, stories) {
-               stories.should.have.property('length');
-               stories.length.should.equal(1);
-               stories[0].name.should.equal('test2');
+         var idOfStoryToDelete = story1.id
 
-               done();
+         var release = new Release();
+         release.name = 'release';
+         release.stories = [story1, story2];
+         release.save(function() {
+            testObject.deleteStory(idOfStoryToDelete, function() {
+               Release.find(function(err, releases) {
+                  var stories = releases[0].stories;
+                  stories.should.have.property('length');
+                  stories.length.should.equal(1);
+                  stories[0].name.should.equal('test2');
+
+                  done();
+               });
             });
          });
       });
