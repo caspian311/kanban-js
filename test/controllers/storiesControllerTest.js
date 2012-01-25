@@ -91,7 +91,7 @@ describe('StoriesController', function() {
 
    describe('#edit', function() {
       it('should show the edit view', function() {
-         storiesModelStub.findById = function(id, callback) {
+         storiesModelStub.getEditStoryViewModel = function(id, callback) {
             callback({});
          };
 
@@ -109,7 +109,7 @@ describe('StoriesController', function() {
 
       it('should have the object that\'s being edited', function() {
          var expectedObject = { name: 'expected object to edit'};
-         storiesModelStub.findById = function(id, callback) {
+         storiesModelStub.getEditStoryViewModel = function(id, callback) {
             if (id == 123) {
                callback(expectedObject);
             } else {
@@ -126,8 +126,8 @@ describe('StoriesController', function() {
 
          testObject.edit({params: {storie: 123}}, res);
 
-         _obj.should.have.property('story');
-         _obj.story.should.have.property('name', 'expected object to edit');
+         _obj.should.have.property('model');
+         _obj.model.should.have.property('name', 'expected object to edit');
       });
    });
 
