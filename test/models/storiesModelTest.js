@@ -131,17 +131,29 @@ describe('StoriesModel', function() {
       it('should update the given story', function(done) {
          var story1 = new Story();
          story1.name = 'test123';
-         story1.save();
+
          var idOfStory = story1.id;
-         
-         story1.name = 'test345';
 
-         testObject.update(story1, function() {
-            Story.findById(idOfStory, function(err, story) {
-               story.should.have.property('name');
-               story.name.should.equal('test345');
+         var release = new Release();
+         release.stories = [story1];
+         var release_id = release.id;
+         release.save(function() {
+            var updatedStory = {
+               id: idOfStory,
+               name: 'test345',
+               release: release_id
+            };
 
-               done();
+            testObject.update(updatedStory, function() {
+               Release.findOne({ "stories._id": idOfStory }, function(err, release) {
+                  release.should.have.property('stories');
+                  release.stories.should.have.property('length');
+                  release.stories.length.should.equal(1);
+                  release.stories[0].should.have.property('name');
+                  release.stories[0].name.should.equal('test345');
+
+                  done();
+               });
             });
          });
       });
