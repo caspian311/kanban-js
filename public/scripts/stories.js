@@ -1,7 +1,8 @@
 var kanban = kanban || {};
 kanban.stories = {};
 
-kanban.stories.delete = function(id) {
+kanban.stories.delete = function() {
+   var id = this.id;
    $.ajax({
       url: '/stories/' + id, 
       type: 'delete',
@@ -12,12 +13,24 @@ kanban.stories.delete = function(id) {
          alert('failed to delete: ' + id + '\n' + data.responseText);
       }
    });
+   return false;
+}
+
+kanban.stories.updateCreateButton = function() {
+   if ($('#release').val() && $('#name').val()) {
+      $('#submitStory').removeAttr('disabled');
+   } else {
+      $('#submitStory').attr('disabled', 'disabled');
+   }
 }
 
 $(function() {
-   $('.deleteStory').click(function() {
-      kanban.stories.delete(this.id);
-      return false;
-   });
+   $('.deleteStory').click(kanban.stories.delete);
+
+   $('#release').change(kanban.stories.updateCreateButton);
+   $('#name').change(kanban.stories.updateCreateButton);
+   $('#name').keyup(kanban.stories.updateCreateButton);
+
+   kanban.stories.updateCreateButton();
 });
 

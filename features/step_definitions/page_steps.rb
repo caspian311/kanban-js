@@ -34,3 +34,13 @@ Then /^I should be on the "([^"]*)" page$/ do |page|
    uri.path.should == path_to(page)
 end
 
+Then /^I should see the following options in the "(.*)" dropdown:$/ do |dropdown, table|
+   table.raw.each do |value|
+      page.has_select?(dropdown, :options => value).should == true
+   end
+end
+
+When /^I select "(.*)" from the "(.*)" dropdown$/ do |option, dropdown|
+   select(option, :from => dropdown)
+end
+
