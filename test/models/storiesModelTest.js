@@ -102,25 +102,18 @@ describe('StoriesModel', function() {
             }
          
             testObject.save(story1, function() {
-               Story.find(function(err, stories) {
+               Release.findById(release.id, function(err, release) {
                   should.not.exist(err);
-                  stories.should.have.property('length');
-                  stories.length.should.equal(1);
-                  stories[0].should.have.property('name');
-                  stories[0].name.should.equal('story name');
-                  stories[0].should.have.property('description');
-                  stories[0].description.should.equal('story description');
+                  should.exist(release);
+                  release.should.have.property('stories');
+                  release.stories.should.have.property('length');
+                  release.stories.length.should.equal(1);
+                  release.stories[0].should.have.property('name');
+                  release.stories[0].name.should.equal('story name');
+                  release.stories[0].should.have.property('description');
+                  release.stories[0].description.should.equal('story description');
 
-                  Release.findById(release._id, function(err, doc) {
-                     doc.stories.should.have.property('length');
-                     doc.stories.length.should.equal(1);
-                     doc.stories[0].should.have.property('name');
-                     doc.stories[0].name.should.equal('story name');
-                     doc.stories[0].should.have.property('description');
-                     doc.stories[0].description.should.equal('story description');
-
-                     done();
-                  });
+                  done();
                });
             });
          });
