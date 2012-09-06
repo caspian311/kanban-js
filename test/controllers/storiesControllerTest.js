@@ -102,7 +102,7 @@ describe('StoriesController', function() {
             }
          };
 
-         testObject.edit({params: {storie: 1}}, res);
+         testObject.edit({params: {story: 1}}, res);
 
          _view.should.equal('stories/edit');
       });
@@ -124,7 +124,7 @@ describe('StoriesController', function() {
             }
          };
 
-         testObject.edit({params: {storie: 123}}, res);
+         testObject.edit({params: {story: 123}}, res);
 
          _obj.should.have.property('model');
          _obj.model.should.have.property('name', 'expected object to edit');
@@ -139,7 +139,7 @@ describe('StoriesController', function() {
             callback();
          };
 
-         testObject.destroy({params: {storie: 234}}, {send: function() {}});
+         testObject.destroy({params: {story: 234}}, {send: function() {}});
 
          _id.should.equal(234);
       });
