@@ -4,7 +4,7 @@ ifeq ($(wildcard $(MOCHA)),)
    MOCHA:=	mocha
 endif
 
-all: clean test cukes cukes_wip
+all: clean tests cukes cukes_wip
 
 clean:
 	rm -fR reports
