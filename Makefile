@@ -1,12 +1,17 @@
 
-all: clean tests cukes cukes_wip
+MOCHA:=	./node_modules/.bin/mocha
+ifeq ($(wildcard $(MOCHA)),)
+   MOCHA:=	mocha
+endif
+
+all: clean test cukes cukes_wip
 
 clean:
 	rm -fR reports
 	mkdir reports
 
 tests:
-	mocha --reporter spec test/**/*Test.js
+	$(MOCHA) --reporter spec test/**/*Test.js
 
 cukes:
 	cucumber
