@@ -3,14 +3,13 @@
 ## install js pre-requisites
 ```$ sudo apt-get install -y nodejs npm```
 
-```$ npm install express
-$ npm install express-resource
-$ npm install mongoose
-$ npm install ejs
-$ npm install mocha
-$ npm install should```
+## install npm dependencies
+```$ npm install```
 
-## start server                 
+## run tests
+```$ make tests```
+
+## start server
 ```$ node app.js```
 
 ## open browser to site
@@ -18,6 +17,9 @@ $ npm install should```
 
 All UATs are run from cucumber which means that you'll need all appropriate ruby, cucumber, mongo drivers installed to run them.
 
-## install ruby pre-requisites
-```$ gem install cucumber mongo bson bson_ext rspec capybara```
+## install cucumber pre-requisites
+```$ bundle install```
+
+## run UATs... server must be running
+```$ make cukes```
 
