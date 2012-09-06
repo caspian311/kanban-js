@@ -1,0 +1,20 @@
+{
+   "name": "kanban-js",
+   "description": "Node/mongo based Kanban board",
+   "version": "0.0.1",
+   "homepage": "https://caspian311.github.com/kanban-js",
+   "author": "Matt Todd <matt.c.todd@gmail.com>",
+   "dependencies": {
+      "express": "2.5.11",
+      "express-resource": "*",
+      "ejs": "*",
+      "mongoose": "2.8.2"
+   },
+   "devDependencies": {
+      "mocha": "*",
+      "should": "*"
+   },
+   "keywords": [ "kanban" ],
+   "main": "index",
+   "engines": { "node": "*" }
+}
