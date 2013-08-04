@@ -1,20 +1,23 @@
-require('./lib/helper');
+(function() {
+  var express = require('express')
+     , http = require('http')
+     , path = require('path')
+     , main = require('./app/main')
 
-var express = require('express');
-var resource = require('express-resource');
-var app = express.createServer();
-app.configure(function() {
-   this.set('view engine', 'ejs');
-   this.use(express.bodyParser());
-   this.use(express.methodOverride());
-   this.use(express.static(__dirname + '/public'));
-   this.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-app.listen(1337);
+   var app = express()
 
-app.get('/', function(req, res){
-   res.render('index');
-});
+   app.use(express.static(path.join(__dirname, 'public')))
+   app.set('view engine', 'jade')
 
-app.resource('stories', require('./lib/stories'));
-app.resource('releases', require('./lib/releases'));
+   app.use(express.logger('dev'))
+   app.use(express.bodyParser())
+   app.use(express.methodOverride())
+   app.use(express.cookieParser())
+   app.use(express.session({ secret: 'keyboard cat' }))
+
+   app.use(main)
+
+   http.createServer(app).listen(3000, function(){
+     console.log("Express server listening on port 3000")
+   });
+})();
