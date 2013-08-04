@@ -3,6 +3,7 @@
      , http = require('http')
      , path = require('path')
      , main = require('./app/main')
+     , login = require('./app/login')
 
    var app = express()
 
@@ -16,6 +17,7 @@
    app.use(express.session({ secret: 'keyboard cat' }))
 
    app.use(main)
+   app.use(login)
 
    http.createServer(app).listen(3000, function(){
      console.log("Express server listening on port 3000")
