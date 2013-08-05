@@ -4,6 +4,7 @@
      , path = require('path')
      , main = require('./app/main')
      , login = require('./app/login')
+     , authentication = require('./app/authentication');
 
    var app = express()
 
@@ -16,6 +17,8 @@
    app.use(express.favicon())
    app.use(express.cookieParser())
    app.use(express.session({ secret: 'keyboard cat' }))
+
+   app.use(authentication)
 
    app.use(main)
    app.use(login)
