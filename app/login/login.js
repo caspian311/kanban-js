@@ -1,9 +1,16 @@
 (function() {
-   var login = function() {
-      this.index = function(request, response) {
+   var passport = require('passport');
+
+   var Login = function() {
+      this.form = function(request, response) {
          response.render('form');
       };
+
+      this.submit = passport.authenticate('local', {
+         failureRedirect: '/login',
+         successRedirect: '/'
+         });
    };
 
-   module.exports = new login();
+   module.exports = new Login();
 })();

@@ -2,9 +2,10 @@ extends ../../layout/layout
 
 block content
    h1= 'Login'
-   p Username
-      input
-   p Password
-      input
-   p
-      button= 'Login'
+   form(action='/login', method='post')
+      p Username
+         input(id='username', name='username', type='text')
+      p Password
+         input(id='password', name='password', type='password')
+      p
+         input(value='Login', type='submit')
