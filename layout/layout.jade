@@ -3,5 +3,11 @@ html(lang='en')
 
    head
       title= 'KanbanJS'
+      link(rel='stylesheet', href='/css/site.css', media='screen')
+      block styles
+
    body
       block content
+
+      script(type='text/javascript', src='/scripts/site.js')
+      block scripts

@@ -5,7 +5,8 @@
    app.locals.pretty = true;
    app.set('views', __dirname);
 
-   app.get('/login', login.index);
+   app.get('/login', login.form);
+   app.post('/login', login.submit);
 
    module.exports = app;
 })();
