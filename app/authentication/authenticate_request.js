@@ -1,5 +1,5 @@
 (function() {
-   var authenticate_request = function(request, response, next) {
+   var authenticateRequest = function(request, response, next) {
       if (request.user || request.path == '/login') {
          next();
       } else {
@@ -7,5 +7,5 @@
       }
    }
 
-   module.exports = authenticate_request;
+   module.exports = authenticateRequest;
 })();
