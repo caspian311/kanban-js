@@ -4,6 +4,8 @@ block content
    h1= 'Login'
    if bad_login
       b Invalid credentials
+   if created_user_successfully
+      b Your user account has been created successfully.  Please login with your credentials.
 
    form(action='/login', method='post')
       p Username
