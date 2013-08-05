@@ -1,30 +1,14 @@
 (function() {
-   var passport = require('passport');
+   var passport = require('passport')
+      , callbackGenerator = require('./callback_generator.js');
 
    var Login = function() {
       this.form = function(request, response) {
-         var model = {
-            bad_login: request.query.bad_login
-         };
-         response.render('form', model);
+         response.render('form', { bad_login: request.query.bad_login });
       };
 
       this.submit = function(request, response, next) {
-         passport.authenticate('local', function(authError, user, info) {
-            if (authError || !user) {
-               console.log('authentication error: ' + authError);
-               return response.redirect('/login?bad_login=true');
-            }
-
-            request.login(user, function(loginError) {
-               if (loginError) {
-                  console.log('login error: ' + loginError);
-                  return response.redirect('/login?bad_login=true');
-               }
-
-               return response.redirect('/');
-            });
-         })(request, response, next);
+         passport.authenticate('local', callbackGenerator.generateCallback(request, response))(request, response, next);
       };
    };
 
