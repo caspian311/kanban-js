@@ -1,0 +1,19 @@
+extends ../../layout/layout
+
+block content
+   h1= 'New user registration'
+   form(action='/registration', method='post')
+      p
+         b Name
+         input(type='text', name='name')
+      p
+         b Email
+         input(type='text', name='email')
+      p
+         b Password
+         input(type='password', name='password')
+      p
+         b Confirm password
+         input(type='password', name='password2')
+      p
+         input(type='submit', value='Create user')
