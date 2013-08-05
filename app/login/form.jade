@@ -2,10 +2,13 @@ extends ../../layout/layout
 
 block content
    h1= 'Login'
+   if bad_login
+      b Invalid credentials
+
    form(action='/login', method='post')
       p Username
-         input(id='username', name='username', type='text')
+         input(name='username', type='text')
       p Password
-         input(id='password', name='password', type='password')
+         input(name='password', type='password')
       p
          input(value='Login', type='submit')
