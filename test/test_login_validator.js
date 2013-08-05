@@ -26,8 +26,10 @@
 
             loginValidator.validate_login('asdf', 'asdfasdfasdf', done);
 
-            assert(done.args[0].length == 1);
-            assert(done.args[0][0].message === 'Unauthenticated user', 'error message is populated');
+            assert(done.args[0].length == 3);
+            assert(done.args[0][0] === null);
+            assert(done.args[0][1] === false);
+            assert(done.args[0][2].message === 'Unauthenticated user', 'error message is populated');
          });
       });
    });

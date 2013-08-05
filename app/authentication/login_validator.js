@@ -4,7 +4,7 @@
          if (username === 'test' && password === 'test') {
             done(null, {id: 123});
          } else {
-            done({ message: 'Unauthenticated user' });
+            done(null, false, { message: 'Unauthenticated user' });
          }
       }
    };
