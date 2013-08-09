@@ -4,15 +4,24 @@
    };
    Users.prototype = base.prototype;
    Users.prototype.all = function(callback) {
-      this.inConnection(function(err, db) {
-         var collection = db.collection('users');
-         collection.find().toArray(callback);
+      this.inConnection(function(db) {
+         db.collection('users').find().toArray(function(err, docs) {
+            if (err) {
+               throw err;
+            }
+
+            callback(docs);
+         });
       });
    };
    Users.prototype.add = function(user, callback) {
-      this.inConnection(function(err, db) {
-         var collection = db.collection('users');
-         collection.insert(user, callback);
+      this.inConnection(function(db) {
+         db.collection('users').insert(user, function(err, users) {
+            if (err) {
+               throw err;
+            }
+            callback(users[0]);
+         });
       });
    };
 
