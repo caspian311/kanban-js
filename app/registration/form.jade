@@ -1,17 +1,15 @@
 extends ../../layout/layout
 
 block content
-   h1= 'New user registration'
+   h1 New user registration
    form(action='/registration', method='post')
-      p
-         b Name
-         input(type='text', name='name')
-      p
-         b Email
-         input(type='text', name='email')
-      p
-         b Password
-         input(type='password', name='password')
-      p
-         input(type='submit', value='Create user')
-         a(href='/login') Cancel
+      .form-group
+         input(type='text', name='name', placeholder='Full name')
+      .form-group
+         input(type='text', name='email', placeholder='Email')
+      .form-group
+         input(type='password', name='password', placeholder='Password')
+      .form-group
+         input(type='submit', value='Create user', class='btn btn-primary')
+         &nbsp;
+         a(href='/login', class='btn btn-default') Cancel
