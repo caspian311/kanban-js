@@ -1,35 +1,64 @@
 (function() {
-   var loginValidator = require('../../app/authentication/login_validator');
+   var loginValidator = require('../../app/authentication/login_validator')
+      , users = require('../../app/db/users')
+      , findByCredentialsStub;
 
    describe('LoginValidator', function() {
+      beforeEach(function() {
+         findByCredentialsStub = sinon.stub(users, 'findByCredentials');
+      });
+
+      afterEach(function() {
+         findByCredentialsStub.restore();
+      });
+
       describe('#validate_login', function() {
-         it('should not populate an error message', function() {
-            var username = 'test', password = 'test';
-            var done = sinon.spy();
+         describe('when credentials are correct exists', function() {
+            it('should find user with given username and password', function() {
+               var username = 'user', password = 'pass'
+                  , callback = sinon.spy();
 
-            loginValidator.validate_login(username, password, done);
+               loginValidator.validate_login(username, password, callback);
 
-            assert(done.args[0][0] === null, 'no error message given');
+               assert(findByCredentialsStub.calledWith(username, password));
+            });
+
+            it('should not populate an error message', function() {
+               var callback = sinon.spy();
+
+               loginValidator.validate_login('test', 'test', callback);
+               findByCredentialsStub.args[0][2]([{}]);
+
+               expect(callback.args[0][1]).to.be.ok;
+            });
+
+            it('should populate user', function() {
+               var callback = sinon.spy();
+
+               loginValidator.validate_login('test', 'test', callback);
+
+               var expectedUser = {
+                  id: 123
+               };
+               findByCredentialsStub.args[0][2]([expectedUser]);
+
+               expect(callback.args[0][1]).to.deep.equal(expectedUser);
+            });
          });
 
-         it('should populate user if correct username and password are given', function() {
-            var username = 'test', password = 'test';
-            var done = sinon.spy();
+         describe('when no user matches the credentials given', function() {
+            it('should populate only the error message if credentials are bad', function() {
+               var callback = sinon.spy();
 
-            loginValidator.validate_login(username, password, done);
+               loginValidator.validate_login('test', 'test', callback);
 
-            assert(done.args[0][1].id === 123, 'should populate a user with id 123');
-         });
+               findByCredentialsStub.args[0][2]([]);
 
-         it('should populate only the error message if credentials are bad', function() {
-            var done = sinon.spy();
-
-            loginValidator.validate_login('asdf', 'asdfasdfasdf', done);
-
-            assert(done.args[0].length == 3);
-            assert(done.args[0][0] === null);
-            assert(done.args[0][1] === false);
-            assert(done.args[0][2].message === 'Unauthenticated user', 'error message is populated');
+               expect(callback.args[0]).to.have.length(3);
+               expect(callback.args[0][0]).to.not.be.ok;
+               expect(callback.args[0][1]).to.not.be.ok;
+               expect(callback.args[0][2].message).to.equal('Unauthenticated user');
+            });
          });
       });
    });
