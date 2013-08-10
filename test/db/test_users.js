@@ -3,7 +3,7 @@
       , users = require('../../app/db/users');
 
    describe("users", function() {
-      before(function(done) {
+      var cleanUp = function(done) {
          MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
             if (err) {
                throw err;
@@ -16,7 +16,10 @@
                done();
             });
          });
-      });
+      };
+
+      before(cleanUp);
+      after(cleanUp);
 
       describe('#all', function() {
          it('initially should be empty', function(done) {
