@@ -1,6 +1,6 @@
 (function() {
    var MongoClient = require('mongodb').MongoClient
-      , users = require('../app/db/users');
+      , users = require('../../app/db/users');
 
    describe("users", function() {
       before(function(done) {
