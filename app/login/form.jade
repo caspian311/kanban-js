@@ -1,19 +1,24 @@
 extends ../../layout/layout
 
 block content
-   h1= 'Login'
+   h1 Login
+
    if bad_login
-      b Invalid credentials
+      .alert.alert-danger 
+         b Error:
+         |  Invalid credentials
    if created_user_successfully
-      b Your user account has been created successfully.  Please login with your credentials.
+      .alert.alert-success
+         b Success!
+         |  Your user account has been created successfully.  Please login with your credentials.
 
    form(action='/login', method='post')
-      p Username
-         input(name='username', type='text')
-      p Password
-         input(name='password', type='password')
-      p
-         input(value='Login', type='submit')
+      fieldset
+         .form-group
+            input(name='username', type='text', placeholder='Username')
+         .form-group
+            input(name='password', type='password', placeholder='Password')
+         input(value='Login', type='submit', class='btn btn-primary')
 
-   p
-      a(href='/registration') New user registration
+      | Not a registered user? 
+      a(href='/registration') Registration here!
