@@ -24,6 +24,17 @@
          });
       });
    };
+   Users.prototype.findByCredentials = function(email, password, callback) {
+      this.inConnection(function(db) {
+         var query = { email: email, password: password };
+         db.collection('users').find(query).toArray(function(err, results) {
+            if (err) {
+               throw err;
+            }
+            callback(results);
+         });
+      });
+   };
 
 
    module.exports = new Users();
