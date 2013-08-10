@@ -1,5 +1,5 @@
 (function() {
-   var userSerialization = require('../app/authentication/user_serialization');
+   var userSerialization = require('../../app/authentication/user_serialization');
 
    describe('UserSerialization', function() {
       describe('#serialize', function() {

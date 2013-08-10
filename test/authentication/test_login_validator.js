@@ -1,5 +1,5 @@
 (function() {
-   var loginValidator = require('../app/authentication/login_validator');
+   var loginValidator = require('../../app/authentication/login_validator');
 
    describe('LoginValidator', function() {
       describe('#validate_login', function() {
