@@ -4,6 +4,7 @@
      , path = require('path')
      , main = require('./app/main')
      , login = require('./app/login')
+     , logout = require('./app/logout')
      , registration = require('./app/registration')
      , authentication = require('./app/authentication');
 
@@ -23,6 +24,7 @@
 
    app.use(main)
    app.use(login)
+   app.use(logout)
    app.use(registration)
 
    http.createServer(app).listen(3000, function(){
