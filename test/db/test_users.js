@@ -44,5 +44,42 @@
             });
          });
       });
+
+      describe('#findByCredentials', function() {
+         it('should find user with matching credentials', function(done) {
+            var user1 = {
+               id: 1,
+               email: 'email1',
+               password: 'pass1'
+            };
+            var user2 = {
+               id: 2,
+               email: 'email2',
+               password: 'pass1'
+            };
+            var user3 = {
+               id: 3,
+               email: 'email1',
+               password: 'pass2'
+            };
+            users.add([user1, user2, user3], function() {
+               users.findByCredentials('email2', 'pass1', function(results) {
+                  results.should.have.length(1);
+                  results[0].id.should.equal(2);
+
+                  done();
+               });
+            });
+         });
+
+         it('should return empty list if no users match the results', function(done) {
+            users.findByCredentials('email', 'pass', function(results) {
+               results.should.have.length(0);
+
+               done();
+            });
+         });
+
+      });
    });
 })();

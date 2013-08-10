@@ -1,5 +1,5 @@
 (function() {
-   var authenticateRequest = require('../app/authentication/authenticate_request');
+   var authenticateRequest = require('../../app/authentication/authenticate_request');
 
    describe('authenticateRequest', function() {
       describe('already authenticated user', function() {

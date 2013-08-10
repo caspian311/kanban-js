@@ -6,4 +6,5 @@
 
    global.sinon = require('sinon');
    global.assert = chai.assert;
+   global.expect = chai.expect;
 })();

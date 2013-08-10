@@ -1,11 +1,11 @@
 (function() {
    var UserSerialization = function() {
       this.serialize = function(user, done) {
-         done(null, user.id);
+         done(null, user);
       };
 
-      this.deserialize = function(id, done) {
-         done(null, { id: id, name: 'Matt Todd' });
+      this.deserialize = function(user, done) {
+         done(null, user);
       };
    };
 
