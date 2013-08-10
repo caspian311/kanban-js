@@ -4,7 +4,9 @@
 
    var Login = function() {
       this.form = function(request, response) {
-         response.render('form', { bad_login: request.query.bad_login });
+         response.render('form', { 
+               bad_login: request.query.bad_login, 
+               created_user_successfully: request.query.created_user_successfully });
       };
 
       this.submit = function(request, response, next) {

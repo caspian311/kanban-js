@@ -4,6 +4,7 @@
      , path = require('path')
      , main = require('./app/main')
      , login = require('./app/login')
+     , registration = require('./app/registration')
      , authentication = require('./app/authentication');
 
    var app = express()
@@ -22,6 +23,7 @@
 
    app.use(main)
    app.use(login)
+   app.use(registration)
 
    http.createServer(app).listen(3000, function(){
      console.log("Express server listening on port 3000")
