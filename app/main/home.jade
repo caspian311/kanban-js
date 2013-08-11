@@ -1,5 +1,13 @@
 extends ../../layout/layout
 
+block top_nav
+   div(class="nav-collapse collapse")
+      ul(class="nav navbar-nav")
+         li(class="active")
+            a(href="/") Home
+         li
+            a(href="/queues") Queue Management
+
 block content
    h1 Welcome, #{user.name}
    p Welcome to the Kanban board
