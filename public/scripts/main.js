@@ -5,9 +5,7 @@ require(['queueManagement'], function(queueManagement) {
    var viewModel = {
       queueManagement: queueManagementPage,
 
-      logout: function() {
-         window.location.href = '/logout';
-      }
+      logout: kanbanjs.logout
    };
 
    pager.extendWithPage(viewModel);
