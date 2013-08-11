@@ -5,7 +5,7 @@
    app.locals.pretty = true;
 
    app.set('views', __dirname);
-   app.get('/', main.home);
+   app.get('/', main.main);
 
    module.exports = app;
 })();

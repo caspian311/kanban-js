@@ -1,0 +1,21 @@
+extends ../../layout/layout
+
+block scripts
+   script(type='text/javascript', src='/scripts/knockout-2.3.0.js')
+   script(type='text/javascript', src='/scripts/pager.js')
+   script(type='text/javascript', src='/scripts/require-2.1.8.js', data-main='scripts/main')
+
+block top_nav
+   div(class="nav-collapse collapse")
+      ul(class="nav navbar-nav")
+         li(class="active")
+            a(data-bind='page-href: "home"') Home
+         li
+            a(data-bind='page-href: "queue management"') Queue Management
+      .navbar-form.pull-right
+         button#logout.btn(data-bind='click: logout') Logout
+
+block content
+   include home
+   include queueManagement
+
