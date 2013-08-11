@@ -10,7 +10,8 @@
    }
 
    desc('Run all tests');
-   task('default', ['test', 'cukes']);
+   //task('default', ['test', 'cukes']);
+   task('default', ['test']);
 
    desc('Run all unit tests');
    task('test', function() {
