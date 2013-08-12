@@ -1,16 +1,9 @@
-require(['queueManagement'], function(queueManagement) {
-   var queueManagementPage = new pager.Page();
-   queueManagementPage.viewModel = queueManagement;
+require(['viewModels/main', 'viewModels/queueManagement'], function(mainVM, queueManagement) {
+   mainVM.registerVM('queueManagement', queueManagement);
 
-   var viewModel = {
-      queueManagement: queueManagementPage,
+   pager.extendWithPage(mainVM);
 
-      logout: kanbanjs.logout
-   };
-
-   pager.extendWithPage(viewModel);
-
-   ko.applyBindings(viewModel);
+   ko.applyBindings(mainVM);
 
    pager.start('home');
 });

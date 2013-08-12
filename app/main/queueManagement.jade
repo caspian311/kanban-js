@@ -1,4 +1,9 @@
 
-div(data-bind='page: { id: "queue management", title: "Queue Management" }')
+div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnShow: bindModel }')
    h1 Queue Management
    p This is where you manage queues.
+
+   ul(data-bind='foreach: queues')
+      li
+         span(data-bind='text: name')
+         span(data-bind='text: description')
