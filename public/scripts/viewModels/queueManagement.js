@@ -1,8 +1,11 @@
 define(['queueService'], function(queueService) {
    var QueueManagement = function() {
-      this.queues = ko.observableArray();
+      var self = this;
+      self.queues = ko.observableArray();
 
-      this.queues(queueService.getAllQueues());
+      queueService.getAllQueues(function(data) {
+         self.queues(data);
+      });
    };
    return new QueueManagement();
 });

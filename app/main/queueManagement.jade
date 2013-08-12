@@ -5,5 +5,6 @@ div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnS
 
    ul(data-bind='foreach: queues')
       li
-         span(data-bind='text: name')
+         b(data-bind='text: name')
+         | - 
          span(data-bind='text: description')
