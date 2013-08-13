@@ -8,6 +8,11 @@
             { name: 'task 4', description: 'desc 4'}
          ]);
       };
+
+      this.post = function(request, response) {
+         console.dir(request.body)
+         response.json('worky!');
+      };
    };
 
    module.exports = new Queues();

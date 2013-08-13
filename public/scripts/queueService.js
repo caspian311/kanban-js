@@ -11,6 +11,18 @@ define(function() {
             }
          });
       };
+
+      this.saveQueue = function(queue, callback) {
+         return $.ajax({
+            url: '/queues',
+            data: queue,
+            type: 'POST',
+            success: callback,
+            failure: function() {
+               alert('bad');
+            }
+         });
+      };
    };
    return new QueueService();
 });

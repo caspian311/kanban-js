@@ -1,4 +1,4 @@
-define(function() {
+define(['queueService'], function(queueService) {
    var NewQueue = function() {
       var self = this;
 
@@ -6,7 +6,10 @@ define(function() {
       self.description = ko.observable();
 
       self.save = function() {
-         console.log('saving: ' + self.name() + ' ' + self.description());
+         queueService.saveQueue({
+               name: self.name(),
+               description: self.description()
+            });
       };
 
       self.cancel = function() {
