@@ -3,9 +3,11 @@ define(['queueService'], function(queueService) {
       var self = this;
       self.queues = ko.observableArray();
 
-      queueService.getAllQueues(function(data) {
-         self.queues(data);
-      });
+      self.viewAttached = function() {
+         queueService.getAllQueues(function(data) {
+            self.queues(data);
+         });
+      };
    };
    return new QueueManagement();
 });

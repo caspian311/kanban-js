@@ -7,6 +7,9 @@ define(function() {
       this.bindModel = function(bindingFunction, parentViewModel) {
          var vm = siteVMs[parentViewModel.currentId];
          bindingFunction(vm);
+         if (vm.viewAttached) {
+            vm.viewAttached();
+         }
       };
 
       this.logout = kanbanjs.logout;
