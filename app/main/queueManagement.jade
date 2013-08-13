@@ -3,6 +3,9 @@ div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnS
    h1 Queue Management
    p This is where you manage queues.
 
+   p
+      a(data-bind='page-href: "../newQueue"') New Queue
+
    ul(data-bind='foreach: queues')
       li
          b(data-bind='text: name')

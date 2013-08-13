@@ -1,0 +1,16 @@
+div(data-bind='page: { id: "newQueue", title: "New Queue", withOnShow: bindModel }')
+   h1 New Queue
+
+   form.form-horizontal
+      .form-group
+         label.col-lg-2.control-label(for='name') Name
+         .col-lg-10
+            input.form-control#name(type='text', placeholder='', data-bind='value: name')
+      .form-group
+         label.col-lg-2.control-label(for='description') Description
+         .col-lg-10
+            textarea.form-control#description(name='description', data-bind='value: description', rows='3')
+      .form-group
+         .col-lg-offset-2.col-lg-10
+            a.form-control.btn.btn-primary(data-bind='click: save') Save
+
