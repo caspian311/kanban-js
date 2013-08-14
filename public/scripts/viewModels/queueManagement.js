@@ -1,4 +1,4 @@
-define(['queueService'], function(queueService) {
+define(['services/queueService'], function(queueService) {
    var QueueManagement = function() {
       var self = this;
       self.queues = ko.observableArray();
