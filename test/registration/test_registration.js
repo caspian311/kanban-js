@@ -4,11 +4,11 @@
 
    describe('registration', function() {
       beforeEach(function() {
-         sinon.stub(users, 'add');
+         sinon.stub(users, 'addUser');
       });
 
       afterEach(function() {
-         users.add.restore();
+         users.addUser.restore();
       });
 
       describe('#create', function() {
@@ -30,7 +30,7 @@
 
             registration.create(request, { redirect: function() {} });
 
-            users.add.calledWith(expectedUser);
+            users.addUser.calledWith(expectedUser);
          });
 
          it('should redirect to login page', function() {
@@ -38,7 +38,7 @@
             var response = { redirect: sinon.spy() };
 
             registration.create(request, response);
-            users.add.args[0][1]();
+            users.addUser.args[0][1]();
 
             assert(response.redirect.calledWithExactly('/login?created_user_successfully=true'));
          });

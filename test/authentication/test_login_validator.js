@@ -1,15 +1,15 @@
 (function() {
    var loginValidator = require('../../app/authentication/login_validator')
       , users = require('../../app/db/users')
-      , findByCredentialsStub;
+      , findUserByCredentialsStub;
 
    describe('LoginValidator', function() {
       beforeEach(function() {
-         findByCredentialsStub = sinon.stub(users, 'findByCredentials');
+         findUserByCredentialsStub = sinon.stub(users, 'findUserByCredentials');
       });
 
       afterEach(function() {
-         findByCredentialsStub.restore();
+         findUserByCredentialsStub.restore();
       });
 
       describe('#validate_login', function() {
@@ -20,14 +20,14 @@
 
                loginValidator.validate_login(username, password, callback);
 
-               assert(findByCredentialsStub.calledWith(username, password));
+               assert(findUserByCredentialsStub.calledWith(username, password));
             });
 
             it('should not populate an error message', function() {
                var callback = sinon.spy();
 
                loginValidator.validate_login('test', 'test', callback);
-               findByCredentialsStub.args[0][2]([{}]);
+               findUserByCredentialsStub.args[0][2]([{}]);
 
                expect(callback.args[0][1]).to.be.ok;
             });
@@ -40,7 +40,7 @@
                var expectedUser = {
                   id: 123
                };
-               findByCredentialsStub.args[0][2]([expectedUser]);
+               findUserByCredentialsStub.args[0][2]([expectedUser]);
 
                expect(callback.args[0][1]).to.deep.equal(expectedUser);
             });
@@ -52,7 +52,7 @@
 
                loginValidator.validate_login('test', 'test', callback);
 
-               findByCredentialsStub.args[0][2]([]);
+               findUserByCredentialsStub.args[0][2]([]);
 
                expect(callback.args[0]).to.have.length(3);
                expect(callback.args[0][0]).to.not.be.ok;
