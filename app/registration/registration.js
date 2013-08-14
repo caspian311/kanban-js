@@ -12,7 +12,7 @@
             email: request.body.email,
             password: request.body.password
          };
-         users.add(user, function() {
+         users.addUser(user, function() {
             response.redirect('/login?created_user_successfully=true');
          });
       };
