@@ -4,11 +4,28 @@
 
    describe('queues', function() {
       beforeEach(function() {
+         this.allQueuesStub = sinon.stub(queuesDb, 'allQueues');
          sinon.stub(queuesDb, 'addQueue');
       });
 
       afterEach(function() {
+         queuesDb.allQueues.restore();
          queuesDb.addQueue.restore();
+      });
+
+      describe('#get', function() {
+         it('should get all queues in json format', function() {
+            var response = { 
+               json: sinon.spy()
+            };
+
+            queues.get({}, response);
+
+            var allQueues = [{foo: 'bar'}, {fuzz: 'bucket'}];
+            this.allQueuesStub.args[0][0](allQueues);
+
+            response.json.args[0][0].should.deep.equal(allQueues);
+         });
       });
 
       describe('#post', function() {
