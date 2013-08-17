@@ -1,8 +1,4 @@
-extends ../../layout/layout
 
-block content
+div(data-bind='page: { id: "home", title: "Home" }')
    h1 Welcome, #{user.name}
-   p Welcome to the Kanban board
-
-   p
-      a(href='/logout') Logout
+   p Welcome to KanbanJS

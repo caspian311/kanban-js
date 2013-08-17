@@ -1,7 +1,7 @@
 (function() {
    var Main = function() {
-      this.home = function(request, response) {
-         response.render('home', { user: request.user });
+      this.main = function(request, response) {
+         response.render('main', { user: request.user });
       };
    };
 

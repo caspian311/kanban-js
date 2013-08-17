@@ -3,7 +3,7 @@
    var Users = function() {
    };
    Users.prototype = base.prototype;
-   Users.prototype.all = function(callback) {
+   Users.prototype.allUsers = function(callback) {
       this.inConnection(function(db) {
          db.collection('users').find().toArray(function(err, docs) {
             if (err) {
@@ -14,7 +14,7 @@
          });
       });
    };
-   Users.prototype.add = function(user, callback) {
+   Users.prototype.addUser = function(user, callback) {
       this.inConnection(function(db) {
          db.collection('users').insert(user, function(err, users) {
             if (err) {
@@ -24,7 +24,7 @@
          });
       });
    };
-   Users.prototype.findByCredentials = function(email, password, callback) {
+   Users.prototype.findUserByCredentials = function(email, password, callback) {
       this.inConnection(function(db) {
          var query = { email: email, password: password };
          db.collection('users').find(query).toArray(function(err, results) {

@@ -3,7 +3,7 @@
 
    var LoginValidation = function() {
       this.validate_login = function(username, password, done) {
-         users.findByCredentials(username, password, function(results) {
+         users.findUserByCredentials(username, password, function(results) {
             if (results.length > 0) {
                done(null, results[0]);
             } else {

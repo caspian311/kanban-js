@@ -21,9 +21,9 @@
       before(cleanUp);
       after(cleanUp);
 
-      describe('#all', function() {
+      describe('#allUsers', function() {
          it('initially should be empty', function(done) {
-            users.all(function(docs) {
+            users.allUsers(function(docs) {
                assert(docs.length === 0, 'should be empty, but was ' + docs.length);
 
                done();
@@ -33,10 +33,10 @@
 
       describe('#add', function() {
          it('should add a user', function(done) {
-            users.add({name: 'foo'}, function(newUser) {
+            users.addUser({name: 'foo'}, function(newUser) {
                assert(newUser, 'should have created the new user');
                assert(newUser.name === 'foo', 'name should be correct, but was ' + newUser.name);
-               users.all(function(allUsers) {
+               users.allUsers(function(allUsers) {
                   assert(allUsers.length === 1, 'should have one user, but had ' + allUsers.length);
 
                   done();
@@ -62,8 +62,8 @@
                email: 'email1',
                password: 'pass2'
             };
-            users.add([user1, user2, user3], function() {
-               users.findByCredentials('email2', 'pass1', function(results) {
+            users.addUser([user1, user2, user3], function() {
+               users.findUserByCredentials('email2', 'pass1', function(results) {
                   results.should.have.length(1);
                   results[0].id.should.equal(2);
 
@@ -73,7 +73,7 @@
          });
 
          it('should return empty list if no users match the results', function(done) {
-            users.findByCredentials('email', 'pass', function(results) {
+            users.findUserByCredentials('email', 'pass', function(results) {
                results.should.have.length(0);
 
                done();

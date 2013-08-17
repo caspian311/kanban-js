@@ -3,6 +3,7 @@
      , http = require('http')
      , path = require('path')
      , main = require('./app/main')
+     , queues = require('./app/queues')
      , login = require('./app/login')
      , logout = require('./app/logout')
      , registration = require('./app/registration')
@@ -23,6 +24,7 @@
    app.use(authentication)
 
    app.use(main)
+   app.use(queues)
    app.use(login)
    app.use(logout)
    app.use(registration)

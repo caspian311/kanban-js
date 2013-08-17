@@ -1,11 +1,11 @@
 (function() {
    var app = require('express')()
-      , main = require('./main');
+      , queues = require('./queues');
 
    app.locals.pretty = true;
 
-   app.set('views', __dirname);
-   app.get('/', main.main);
+   app.get('/queues', queues.get);
+   app.post('/queues', queues.post);
 
    module.exports = app;
 })();
