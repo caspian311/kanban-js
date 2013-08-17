@@ -1,5 +1,7 @@
-define(function() {
+define(['navigation'], function(navigation) {
    var Main = function() {
+      this.navigation = navigation;
+
       var siteVMs = {};
       this.registerVM = function(id, vm) {
          siteVMs[id] = vm;

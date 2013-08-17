@@ -8,10 +8,10 @@ block scripts
 block top_nav
    div(class="nav-collapse collapse")
       ul(class="nav navbar-nav")
-         li(class="active")
-            a(data-bind='page-href: "home"') Home
-         li
-            a(data-bind='page-href: "queueManagement"') Queue Management
+         li(data-bind='css: { "active": navigation.currentPage() == "#home" }')
+            a(data-bind='page-href: "home", click: navigation.menuNav("#home")') Home
+         li(data-bind='css: { "active": navigation.currentPage() == "#queueManagement" }')
+            a(data-bind='page-href: "queueManagement", click: navigation.menuNav("#queueManagement")') Queue Management
       .navbar-form.pull-right
          button#logout.btn(data-bind='click: logout') Logout
 
