@@ -17,6 +17,16 @@ define(function() {
             failure: errorHandler
          });
       };
+
+      this.updateQueue = function(queue, callback, errorHandler) {
+         return $.ajax({
+            url: '/queues',
+            data: queue,
+            type: 'PUT',
+            success: callback,
+            failure: errorHandler
+         });
+      };
    };
    return new QueueService();
 });

@@ -4,10 +4,10 @@ div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnS
    p This is where you manage queues.
 
    p
-      a(data-bind='page-href: "../newQueue"') New Queue
+      a(data-bind='click: createQueue') New Queue
 
    ul(data-bind='foreach: queues')
-      li
+      li.clickable(data-bind='click: $parent.openQueue')
          b(data-bind='text: name')
          | - 
          span(data-bind='text: description')
