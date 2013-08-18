@@ -63,6 +63,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.cancel = function() {
          console.log('cancelling.');
       };
+
    };
    return new EditQueue();
 });

@@ -11,6 +11,9 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
             textarea.form-control#description(name='description', data-bind='value: description', rows='3')
-   button.pull-right.btn.btn-primary(data-bind='click: save') 
-      span(data-bind='text: saveActionText')
+
+   .btn-toolbar
+      button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
+      button.pull-right.btn.btn-primary(data-bind='click: save') 
+         span(data-bind='text: saveActionText')
 
