@@ -16,13 +16,25 @@
       });
    };
 
-   Queues.prototype.addQueue = function(user, callback) {
+   Queues.prototype.addQueue = function(queue, callback) {
       this.inConnection(function(db, done) {
-         db.collection('queues').insert(user, function(err, users) {
+         db.collection('queues').insert(queue, function(err, queues) {
             if (err) {
                throw err;
             }
-            callback(users[0]);
+            callback(queues[0]);
+            done();
+         });
+      });
+   };
+
+   Queues.prototype.updateQueue = function(queue, callback) {
+      this.inConnection(function(db, done) {
+         db.collection('queues').update({'_id': queue._id}, queue, function(err, numberOfUpdates) {
+            if (err) {
+               throw err;
+            }
+            callback(numberOfUpdates);
             done();
          });
       });
