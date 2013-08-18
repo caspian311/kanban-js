@@ -13,6 +13,12 @@
             response.json({ message: 'worky!' });
          });
       };
+
+      this.put = function(request, response) {
+         queues.updateQueue(request.body, function() {
+            response.json({ message: 'worky!' });
+         });
+      };
    };
 
    module.exports = new Queues();
