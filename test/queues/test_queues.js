@@ -35,6 +35,7 @@
          it('should create new queue', function() {
             var request = { 
                body: { 
+                  id: null,
                   name: 'name',
                   description: 'desc'
                } 
@@ -46,7 +47,7 @@
 
             queues.post(request, { redirect: function() {} });
 
-            queuesDb.addQueue.calledWith(expectedQueue);
+            queuesDb.addQueue.args[0][0].should.deep.equal(expectedQueue);
          });
 
          it('should response with positive message', function() {
@@ -79,7 +80,7 @@
 
             queues.put(request, { json: function() {} });
 
-            queuesDb.updateQueue.calledWith(expectedQueue);
+            queuesDb.updateQueue.args[0][0].should.deep.equal(expectedQueue);
          });
 
          it('should response with positive message', function() {

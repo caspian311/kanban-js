@@ -1,5 +1,6 @@
 (function() {
-   var queues = require('../db/queues');
+   var queues = require('../db/queues')
+      , ObjectID = require('mongodb').ObjectID;
 
    var Queues = function() {
       this.get = function(request, response) {
@@ -9,13 +10,22 @@
       };
 
       this.post = function(request, response) {
-         queues.addQueue(request.body, function() {
+         var user = {
+            name: request.body.name,
+            description: request.body.description
+         };
+         queues.addQueue(user, function() {
             response.json({ message: 'worky!' });
          });
       };
 
       this.put = function(request, response) {
-         queues.updateQueue(request.body, function() {
+         var user = {
+            _id: new ObjectID(request.body.id),
+            name: request.body.name,
+            description: request.body.description
+         };
+         queues.updateQueue(user, function() {
             response.json({ message: 'worky!' });
          });
       };
