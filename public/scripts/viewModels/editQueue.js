@@ -2,6 +2,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
    var EditQueue = function() {
       var self = this;
 
+      self.id = ko.observable();
       self.name = ko.observable();
       self.description = ko.observable();
       self.isEditing = ko.observable(false);
@@ -28,10 +29,12 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.viewAttached = function() {
          if (navigation.parameters()) {
             self.isEditing(true);
+            self.id(navigation.parameters()._id);
             self.name(navigation.parameters().name);
             self.description(navigation.parameters().description);
          } else {
             self.isEditing(false);
+            self.id(null);
             self.name('');
             self.description('');
          }
@@ -39,6 +42,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
 
       var getData = function() {
          return {
+               id: self.id(),
                name: self.name(),
                description: self.description()
             };
