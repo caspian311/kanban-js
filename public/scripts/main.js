@@ -1,8 +1,8 @@
-require(['viewModels/main', 'viewModels/queueManagement', 'viewModels/newQueue'],
-      function(mainVM, queueManagement, newQueue) {
+require(['viewModels/main', 'viewModels/queueManagement', 'viewModels/editQueue'],
+      function(mainVM, queueManagement, editQueue) {
 
    mainVM.registerVM('queueManagement', queueManagement);
-   mainVM.registerVM('newQueue', newQueue);
+   mainVM.registerVM('editQueue', editQueue);
 
    pager.extendWithPage(mainVM);
 

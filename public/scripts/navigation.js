@@ -2,8 +2,10 @@ define(function() {
    var Navigation = function() {
       var self = this;
       self.currentPage = ko.observable('#home');
+      self.parameters = ko.observable();
 
-      self.goTo = function(loc) {
+      self.goTo = function(loc, data) {
+         self.parameters(data);
          window.location = loc;
       };
 

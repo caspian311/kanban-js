@@ -1,5 +1,6 @@
-div(data-bind='page: { id: "newQueue", title: "New Queue", withOnShow: bindModel }')
-   h1 New Queue
+div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: bindModel }')
+   h2 
+      span(data-bind='text: title')
 
    form.form-horizontal
       .form-group
@@ -10,7 +11,6 @@ div(data-bind='page: { id: "newQueue", title: "New Queue", withOnShow: bindModel
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
             textarea.form-control#description(name='description', data-bind='value: description', rows='3')
-      .form-group
-         .col-lg-offset-2.col-lg-10
-            a.form-control.btn.btn-primary(data-bind='click: save') Save
+   button.pull-right.btn.btn-primary(data-bind='click: save') 
+      span(data-bind='text: saveActionText')
 

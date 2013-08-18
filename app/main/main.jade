@@ -13,10 +13,10 @@ block top_nav
          li(data-bind='css: { "active": navigation.currentPage() == "#queueManagement" }')
             a(data-bind='page-href: "queueManagement", click: navigation.menuNav("#queueManagement")') Queue Management
       .navbar-form.pull-right
-         button#logout.btn(data-bind='click: logout') Logout
+         button#logout.btn.btn-sm(data-bind='click: logout') Logout
 
 block content
    include home
    include queueManagement
-   include newQueue
+   include editQueue
 

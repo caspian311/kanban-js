@@ -1,13 +1,15 @@
 
 div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnShow: bindModel }')
-   h1 Queue Management
+   h2 Queue Management
    p This is where you manage queues.
 
-   p
-      a(data-bind='page-href: "../newQueue"') New Queue
+   a.btn.btn-primary.btn-sm.pull-right.glyphicon.glyphicon-file.glyphicon-white(data-bind='click: createQueue')  New Queue
 
-   ul(data-bind='foreach: queues')
-      li
-         b(data-bind='text: name')
-         | - 
-         span(data-bind='text: description')
+   table.table.table-hover
+      thead
+         th Name
+         th Description
+      tbody(data-bind='foreach: queues')
+         tr.clickable(data-bind='click: $parent.openQueue')
+            td(data-bind='text: name')
+            td.big(data-bind='text: description')
