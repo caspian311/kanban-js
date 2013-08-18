@@ -49,7 +49,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       var sucessfulSave = function() {
-         navigation.goTo('#queueManagement');
+         redirectBackToQueueManagement();
       };
 
       self.save = function() {
@@ -61,7 +61,11 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       self.cancel = function() {
-         console.log('cancelling.');
+         redirectBackToQueueManagement();
+      };
+
+      var redirectBackToQueueManagement = function() {
+         navigation.goTo('#queueManagement');
       };
 
    };
