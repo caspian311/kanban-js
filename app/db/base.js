@@ -8,7 +8,9 @@
          if (err) {
             throw err;
          }
-         task(db);
+         task(db, function() {
+            db.close();
+         });
       });
    };
 
