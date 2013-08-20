@@ -16,11 +16,11 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
          .col-lg-10
 
             .input-group
-               input.form-control(type='text', placeholder='New state', data-bind='value: newStateName')
+               input.form-control(type='text', data-bind='value: newStateName')
                span.input-group-btn
                   button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState')
-            .list-group(data-bind='foreach: states')
-               a.list-group-item(data-bind='text: name')
+            ul.list-group(data-bind='foreach: states')
+               li.list-group-item(data-bind='text: name')
 
    .btn-toolbar
       button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
