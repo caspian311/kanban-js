@@ -37,12 +37,14 @@
                body: { 
                   id: null,
                   name: 'name',
-                  description: 'desc'
+                  description: 'desc',
+                  states: [{ name: 'abc' }]
                } 
             };
             var expectedQueue = {
                name: 'name',
-               description: 'desc'
+               description: 'desc',
+               states: [{ name: 'abc' }]
             };
 
             queues.post(request, { redirect: function() {} });

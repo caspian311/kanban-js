@@ -12,7 +12,8 @@
       this.post = function(request, response) {
          var user = {
             name: request.body.name,
-            description: request.body.description
+            description: request.body.description,
+            states: request.body.states
          };
          queues.addQueue(user, function() {
             response.json({ message: 'worky!' });
