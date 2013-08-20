@@ -6,6 +6,8 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.name = ko.observable();
       self.description = ko.observable();
       self.isEditing = ko.observable(false);
+      self.newStateName = ko.observable();
+      self.states = ko.observableArray([]);
 
       self.title = ko.computed(function() {
          var prefix;
@@ -38,6 +40,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             self.name('');
             self.description('');
          }
+         self.newStateName('');
       };
 
       var getData = function() {
@@ -66,6 +69,11 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
 
       var redirectBackToQueueManagement = function() {
          navigation.goTo('#queueManagement');
+      };
+
+      self.addState = function() {
+         self.states.push({ name: ko.observable(self.newStateName())});
+         self.newStateName('');
       };
 
    };
