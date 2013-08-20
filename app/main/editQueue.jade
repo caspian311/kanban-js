@@ -11,6 +11,16 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
             textarea.form-control#description(name='description', data-bind='value: description', rows='3')
+      .form-group
+         label.col-lg-2.control-label(for='description') States
+         .col-lg-10
+
+            .input-group
+               input.form-control(type='text', data-bind='value: newStateName')
+               span.input-group-btn
+                  button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState')
+            ul.list-group(data-bind='foreach: states')
+               li.list-group-item(data-bind='text: name')
 
    .btn-toolbar
       button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel

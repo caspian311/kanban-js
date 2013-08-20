@@ -6,6 +6,8 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.name = ko.observable();
       self.description = ko.observable();
       self.isEditing = ko.observable(false);
+      self.newStateName = ko.observable();
+      self.states = ko.observableArray([]);
 
       self.title = ko.computed(function() {
          var prefix;
@@ -27,24 +29,30 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       });
 
       self.viewAttached = function() {
+         self.states([]);
          if (navigation.parameters()) {
             self.isEditing(true);
             self.id(navigation.parameters()._id);
             self.name(navigation.parameters().name);
             self.description(navigation.parameters().description);
+            if (navigation.parameters().states) {
+               self.states(navigation.parameters().states);
+            }
          } else {
             self.isEditing(false);
             self.id(null);
             self.name('');
             self.description('');
          }
+         self.newStateName('');
       };
 
       var getData = function() {
          return {
                id: self.id(),
                name: self.name(),
-               description: self.description()
+               description: self.description(),
+               states: self.states()
             };
       };
 
@@ -66,6 +74,11 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
 
       var redirectBackToQueueManagement = function() {
          navigation.goTo('#queueManagement');
+      };
+
+      self.addState = function() {
+         self.states.push({ name: ko.observable(self.newStateName())});
+         self.newStateName('');
       };
 
    };

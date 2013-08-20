@@ -1,6 +1,10 @@
 td.big {
    width: 80%;
 }
+.half {
+   width: 50%
+}
+
 .clickable {
    cursor: pointer;
 }
