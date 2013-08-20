@@ -23,7 +23,8 @@
          var user = {
             _id: new ObjectID(request.body.id),
             name: request.body.name,
-            description: request.body.description
+            description: request.body.description,
+            states: request.body.states
          };
          queues.updateQueue(user, function() {
             response.json({ message: 'worky!' });

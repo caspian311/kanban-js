@@ -34,11 +34,15 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             self.id(navigation.parameters()._id);
             self.name(navigation.parameters().name);
             self.description(navigation.parameters().description);
+            if (navigation.parameters().states) {
+               self.states(navigation.parameters().states);
+            }
          } else {
             self.isEditing(false);
             self.id(null);
             self.name('');
             self.description('');
+            self.states.length = 0;
          }
          self.newStateName('');
       };
@@ -47,7 +51,8 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          return {
                id: self.id(),
                name: self.name(),
-               description: self.description()
+               description: self.description(),
+               states: self.states()
             };
       };
 

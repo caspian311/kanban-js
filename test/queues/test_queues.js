@@ -69,13 +69,15 @@
                body: { 
                   id: id,
                   name: 'name',
-                  description: 'desc'
+                  description: 'desc',
+                  states: [{ name: 'abc' }]
                } 
             };
             var expectedQueue = {
                _id: new ObjectID(id),
                name: 'name',
-               description: 'desc'
+               description: 'desc',
+               states: [{ name: 'abc' }]
             };
 
             queues.put(request, { json: function() {} });
