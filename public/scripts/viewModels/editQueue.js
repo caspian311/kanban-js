@@ -29,6 +29,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       });
 
       self.viewAttached = function() {
+         self.states([]);
          if (navigation.parameters()) {
             self.isEditing(true);
             self.id(navigation.parameters()._id);
@@ -42,7 +43,6 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             self.id(null);
             self.name('');
             self.description('');
-            self.states.length = 0;
          }
          self.newStateName('');
       };
