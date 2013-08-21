@@ -46,4 +46,5 @@ td.big {
    border: solid 1px #000;
    margin: 5px;
    padding: 5px;
+   cursor: move;
 }
