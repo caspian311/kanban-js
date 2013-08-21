@@ -12,3 +12,38 @@ td.big {
 .pull-right.btn {
    margin-left: 5px;
 }
+
+.states {
+   border-width: 1px 1px 1px 0px;
+   border-style: solid;
+   border-color: #000;
+   float: left;
+   width: 200px;
+   height: 500px;
+}
+
+.states:first-child {
+   border-width: 1px 1px 1px 1px;
+}
+
+.states-header {
+   border-width: 1px 1px 0px 0px;
+   border-style: solid;
+   border-color: #000;
+   float: left;
+   width: 200px;
+}
+.states-header:first-child {
+   border-width: 1px 1px 0px 1px;
+}
+
+.states-header .card {
+   border: 0;
+   padding: 5px;
+}
+
+.card {
+   border: solid 1px #000;
+   margin: 5px;
+   padding: 5px;
+}
