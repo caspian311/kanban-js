@@ -2,15 +2,16 @@
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
-         li(data-bind='style: isSelected')
+         li(data-bind='css: {active: isSelected}')
             a(data-bind='text: name, click: $parent.selectQueue')
 
-      .row(data-bind='foreach: states')
-         span.states-header(data-bind='text: name')
-      .row(data-bind='foreach: states')
-         .states(data-bind='sortable: { data: cards }')
-            .card
-               .title(data-bind='text: name')
-               .separater
-               span(data-bind='text: description')
+      div(data-bind='with: selectedQueue')
+         .row(data-bind='foreach: states')
+            span.states-header(data-bind='text: name')
+         .row(data-bind='foreach: states')
+            .states(data-bind='sortable: cards')
+               .card
+                  .title(data-bind='text: name')
+                  .separater
+                  span(data-bind='text: description')
 

@@ -1,26 +1,40 @@
 define(['services/queueService'], function(queueService) {
-   var Card = function(name) {
-      var description = "blah blah blah blah blah blah blah blah blah blah blah";
+   var Card = function(name, description) {
       this.name = ko.observable(name);
       this.description = ko.observable(description);
    }
 
+   var transformCards = function(cardsJson) {
+      var cards = [];
+      if (cardsJson) {
+         cards = $.map(cardsJson, function(card) {
+            return new Card(card.name, card.description);
+         });
+      }
+      return cards;
+   };
+
    var State = function(name, cards) {
       this.name = ko.observable(name);
-      this.cards = ko.observableArray(cards);
+      this.cards = ko.observableArray(transformCards(cards));
    }
 
-   var allStates = [
-      new State('To do', 
-         [new Card('card1'), new Card('card2'), new Card('card3'), new Card('card4')]),
-      new State('Doing', 
-         [new Card('card5'), new Card('card6')]),
-      new State('Done', 
-         [new Card('card7'), new Card('card8'), new Card('card9'), new Card('card10')])
-   ];
+   var transformStates = function(statesJson) {
+      var states = [];
+      if (statesJson) {
+         states = $.map(statesJson, function(state) {
+            return new State(state.name, state.cards);
+         });
+      }
+      return states;
+   };
 
-   var Queue = function() {
-      this.states = ko.observableArray(allStates);
+   var Queue = function(name, description, states) {
+      this.name = ko.observable(name);
+      this.description = ko.observable(description);
+      this.states = ko.observableArray(transformStates(states));
+
+      this.isSelected = ko.observable(false);
    };
 
    var Home = function() {
@@ -28,30 +42,28 @@ define(['services/queueService'], function(queueService) {
       self.queues = ko.observableArray([]);
       self.selectedQueue = ko.observable();
 
+      var transformQueues = function(queuesJson) {
+         return $.map(queuesJson, function(queueJson) {
+            return new Queue(queueJson.name, queueJson.description, queueJson.states);
+         });
+      };
 
       self.viewAttached = function() {
          queueService.getAllQueues(function(queues) {
             self.queues(transformQueues(queues));
+
             if (self.queues().length > 0) {
-               self.selectedQueue(self.queues()[0]);
+               self.selectQueue(self.queues()[0]);
             }
          });
       };
 
-      var transformQueues = function(queuesJson) {
-         return [];
+      self.selectQueue = function(chosen) {
+         $.each(self.queues(), function(index, queue) {
+            queue.isSelected(queue == chosen);
+         });
+         self.selectedQueue(chosen);
       };
-
-      self.selectQueue = function(queue) {
-         self.selectedQueue(queue);
-      };
-
-      self.states = ko.computed(function() {
-         if (self.selectedQueue()) {
-            return self.selectedQueue().states();
-         }
-         return [];
-      });
    };
 
    return new Home();
