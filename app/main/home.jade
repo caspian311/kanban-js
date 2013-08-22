@@ -1,4 +1,17 @@
 
-div(data-bind='page: { id: "home", title: "Home" }')
-   h2 Welcome, #{user.name}
-   p Welcome to KanbanJS
+div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
+   .container
+      ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
+         li(data-bind='css: {active: isSelected}')
+            a(data-bind='text: name, click: $parent.selectQueue')
+
+      div(data-bind='with: selectedQueue')
+         .row(data-bind='foreach: states')
+            span.states-header(data-bind='text: name')
+         .row(data-bind='foreach: states')
+            .states(data-bind='sortable: cards')
+               .card
+                  .title(data-bind='text: name')
+                  .separater
+                  span(data-bind='text: description')
+

@@ -1,7 +1,6 @@
 extends ../../layout/layout
 
 block scripts
-   script(type='text/javascript', src='/scripts/knockout-2.3.0.js')
    script(type='text/javascript', src='/scripts/pager.js')
    script(type='text/javascript', src='/scripts/require-2.1.8.js', data-main='scripts/main')
 
@@ -12,8 +11,12 @@ block top_nav
             a(data-bind='page-href: "home", click: navigation.menuNav("#home")') Home
          li(data-bind='css: { "active": navigation.currentPage() == "#queueManagement" }')
             a(data-bind='page-href: "queueManagement", click: navigation.menuNav("#queueManagement")') Queue Management
+
       .navbar-form.pull-right
-         button#logout.btn.btn-sm(data-bind='click: logout') Logout
+         .greeting 
+            | Welcome, #{user.name}! 
+            .separater |
+            a.logout(data-bind='click: logout') Logout
 
 block content
    include home

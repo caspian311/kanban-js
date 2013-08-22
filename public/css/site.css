@@ -1,3 +1,4 @@
+
 td.big {
    width: 80%;
 }
@@ -11,4 +12,70 @@ td.big {
 
 .pull-right.btn {
    margin-left: 5px;
+}
+
+.greeting {
+   color: #999;
+}
+
+.greeting .separater {
+   display: inline;
+   margin-left: 10px;;
+   margin-right: 10px;;
+   font-size: 14pt;
+}
+
+.greeting a {
+   color: #999;
+}
+
+.greeting a:hover {
+   color: #fff;
+   text-decoration: none;
+}
+
+.states {
+   border-width: 0px 1px 1px 0px;
+   border-style: solid;
+   border-color: #c0c0c0;
+   float: left;
+   width: 200px;
+   height: 500px;
+   padding: 5px;
+}
+
+.states:last-child {
+   border-width: 0px 0px 1px 0px;
+}
+
+.states-header {
+   float: left;
+   width: 200px;
+}
+
+.states-header {
+   font-weight: bold;
+   text-align: center;
+}
+
+.card {
+   background: linear-gradient(to bottom, 
+               rgba(240,240,240,1) 0%,
+               rgba(255,255,255,1) 50%);
+   border: solid 1px #c0c0c0;
+   border-radius: 5px;
+   margin: 5px;
+   padding: 5px;
+   cursor: move;
+}
+
+.card .title {
+   font-weight: bold;
+}
+
+.card .separater {
+   border-style: solid;
+   border-width: 0px 0px 1px 0px;
+   border-color: #c0c0c0;
+   margin: 0px -5px 0px -5px;
 }
