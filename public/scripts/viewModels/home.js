@@ -1,6 +1,8 @@
 define(function() {
    var Card = function(name) {
+      var description = "blah blah blah blah blah blah blah blah blah blah blah";
       this.name = ko.observable(name);
+      this.description = ko.observable(description);
    }
 
    var State = function(name, cards) {

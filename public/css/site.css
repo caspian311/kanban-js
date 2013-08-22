@@ -1,3 +1,4 @@
+
 td.big {
    width: 80%;
 }
@@ -14,37 +15,47 @@ td.big {
 }
 
 .states {
-   border-width: 1px 1px 1px 0px;
+   border-width: 0px 1px 1px 0px;
    border-style: solid;
-   border-color: #000;
+   border-color: #c0c0c0;
    float: left;
    width: 200px;
    height: 500px;
+   padding: 5px;
 }
 
-.states:first-child {
-   border-width: 1px 1px 1px 1px;
+.states:last-child {
+   border-width: 0px 0px 1px 0px;
 }
 
 .states-header {
-   border-width: 1px 1px 0px 0px;
-   border-style: solid;
-   border-color: #000;
    float: left;
    width: 200px;
 }
-.states-header:first-child {
-   border-width: 1px 1px 0px 1px;
-}
 
-.states-header .card {
-   border: 0;
-   padding: 5px;
+.states-header {
+   font-weight: bold;
+   text-align: center;
 }
 
 .card {
-   border: solid 1px #000;
+   background: linear-gradient(to bottom, 
+               rgba(240,240,240,1) 0%,
+               rgba(255,255,255,1) 50%);
+   border: solid 1px #c0c0c0;
+   border-radius: 5px;
    margin: 5px;
    padding: 5px;
    cursor: move;
+}
+
+.card .title {
+   font-weight: bold;
+}
+
+.card .separater {
+   border-style: solid;
+   border-width: 0px 0px 1px 0px;
+   border-color: #c0c0c0;
+   margin: 0px -5px 0px -5px;
 }

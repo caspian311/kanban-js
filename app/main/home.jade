@@ -2,9 +2,11 @@
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container
       .row(data-bind='foreach: states')
-         .states-header
-            .card(data-bind='text: name')
+         span.states-header(data-bind='text: name')
       .row(data-bind='foreach: states')
-         .states(data-bind='sortable: cards')
-            .card(data-bind='text: name')
+         .states(data-bind='sortable: { data: cards }')
+            .card
+               .title(data-bind='text: name')
+               .separater
+               span(data-bind='text: description')
 
