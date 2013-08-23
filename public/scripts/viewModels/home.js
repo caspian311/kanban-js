@@ -53,6 +53,9 @@ define(['services/queueService'], function(queueService) {
          });
          self.selectedQueue(chosen);
       };
+
+      self.newCard = function() {
+      };
    };
 
    return new Home();

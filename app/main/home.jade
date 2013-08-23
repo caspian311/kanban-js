@@ -1,6 +1,8 @@
 
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container
+      button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
+
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
          li(data-bind='css: {active: isSelected}')
             a(data-bind='text: name, click: $parent.selectQueue')
