@@ -37,13 +37,15 @@ define(['services/queueService'], function(queueService) {
       self.selectedQueue = ko.observable();
 
       self.viewAttached = function() {
-         queueService.getAllQueues(function(queues) {
-            self.queues($.map(queues, function(queue) { return new Queue(queue); }));
+         queueService.getAllQueues(populateQueues);
+      };
 
-            if (self.queues().length > 0) {
-               self.selectQueue(self.queues()[0]);
-            }
-         });
+      var populateQueues = function(queues) {
+         self.queues($.map(queues, function(queue) { return new Queue(queue); }));
+
+         if (self.queues().length > 0) {
+            self.selectQueue(self.queues()[0]);
+         }
       };
 
       self.selectQueue = function(chosen) {
