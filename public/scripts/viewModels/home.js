@@ -1,40 +1,34 @@
 define(['services/queueService'], function(queueService) {
-   var Card = function(name, description) {
-      this.name = ko.observable(name);
-      this.description = ko.observable(description);
+   var Card = function(json) {
+      this.name = ko.observable();
+      this.description = ko.observable();
+
+      this.name(json.name);
+      this.description(json.description);
    }
 
-   var transformCards = function(cardsJson) {
-      var cards = [];
-      if (cardsJson) {
-         cards = $.map(cardsJson, function(card) {
-            return new Card(card.name, card.description);
-         });
-      }
-      return cards;
-   };
+   var State = function(json) {
+      this.name = ko.observable();
+      this.cards = ko.observableArray();
 
-   var State = function(name, cards) {
-      this.name = ko.observable(name);
-      this.cards = ko.observableArray(transformCards(cards));
+      this.name(json.name);
+      if (json.cards) {
+         this.cards($.map(json.cards, function(card) { return new Card(card); }));
+      }
    }
 
-   var transformStates = function(statesJson) {
-      var states = [];
-      if (statesJson) {
-         states = $.map(statesJson, function(state) {
-            return new State(state.name, state.cards);
-         });
+   var Queue = function(json) {
+      this.name = ko.observable();
+      this.description = ko.observable();
+      this.states = ko.observableArray();
+      this.isSelected = ko.observable();
+
+      this.name(json.name);
+      this.description(json.description);
+      this.isSelected(false);
+      if (json.states) {
+         this.states($.map(json.states, function(state) { return new State(state); }));
       }
-      return states;
-   };
-
-   var Queue = function(name, description, states) {
-      this.name = ko.observable(name);
-      this.description = ko.observable(description);
-      this.states = ko.observableArray(transformStates(states));
-
-      this.isSelected = ko.observable(false);
    };
 
    var Home = function() {
@@ -42,15 +36,10 @@ define(['services/queueService'], function(queueService) {
       self.queues = ko.observableArray([]);
       self.selectedQueue = ko.observable();
 
-      var transformQueues = function(queuesJson) {
-         return $.map(queuesJson, function(queueJson) {
-            return new Queue(queueJson.name, queueJson.description, queueJson.states);
-         });
-      };
 
       self.viewAttached = function() {
          queueService.getAllQueues(function(queues) {
-            self.queues(transformQueues(queues));
+            self.queues($.map(queues, function(queue) { return new Queue(queue); }));
 
             if (self.queues().length > 0) {
                self.selectQueue(self.queues()[0]);
