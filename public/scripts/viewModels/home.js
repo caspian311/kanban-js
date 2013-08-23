@@ -9,7 +9,7 @@ define(['services/queueService'], function(queueService) {
 
    var State = function(json) {
       this.name = ko.observable();
-      this.cards = ko.observableArray();
+      this.cards = ko.observableArray([]);
 
       this.name(json.name);
       if (json.cards) {
@@ -20,7 +20,7 @@ define(['services/queueService'], function(queueService) {
    var Queue = function(json) {
       this.name = ko.observable();
       this.description = ko.observable();
-      this.states = ko.observableArray();
+      this.states = ko.observableArray([]);
       this.isSelected = ko.observable();
 
       this.name(json.name);
@@ -35,7 +35,6 @@ define(['services/queueService'], function(queueService) {
       var self = this;
       self.queues = ko.observableArray([]);
       self.selectedQueue = ko.observable();
-
 
       self.viewAttached = function() {
          queueService.getAllQueues(function(queues) {
@@ -55,6 +54,7 @@ define(['services/queueService'], function(queueService) {
       };
 
       self.newCard = function() {
+         self.selectedQueue().states()[0].cards.push(new Card({ name: 'test', description: 'this is the description' }));
       };
    };
 
