@@ -2,9 +2,14 @@ define(function() {
    var CardService = function() {
       var self = this;
 
-      self.saveCard = function(card) {
-         console.log('saving...');
-         console.dir(card);
+      this.saveCard = function(card, callback, errorHandler) {
+         return $.ajax({
+            url: '/cards',
+            data: card,
+            type: 'POST',
+            success: callback,
+            failure: errorHandler
+         });
       };
    };
 
