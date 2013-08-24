@@ -4,6 +4,7 @@
      , path = require('path')
      , main = require('./app/main')
      , queues = require('./app/queues')
+     , cards = require('./app/cards')
      , login = require('./app/login')
      , logout = require('./app/logout')
      , registration = require('./app/registration')
@@ -25,6 +26,7 @@
 
    app.use(main)
    app.use(queues)
+   app.use(cards)
    app.use(login)
    app.use(logout)
    app.use(registration)
