@@ -1,16 +1,20 @@
 define(['services/queueService', 'navigation'], function(queueService, navigation) {
    var Card = function(json) {
+      this.id = ko.observable();
       this.name = ko.observable();
       this.description = ko.observable();
 
+      this.id(json._id);
       this.name(json.name);
       this.description(json.description);
    }
 
    var State = function(json) {
+      this.id = ko.observable();
       this.name = ko.observable();
       this.cards = ko.observableArray([]);
 
+      this.id(json._id);
       this.name(json.name);
       if (json.cards) {
          this.cards($.map(json.cards, function(card) { return new Card(card); }));
@@ -58,7 +62,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       self.newCard = function() {
-         navigation.goTo('#newCard', { queueId: self.selectedQueue().id() });
+         navigation.goTo('#newCard', { queueId: self.selectedQueue().states()[0].id() });
       };
    };
 

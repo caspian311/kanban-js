@@ -1,6 +1,6 @@
 (function() {
-   var app = require('express')();
-      , cards = require('cards');
+   var app = require('express')()
+      , cards = require('./cards');
 
    app.locals.pretty = true;
 

@@ -10,14 +10,28 @@
       };
 
       this.post = function(request, response) {
+         queues.addQueue(parseQueue(request), function() {
+            response.json({ message: 'worky!' });
+         });
+      };
+
+      var parseQueue = function(request) {
          var queue = {
             name: request.body.name,
             description: request.body.description,
-            states: request.body.states
+            states: $.map(request.body.states, mapState)
          };
-         queues.addQueue(queue, function() {
-            response.json({ message: 'worky!' });
-         });
+         return queue;
+      ;}
+
+      var mapState = function(state) {
+         if (!state._id) {
+            state._id = new ObjectID();
+         }
+         if (!state.cards) {
+            state.cards = [];
+         }
+         return state;
       };
 
       this.put = function(request, response) {
@@ -25,7 +39,7 @@
             _id: new ObjectID(request.body.id),
             name: request.body.name,
             description: request.body.description,
-            states: request.body.states
+            states: $.map(request.body.states, mapState)
          };
          queues.updateQueue(queue, function() {
             response.json({ message: 'worky!' });
