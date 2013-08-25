@@ -19,7 +19,7 @@
          var queue = {
             name: request.body.name,
             description: request.body.description,
-            states: $.map(request.body.states, mapState)
+            states: request.body.states.map(mapState)
          };
          return queue;
       ;}
@@ -39,7 +39,7 @@
             _id: new ObjectID(request.body.id),
             name: request.body.name,
             description: request.body.description,
-            states: $.map(request.body.states, mapState)
+            states: request.body.states.map(mapState)
          };
          queues.updateQueue(queue, function() {
             response.json({ message: 'worky!' });
