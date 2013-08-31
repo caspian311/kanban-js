@@ -55,6 +55,7 @@
             receivedQueue.states.length.should.equal(1);
             receivedQueue.states[0].name.should.equal('abc');
             receivedQueue.states[0].cards.length.should.equal(0);
+            assert((new Date().getTime() - receivedQueue.creationDate.getTime()) < 1000)
          });
 
          it('should respond with positive message', function() {
