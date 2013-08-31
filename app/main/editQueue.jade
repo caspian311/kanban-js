@@ -19,7 +19,7 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
                input.form-control(type='text', data-bind='value: newStateName')
                span.input-group-btn
                   button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState')
-            ul.list-group(data-bind='foreach: states')
+            ul.list-group(data-bind='sortable: states')
                li.list-group-item(data-bind='text: name')
 
    .btn-toolbar
