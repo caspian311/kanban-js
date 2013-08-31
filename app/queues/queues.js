@@ -1,16 +1,16 @@
 (function() {
-   var queues = require('../db/queues')
+   var queuesDb = require('../db/queuesDb')
       , ObjectID = require('mongodb').ObjectID;
 
    var Queues = function() {
       this.get = function(request, response) {
-         queues.allQueues(function(queues) {
+         queuesDb.allQueues(function(queues) {
             response.json(queues);
          });
       };
 
       this.post = function(request, response) {
-         queues.addQueue(parseQueue(request), function() {
+         queuesDb.addQueue(parseQueue(request), function() {
             response.json({ message: 'worky!' });
          });
       };
@@ -43,7 +43,7 @@
             states: request.body.states.map(mapState),
             creationDate: request.body.creationDate
          };
-         queues.updateQueue(queue, function() {
+         queuesDb.updateQueue(queue, function() {
             response.json({ message: 'worky!' });
          });
       };

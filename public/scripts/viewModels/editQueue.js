@@ -54,6 +54,12 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          self.newStateName('');
       };
 
+      self.removeState = function(stateToBeDeleted) {
+         var states = self.states();
+         var index = states.indexOf(stateToBeDeleted);
+         self.states.splice(index, 1);
+      };
+
       var getData = function() {
          var data = {
                id: self.id(),

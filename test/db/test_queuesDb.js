@@ -1,9 +1,9 @@
 (function() {
    var MongoClient = require('mongodb').MongoClient
       , ObjectID = require('mongodb').ObjectID
-      , queues = require('../../app/db/queues');
+      , queuesDb = require('../../app/db/queuesDb');
 
-   describe("queues", function() {
+   describe("queuesDb", function() {
       var cleanUp = function(done) {
          MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
             if (err) {
@@ -25,7 +25,7 @@
 
       describe('#allQueues', function() {
          it('initially should be empty', function(done) {
-            queues.allQueues(function(docs) {
+            queuesDb.allQueues(function(docs) {
                assert(docs.length === 0, 'should be empty, but was ' + docs.length);
 
                done();
@@ -35,10 +35,10 @@
 
       describe('#addQueue', function() {
          it('should add a queue', function(done) {
-            queues.addQueue({name: 'foo'}, function(newQueue) {
+            queuesDb.addQueue({name: 'foo'}, function(newQueue) {
                assert(newQueue, 'should have created the new Queue');
                assert(newQueue.name === 'foo', 'name should be correct, but was ' + newQueue.name);
-               queues.allQueues(function(allQueues) {
+               queuesDb.allQueues(function(allQueues) {
                   assert(allQueues.length === 1, 'should have one queue, but had ' + allQueues.length);
 
                   done();
@@ -51,16 +51,34 @@
          it('should update a queue', function(done) {
             var initialQueue = {name: 'foo'};
 
-            queues.addQueue(initialQueue, function(existingQueue) {
+            queuesDb.addQueue(initialQueue, function(existingQueue) {
                existingQueue.name = 'bar';
 
-               queues.updateQueue(existingQueue, function(updatedItems) {
+               queuesDb.updateQueue(existingQueue, function(updatedItems) {
 
                   updatedItems.should.equal(1);
 
-                  queues.allQueues(function(allQueues) {
+                  queuesDb.allQueues(function(allQueues) {
                      assert(allQueues.length === 1, 'should still only have one queue, but had ' + allQueues.length);
                      allQueues[0].name.should.equal('bar');
+
+                     done();
+                  });
+               });
+            });
+         });
+
+         it('should make all state ids objectids', function(done) {
+            var initialQueue = {name: 'foo', states: [ { _id: new ObjectID() , name: 'footoo' } ]};
+
+            queuesDb.addQueue(initialQueue, function(existingQueue) {
+               var stateId = new ObjectID().toHexString();
+               existingQueue.states = [ { _id: stateId } ]
+
+               queuesDb.updateQueue(existingQueue, function() {
+
+                  queuesDb.allQueues(function(allQueues) {
+                     allQueues[0].states[0]._id.toHexString().should.equal(stateId);
 
                      done();
                   });
@@ -88,12 +106,12 @@
                ]
             };
 
-            queues.addQueue(initialQueue, function() {
+            queuesDb.addQueue(initialQueue, function() {
                var cardName = 'this is a new card';
 
-               queues.addCard(stateId.toHexString(), { name: cardName }, function() {
+               queuesDb.addCard(stateId.toHexString(), { name: cardName }, function() {
 
-                  queues.allQueues(function(allQueues) {
+                  queuesDb.allQueues(function(allQueues) {
                      var updatedState = allQueues[0].states.filter(function(state) { 
                         return state._id.equals(stateId);
                      })[0];

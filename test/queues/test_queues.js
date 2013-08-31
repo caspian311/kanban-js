@@ -1,6 +1,6 @@
 (function() {
    var queues = require('../../app/queues/queues')
-      , queuesDb = require('../../app/db/queues')
+      , queuesDb = require('../../app/db/queuesDb')
       , ObjectID = require('mongodb').ObjectID;
 
    describe('queues', function() {
