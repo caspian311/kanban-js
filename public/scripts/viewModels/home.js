@@ -46,8 +46,14 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          queueService.getAllQueues(populateQueues);
       };
 
+      var sortByCreationDate = function(queues) {
+         return queues.sort(function(q1, q2) {
+            return q1.creationDate < q2.creationDate ? -1 : q1.creationDate > q2.creationDate ? 1 : 0;
+         });
+      };
+
       var populateQueues = function(queues) {
-         self.queues($.map(queues, function(queue) { return new Queue(queue); }));
+         self.queues($.map(sortByCreationDate(queues), function(queue) { return new Queue(queue); }));
 
          if (self.queues().length > 0) {
             self.selectQueue(self.queues()[0]);

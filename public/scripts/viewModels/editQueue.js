@@ -8,6 +8,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.isEditing = ko.observable(false);
       self.newStateName = ko.observable();
       self.states = ko.observableArray([]);
+      self.creationDate = ko.observable();
 
       self.title = ko.computed(function() {
          var prefix;
@@ -38,11 +39,13 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             if (navigation.parameters().states) {
                self.states(navigation.parameters().states);
             }
+            self.creationDate(navigation.parameters().creationDate);
          } else {
             self.isEditing(false);
             self.id(null);
             self.name('');
             self.description('');
+            self.creationDate('');
          }
          self.newStateName('');
       };
@@ -52,7 +55,8 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
                id: self.id(),
                name: self.name(),
                description: self.description(),
-               states: self.states()
+               states: self.states(),
+               creationDate: self.creationDate()
             };
       };
 
