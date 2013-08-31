@@ -12,7 +12,7 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
             span.states-header(data-bind='text: name')
          .row(data-bind='foreach: states')
             .states(data-bind='sortable: cards')
-               .card
+               .card.draggable
                   .title(data-bind='text: name')
                   .separater
                   span(data-bind='text: description')

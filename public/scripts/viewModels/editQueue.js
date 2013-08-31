@@ -29,6 +29,10 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          }
       });
 
+      var sortByOrderBy = function(s1, s2) {
+         return s1.orderBy < s2.orderBy ? -1 : s1.orderBy > s2.orderBy ? 1 : 0;
+      };
+
       self.viewAttached = function() {
          self.states([]);
          if (navigation.parameters()) {
@@ -37,7 +41,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             self.name(navigation.parameters().name);
             self.description(navigation.parameters().description);
             if (navigation.parameters().states) {
-               self.states(navigation.parameters().states);
+               self.states(navigation.parameters().states.sort(sortByOrderBy));
             }
             self.creationDate(navigation.parameters().creationDate);
          } else {
@@ -51,13 +55,17 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       var getData = function() {
-         return {
+         var data = {
                id: self.id(),
                name: self.name(),
                description: self.description(),
-               states: self.states(),
                creationDate: self.creationDate()
             };
+         data.states = $.map(self.states(), function(state, index) {
+            state.orderBy = index;
+            return state;
+         });
+         return data;
       };
 
       var sucessfulSave = function() {

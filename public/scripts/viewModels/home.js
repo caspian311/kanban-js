@@ -32,8 +32,13 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       this.name(json.name);
       this.description(json.description);
       this.isSelected(false);
+
+      var sortByOrderBy = function(s1, s2) {
+         return s1.orderBy < s2.orderBy ? -1 : s1.orderBy > s2.orderBy ? 1 : 0;
+      };
+
       if (json.states) {
-         this.states($.map(json.states, function(state) { return new State(state); }));
+         this.states($.map(json.states.sort(sortByOrderBy), function(state) { return new State(state); }));
       }
    };
 
