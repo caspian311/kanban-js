@@ -40,7 +40,8 @@
             _id: new ObjectID(request.body.id),
             name: request.body.name,
             description: request.body.description,
-            states: request.body.states.map(mapState)
+            states: request.body.states.map(mapState),
+            creationDate: request.body.creationDate
          };
          queues.updateQueue(queue, function() {
             response.json({ message: 'worky!' });

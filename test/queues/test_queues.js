@@ -80,14 +80,16 @@
                   id: id,
                   name: 'name',
                   description: 'desc',
-                  states: [{ _id: '123', name: 'abc' }]
+                  states: [{ _id: '123', name: 'abc' }],
+                  creationDate: 'foo'
                } 
             };
             var expectedQueue = {
                _id: new ObjectID(id),
                name: 'name',
                description: 'desc',
-               states: [{ _id: '123', name: 'abc', cards: [] }]
+               states: [{ _id: '123', name: 'abc', cards: [] }],
+               creationDate: 'foo'
             };
 
             queues.put(request, { json: function() {} });
