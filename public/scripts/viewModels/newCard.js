@@ -11,18 +11,20 @@ define(['navigation', 'services/cardService'], function(navigation, cardService)
 
       var getData = function() {
          return {
-               queueId: navigation.parameters().queueId,
+               stateId: navigation.parameters().stateId,
                name: self.name(),
                description: self.description() 
             };
       };
 
       self.save = function() {
-         cardService.saveCard(getData());
+         cardService.saveCard(getData(), function() {
+            navigation.goTo('#home');
+         });
       };
 
       self.cancel = function() {
-         console.log('canceling...');
+         navigation.goTo('#home');
       };
    };
 

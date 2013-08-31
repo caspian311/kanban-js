@@ -62,7 +62,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       self.newCard = function() {
-         navigation.goTo('#newCard', { queueId: self.selectedQueue().states()[0].id() });
+         navigation.goTo('#newCard', { stateId: self.selectedQueue().states()[0].id() });
       };
    };
 

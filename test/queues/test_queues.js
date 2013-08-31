@@ -44,16 +44,23 @@
             var expectedQueue = {
                name: 'name',
                description: 'desc',
-               states: [{ name: 'abc' }]
+               states: [{ name: 'abc', cards: [] }]
             };
 
             queues.post(request, { redirect: function() {} });
 
-            queuesDb.addQueue.args[0][0].should.deep.equal(expectedQueue);
+            var receivedQueue = queuesDb.addQueue.args[0][0];
+            receivedQueue.name.should.equal(expectedQueue.name);
+            receivedQueue.description.should.equal(expectedQueue.description);
+            receivedQueue.states.length.should.equal(1);
+            receivedQueue.states[0].name.should.equal('abc');
+            receivedQueue.states[0].cards.length.should.equal(0);
          });
 
-         it('should response with positive message', function() {
-            var request = { body: {} };
+         it('should respond with positive message', function() {
+            var request = { body: {
+               states: []
+            } };
             var response = { json: sinon.spy() };
 
             queues.post(request, response);
@@ -72,14 +79,14 @@
                   id: id,
                   name: 'name',
                   description: 'desc',
-                  states: [{ name: 'abc' }]
+                  states: [{ _id: '123', name: 'abc' }]
                } 
             };
             var expectedQueue = {
                _id: new ObjectID(id),
                name: 'name',
                description: 'desc',
-               states: [{ name: 'abc' }]
+               states: [{ _id: '123', name: 'abc', cards: [] }]
             };
 
             queues.put(request, { json: function() {} });
@@ -88,7 +95,9 @@
          });
 
          it('should response with positive message', function() {
-            var request = { body: {} };
+            var request = { body: {
+               states: []
+            } };
             var response = { json: sinon.spy() };
 
             queues.put(request, response);
