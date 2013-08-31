@@ -67,6 +67,24 @@
                });
             });
          });
+
+         it('should make all state ids objectids', function(done) {
+            var initialQueue = {name: 'foo', states: [ { _id: new ObjectID() , name: 'footoo' } ]};
+
+            queuesDb.addQueue(initialQueue, function(existingQueue) {
+               var stateId = new ObjectID().toHexString();
+               existingQueue.states = [ { _id: stateId } ]
+
+               queuesDb.updateQueue(existingQueue, function() {
+
+                  queuesDb.allQueues(function(allQueues) {
+                     allQueues[0].states[0]._id.toHexString().should.equal(stateId);
+
+                     done();
+                  });
+               });
+            });
+         });
       });
 
       describe('#addCard', function() {

@@ -52,6 +52,15 @@
       };
 
       self.updateQueue = function(queue, callback) {
+         if (queue.states && queue.states.length > 0) {
+            queue.states = queue.states.map(function(state) {
+               if (!state._id.toHexString) {
+                  state._id = new ObjectID(state._id);
+               }
+               return state;
+            });
+         }
+
          base.inConnection(function(db, done) {
             db.collection('queues').update({'_id': queue._id}, queue, function(err, numberOfUpdates) {
                if (err) {
