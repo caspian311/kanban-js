@@ -1,5 +1,5 @@
 (function() {
-   var queuesDb = require('../db/queues')
+   var queuesDb = require('../db/queuesDb')
       , ObjectID = require('mongodb').ObjectID;
 
    var Queues = function() {

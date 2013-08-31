@@ -1,5 +1,5 @@
 (function() {
-   var queues = require('../db/queues');
+   var queues = require('../db/queuesDb');
 
    var Cards = function() {
       this.post = function(request, response) {

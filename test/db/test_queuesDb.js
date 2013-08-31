@@ -1,7 +1,7 @@
 (function() {
    var MongoClient = require('mongodb').MongoClient
       , ObjectID = require('mongodb').ObjectID
-      , queues = require('../../app/db/queues');
+      , queues = require('../../app/db/queuesDb');
 
    describe("queues", function() {
       var cleanUp = function(done) {
