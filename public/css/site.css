@@ -10,6 +10,14 @@ td.big {
    cursor: pointer;
 }
 
+.draggable {
+   cursor: move;
+}
+
+li.draggable i {
+   padding: 10px;
+}
+
 .pull-right.btn {
    margin-left: 5px;
 }

@@ -20,7 +20,9 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
                span.input-group-btn
                   button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState')
             ul.list-group(data-bind='sortable: states')
-               li.list-group-item(data-bind='text: name')
+               li.list-group-item.draggable
+                  i.glyphicon.glyphicon-sort
+                  span(data-bind='text: name')
 
    .btn-toolbar
       button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
