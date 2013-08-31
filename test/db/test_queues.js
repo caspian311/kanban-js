@@ -1,5 +1,6 @@
 (function() {
    var MongoClient = require('mongodb').MongoClient
+      , ObjectID = require('mongodb').ObjectID
       , queues = require('../../app/db/queues');
 
    describe("queues", function() {
@@ -68,5 +69,43 @@
          });
       });
 
+      describe('#addCard', function() {
+         it('should add a card to the queue', function(done) {
+            var stateId = new ObjectID();
+            var initialQueue = {
+               name: 'queue name', 
+               states: [
+                  { 
+                     _id: new ObjectID(), 
+                     name: 'state 1', 
+                     cards: [] 
+                  }, 
+                  { 
+                     _id: stateId, 
+                     name: 'state 2', 
+                     cards: [] 
+                  }
+               ]
+            };
+
+            queues.addQueue(initialQueue, function() {
+               var cardName = 'this is a new card';
+
+               queues.addCard(stateId.toHexString(), { name: cardName }, function() {
+
+                  queues.allQueues(function(allQueues) {
+                     var updatedState = allQueues[0].states.filter(function(state) { 
+                        return state._id.equals(stateId);
+                     })[0];
+
+                     assert(updatedState.cards.length === 1, 'should have one card, but had ' + updatedState.cards.length);
+                     updatedState.cards[0].name.should.equal(cardName);
+
+                     done();
+                  });
+               });
+            });
+         });
+      });
    });
 })();

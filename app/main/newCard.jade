@@ -1,0 +1,18 @@
+div(data-bind='page: { id: "newCard", title: "New card", withOnShow: bindModel }')
+   h2 Create card
+
+   form.form-horizontal
+      .form-group
+         label.col-lg-2.control-label(for='name') Name
+         .col-lg-10
+            input.form-control#name(type='text', placeholder='', data-bind='value: name')
+      .form-group
+         label.col-lg-2.control-label(for='description') Description
+         .col-lg-10
+            textarea.form-control#description(name='description', data-bind='value: description', rows='3')
+
+   .btn-toolbar
+      button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
+      button.pull-right.btn.btn-primary(data-bind='click: save') Create card
+
+
