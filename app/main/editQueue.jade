@@ -22,8 +22,11 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
             ul.list-group(data-bind='sortable: states')
                li.list-group-item.draggable.state.clearfix
                   i.sort-icon.glyphicon.glyphicon-sort
-                  span(data-bind='text: name')
+                  span(data-bind='text: name, visible: isReadOnly')
+                  input(data-bind='value: name, visible: isEditing')
                   button.btn.btn-default.btn-danger.btn-sm.glyphicon.glyphicon-remove.pull-right(data-bind='click: $parent.removeState')
+                  button.btn.btn-default.btn-primary.btn-sm.glyphicon.glyphicon-pencil.pull-right(data-bind='click: editState, visible: isReadOnly')
+                  button.btn.btn-default.btn-success.btn-sm.glyphicon.glyphicon-ok-sign.pull-right(data-bind='click: doneEditingState, visible: isEditing')
 
    .btn-toolbar
       button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel

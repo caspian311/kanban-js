@@ -33,6 +33,26 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          return s1.orderBy < s2.orderBy ? -1 : s1.orderBy > s2.orderBy ? 1 : 0;
       };
 
+      var State = function(state) {
+         var self = this;
+         self.name = ko.observable(state.name);
+         self.isEditing = ko.observable(false);
+         self.isReadOnly = ko.computed(function() {
+            return !self.isEditing();
+         });
+
+         self.editState = function() {
+            self.isEditing(true);
+         };
+         self.doneEditingState = function() {
+            self.isEditing(false);
+         };
+      };
+
+      var createState = function(state) {
+         return new State(state);
+      };
+
       self.viewAttached = function() {
          self.states([]);
          if (navigation.parameters()) {
@@ -41,7 +61,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             self.name(navigation.parameters().name);
             self.description(navigation.parameters().description);
             if (navigation.parameters().states) {
-               self.states(navigation.parameters().states.sort(sortByOrderBy));
+               self.states($.map(navigation.parameters().states.sort(sortByOrderBy), createState));
             }
             self.creationDate(navigation.parameters().creationDate);
          } else {
@@ -68,8 +88,10 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
                creationDate: self.creationDate()
             };
          data.states = $.map(self.states(), function(state, index) {
-            state.orderBy = index;
-            return state;
+            return {
+               name: state.name(),
+               orderBy: index
+            };
          });
          return data;
       };
