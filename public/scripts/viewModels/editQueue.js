@@ -117,7 +117,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       self.addState = function() {
-         self.states.push({ name: ko.observable(self.newStateName())});
+         self.states.push(new State({ name: self.newStateName() }));
          self.newStateName('');
       };
 
