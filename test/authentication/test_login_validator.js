@@ -1,15 +1,18 @@
 (function() {
    var loginValidator = require('../../app/authentication/login_validator')
+      , encryptionUtils = require('../../app/authentication/encryption_utils')
       , users = require('../../app/db/users')
       , findUserByCredentialsStub;
 
    describe('LoginValidator', function() {
       beforeEach(function() {
          findUserByCredentialsStub = sinon.stub(users, 'findUserByCredentials');
+         this.encryptStub = sinon.stub(encryptionUtils, 'encrypt');
       });
 
       afterEach(function() {
          findUserByCredentialsStub.restore();
+         encryptionUtils.encrypt.restore();
       });
 
       describe('#validate_login', function() {
@@ -18,9 +21,12 @@
                var username = 'user', password = 'pass'
                   , callback = sinon.spy();
 
+               var encryptedPassword = 'this is an encrypted password';
+               this.encryptStub.withArgs(password).returns(encryptedPassword);
+
                loginValidator.validate_login(username, password, callback);
 
-               assert(findUserByCredentialsStub.calledWith(username, password));
+               assert(findUserByCredentialsStub.calledWith(username, encryptedPassword));
             });
 
             it('should not populate an error message', function() {
