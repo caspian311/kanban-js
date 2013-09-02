@@ -72,6 +72,10 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          self.selectedQueue(chosen);
       };
 
+      this.cardMoved = function() {
+         console.log('***********');
+      };
+
       self.newCard = function() {
          navigation.goTo('#newCard', { stateId: self.selectedQueue().states()[0].id() });
       };
