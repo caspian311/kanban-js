@@ -106,7 +106,13 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       };
 
       this.cardMoved = function() {
-         queueService.updateQueue(self.selectedQueue().getData(), showSuccessfulUpdate);
+         queueService.updateQueue(self.selectedQueue().getData(),
+               showSuccessfulUpdate,
+               showFailureMessage);
+      };
+
+      var showFailureMessage = function() {
+         growler.showError("Update failed!");
       };
 
       var showSuccessfulUpdate = function() {
