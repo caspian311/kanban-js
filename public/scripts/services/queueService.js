@@ -4,7 +4,7 @@ define(function() {
          return $.ajax({
             url: '/queues',
             success: callback,
-            failure: errorHandler
+            error: errorHandler
          });
       };
 
@@ -14,7 +14,7 @@ define(function() {
             data: queue,
             type: 'POST',
             success: callback,
-            failure: errorHandler
+            error: errorHandler
          });
       };
 
@@ -24,7 +24,7 @@ define(function() {
             data: queue,
             type: 'PUT',
             success: callback,
-            failure: errorHandler
+            error: errorHandler
          });
       };
    };
