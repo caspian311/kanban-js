@@ -1,4 +1,4 @@
-define(['services/queueService', 'navigation'], function(queueService, navigation) {
+define(['services/queueService', 'navigation', 'growler'], function(queueService, navigation, growler) {
    var Card = function(json) {
       this.id = ko.observable();
       this.name = ko.observable();
@@ -7,6 +7,14 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       this.id(json._id);
       this.name(json.name);
       this.description(json.description);
+
+      this.getData = function() {
+         return { 
+            id: this.id(),
+            name: this.name(),
+            description: this.description()
+         };
+      };
    }
 
    var State = function(json) {
@@ -19,6 +27,18 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       if (json.cards) {
          this.cards($.map(json.cards, function(card) { return new Card(card); }));
       }
+
+      this.getData = function() {
+         return { 
+            id: this.id(),
+            name: this.name(),
+            cards: $.map(this.cards(), function(card, index) {
+               var transformedCard = card.getData();
+               transformedCard.orderBy = index;
+               return transformedCard;
+            })
+         };
+      };
    }
 
    var Queue = function(json) {
@@ -40,6 +60,19 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       if (json.states) {
          this.states($.map(json.states.sort(sortByOrderBy), function(state) { return new State(state); }));
       }
+
+      this.getData = function() {
+         return {
+            id: this.id(),
+            name: this.name(),
+            description: this.description(),
+            states: $.map(this.states(), function(state, index) {
+               var transformedState = state.getData();
+               transformedState.orderBy = index;
+               return transformedState;
+            })
+         };
+      };
    };
 
    var Home = function() {
@@ -70,6 +103,20 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             queue.isSelected(queue == chosen);
          });
          self.selectedQueue(chosen);
+      };
+
+      this.cardMoved = function() {
+         queueService.updateQueue(self.selectedQueue().getData(),
+               showSuccessfulUpdate,
+               showFailureMessage);
+      };
+
+      var showFailureMessage = function() {
+         growler.showError("Update failed!");
+      };
+
+      var showSuccessfulUpdate = function() {
+         growler.showMessage("Update successful.");
       };
 
       self.newCard = function() {

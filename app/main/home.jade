@@ -11,7 +11,7 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
          .row(data-bind='foreach: states')
             span.states-header(data-bind='text: name')
          .row(data-bind='foreach: states')
-            .states(data-bind='sortable: cards')
+            .states(data-bind='sortable: { data: cards, afterMove: $parents[1].cardMoved }')
                .card.draggable
                   .title(data-bind='text: name')
                   .separater
