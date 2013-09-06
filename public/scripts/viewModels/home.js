@@ -106,7 +106,7 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       this.cardMoved = function() {
-         console.dir(self.selectedQueue().getData());
+         queueService.updateQueue(self.selectedQueue().getData());
       };
 
       self.newCard = function() {
