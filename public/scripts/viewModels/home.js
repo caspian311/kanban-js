@@ -1,4 +1,4 @@
-define(['services/queueService', 'navigation'], function(queueService, navigation) {
+define(['services/queueService', 'navigation', 'growler'], function(queueService, navigation, growler) {
    var Card = function(json) {
       this.id = ko.observable();
       this.name = ko.observable();
@@ -106,7 +106,11 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       };
 
       this.cardMoved = function() {
-         queueService.updateQueue(self.selectedQueue().getData());
+         queueService.updateQueue(self.selectedQueue().getData(), showSuccessfulUpdate);
+      };
+
+      var showSuccessfulUpdate = function() {
+         growler.showMessage("Update successful.");
       };
 
       self.newCard = function() {
