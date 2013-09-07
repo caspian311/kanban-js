@@ -16,4 +16,9 @@
    task('test', function() {
       run('NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --require test/test_helper.js --colors --recursive');
    });
+
+   desc('Run all cucumber tests');
+   task('cukes', function() {
+      run('./node_modules/.bin/cucumber.js');
+   });
 })()
