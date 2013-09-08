@@ -25,6 +25,12 @@
          password: 'test'
       };
 
+      this.newUser = {
+         name: 'New User',
+         email: 'new@user.com',
+         password: 'new'
+      };
+
       callback();
    };
 
