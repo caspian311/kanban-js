@@ -3,7 +3,7 @@
       var pageMappings = {}
       pageMappings['main'] = '/'
       pageMappings['login'] = '/login'
-      pageMappings['register'] = '/register'
+      pageMappings['registration'] = '/registration'
 
       this.forPage = function(pageName) {
          return urlPrefix + pageMappings[pageName]

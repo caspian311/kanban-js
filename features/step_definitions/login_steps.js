@@ -46,6 +46,25 @@
       this.Then(/^I should see a welcome message$/, function(callback) {
          this.find_text('Welcome, ' + this.testUser.name, callback);
       });
+
+      this.When(/^I fill in my registration information$/, function(callback) {
+         this.browser.fill('#name', this.newUser.name);
+         this.browser.fill('#email', this.newUser.email);
+         this.browser.fill('#password', this.newUser.password);
+         this.browser.fill('#confirm-password', this.newUser.password);
+         this.browser.pressButton('#register-button', callback);
+      });
+
+      this.When(/^I login with the newly created user$/, function(callback) {
+         var self = this;
+         this.visit('login', function() {
+            loginWithCredentials.call(self, self.newUser.email, self.newUser.password, callback);
+         });
+      });
+
+      this.Then(/^I should see a new user welcome message$/, function(callback) {
+         this.find_text('Welcome, ' + this.newUser.name, callback);
+      });
    }
    module.exports = login_steps;
 })();
