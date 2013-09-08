@@ -16,6 +16,10 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       self.openQueue = function(data, event) {
          navigation.goTo('#editQueue', data);
       };
+
+      self.deleteQueue = function(queueToBeDeleted) {
+         console.log('deleting: ' + queueToBeDeleted.name);
+      };
    };
    return new QueueManagement();
 });
