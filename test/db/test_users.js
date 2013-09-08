@@ -4,18 +4,7 @@
 
    describe("users", function() {
       var cleanUp = function(done) {
-         MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
-            if (err) {
-               throw err;
-            }
-            db.collection('users').remove({}, function(err, numberRemoved) {
-               if (err) {
-                  throw err;
-               }
-
-               done();
-            });
-         });
+         users.removeAllUsers(done)
       };
 
       before(cleanUp);

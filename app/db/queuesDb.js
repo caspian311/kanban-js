@@ -71,6 +71,15 @@
             });
          });
       };
+
+      self.removeAllQueues = function(callback) {
+         base.inConnection(function(db, done) {
+            db.collection('queues').remove({}, function() {
+               callback();
+               done();
+            });
+         });
+      };
    };
 
    module.exports = new Queues();
