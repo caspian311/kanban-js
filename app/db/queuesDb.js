@@ -80,6 +80,8 @@
             });
          });
       };
+
+      self.deleteQueue = function(callback) { };
    };
 
    module.exports = new Queues();

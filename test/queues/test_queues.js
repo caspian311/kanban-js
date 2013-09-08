@@ -8,12 +8,14 @@
          this.allQueuesStub = sinon.stub(queuesDb, 'allQueues');
          sinon.stub(queuesDb, 'addQueue');
          sinon.stub(queuesDb, 'updateQueue');
+         sinon.stub(queuesDb, 'deleteQueue');
       });
 
       afterEach(function() {
          queuesDb.allQueues.restore();
          queuesDb.addQueue.restore();
          queuesDb.updateQueue.restore();
+         queuesDb.deleteQueue.restore();
       });
 
       describe('#get', function() {
@@ -105,6 +107,34 @@
 
             queues.put(request, response);
             queuesDb.updateQueue.args[0][1]();
+
+            var responseMessage = response.json.args[0][0];
+            responseMessage.message.should.equal('worky!');
+         });
+      });
+
+      describe('#del', function() {
+         it('should delete an existing queue by id', function() {
+            var id = '4e4e1638c85e808431000003';
+            var request = { 
+               params: { id: id }
+            };
+
+            queues.del(request, { json: function() {} });
+
+            queuesDb.deleteQueue.args[0][0].should.equal(id);
+         });
+
+         it('should response with positive message', function() {
+            var request = { 
+               params: {
+                  id: {}
+               }
+            };
+            var response = { json: sinon.spy() };
+
+            queues.del(request, response);
+            queuesDb.deleteQueue.args[0][1]();
 
             var responseMessage = response.json.args[0][0];
             responseMessage.message.should.equal('worky!');
