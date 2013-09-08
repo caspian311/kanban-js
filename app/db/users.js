@@ -40,6 +40,15 @@
             });
          });
       };
+
+      self.removeAllUsers = function(callback) {
+         base.inConnection(function(db, done) {
+            db.collection('users').remove({}, function() {
+               callback();
+               done();
+            });
+         });
+      };
    };
 
 
