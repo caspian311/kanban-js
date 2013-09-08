@@ -7,14 +7,14 @@ block content
    h1 New user registration
    form(action='/registration', method='post')
       .form-group
-         input(type='text', name='name', placeholder='Full name', data-bind='value: name')
+         input(type='text', id='name', name='name', placeholder='Full name', data-bind='value: name')
       .form-group
-         input(type='text', name='email', placeholder='Email', data-bind='value: email')
+         input(type='text', id='email', name='email', placeholder='Email', data-bind='value: email')
       .form-group
-         input(type='password', name='password', placeholder='Password', data-bind='value: password')
+         input(type='password', id='password', name='password', placeholder='Password', data-bind='value: password')
       .form-group
-         input(type='password', placeholder='Confirm password', data-bind='value: passwordConfirmation')
+         input(type='password', id='confirm-password', placeholder='Confirm password', data-bind='value: passwordConfirmation')
       .form-group
-         input(type='submit', value='Create user', class='btn btn-primary', data-bind='enable: isValid')
+         input(type='submit', id='register-button', value='Create user', class='btn btn-primary', data-bind='enable: isValid')
          &nbsp;
          a(href='/login', class='btn btn-default') Cancel
