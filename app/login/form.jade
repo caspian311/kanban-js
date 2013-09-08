@@ -15,10 +15,10 @@ block content
    form(action='/login', method='post')
       fieldset
          .form-group
-            input(name='username', type='text', placeholder='Username')
+            input(id='username', name='username', type='text', placeholder='Username')
          .form-group
-            input(name='password', type='password', placeholder='Password')
-         input(value='Login', type='submit', class='btn btn-primary')
+            input(id='password', name='password', type='password', placeholder='Password')
+         input(id='login-button', value='Login', type='submit', class='btn btn-primary')
 
       | Not a registered user? 
       a(href='/registration') Registration here!

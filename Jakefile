@@ -16,4 +16,14 @@
    task('test', function() {
       run('NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --require test/test_helper.js --colors --recursive');
    });
+
+   desc('Run all cucumber tests');
+   task('cukes', function() {
+      run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty');
+   });
+
+   desc('Run the cucumber tests marked as WIP');
+   task('cukes-wip', function() {
+      run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty --tags=@wip');
+   });
 })()
