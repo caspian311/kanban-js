@@ -19,6 +19,12 @@
          callback();
       };
 
+      this.testUser = {
+         name: 'Test User',
+         email: 'test@user.com',
+         password: 'test'
+      };
+
       callback();
    };
 
