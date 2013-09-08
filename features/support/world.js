@@ -15,7 +15,7 @@
       };
 
       this.find_text = function(text, callback) {
-         assert(this.browser.html().indexOf(text) > -1, 'Could not find text on page: ' + text);
+         assert(this.browser.html().indexOf(text) > -1, '**************************\nCould not find ' + text + ' on page: \n' + this.browser.html());
          callback();
       };
 
