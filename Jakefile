@@ -21,4 +21,9 @@
    task('cukes', function() {
       run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty');
    });
+
+   desc('Run the cucumber tests marked as WIP');
+   task('cukes-wip', function() {
+      run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty --tags=@wip');
+   });
 })()
