@@ -1,11 +1,13 @@
 (function() {
    var DbHelper = function() {
       var db = function() {
-         if (process.env.NODE_ENV === 'test') {
-            return 'test';
-         } else {
-            return 'kanbanjs';
+         var dbName = 'kanbanjs';
+
+         if (process.env.NODE_ENV) {
+            dbName = dbName + '-' + process.env.NODE_ENV;
          }
+
+         return dbName;
       };
 
       this.getConnectionString = function() {
