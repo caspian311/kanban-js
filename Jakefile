@@ -19,6 +19,6 @@
 
    desc('Run all cucumber tests');
    task('cukes', function() {
-      run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js');
+      run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty');
    });
 })()
