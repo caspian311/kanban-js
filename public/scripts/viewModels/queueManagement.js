@@ -18,7 +18,7 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       };
 
       self.deleteQueue = function(queueToBeDeleted) {
-         console.log('deleting: ' + queueToBeDeleted.name);
+         queueService.deleteQueue(queueToBeDeleted._id, self.viewAttached);
       };
    };
    return new QueueManagement();
