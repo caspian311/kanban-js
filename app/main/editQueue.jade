@@ -34,3 +34,9 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
       button.btn.btn-primary(data-bind='click: save, disable: !isValid()') 
          span(data-bind='text: saveActionText')
 
+   .alert.alert-block.alert-warning.pull-left(data-bind='visible: !$data.isValid()')
+      h4 Invalid queue
+      p Please be sure to fix the following invalid items:
+         ul(data-bind='foreach: validationErrors')
+            li(data-bind='text: $data')
+
