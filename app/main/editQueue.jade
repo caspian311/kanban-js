@@ -2,23 +2,24 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
    h2 
       span(data-bind='text: title')
 
+
    form.form-horizontal
       .form-group
          label.col-lg-2.control-label(for='name') Name
          .col-lg-10
-            input.form-control#name(type='text', placeholder='', data-bind='value: name')
+            input.form-control#name(type='text', placeholder='', data-bind='value: name, valueUpdate: "keyup"')
       .form-group
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
-            textarea.form-control#description(name='description', data-bind='value: description', rows='3')
+            textarea.form-control#description(name='description', data-bind='value: description, valueUpdate: "keyup"', rows='3')
       .form-group
          label.col-lg-2.control-label(for='description') States
          .col-lg-10
 
             .input-group
-               input.form-control(type='text', data-bind='value: newStateName')
+               input.form-control(type='text', data-bind='value: newStateName, valueUpdate: "keyup"')
                span.input-group-btn
-                  button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState')
+                  button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState, disable: !$data.validStateName()')
             ul.list-group(data-bind='sortable: states')
                li.list-group-item.draggable.state.clearfix
                   i.sort-icon.glyphicon.glyphicon-sort
@@ -28,8 +29,14 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
                   button.btn.btn-default.btn-primary.btn-sm.glyphicon.glyphicon-pencil.pull-right(data-bind='click: editState, visible: isReadOnly')
                   button.btn.btn-default.btn-success.btn-sm.glyphicon.glyphicon-ok-sign.pull-right(data-bind='click: doneEditingState, visible: isEditing')
 
-   .btn-toolbar
-      button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
-      button.pull-right.btn.btn-primary(data-bind='click: save') 
+   .btn-toolbar.pull-right
+      button.btn.btn-default(data-bind='click: cancel') Cancel
+      button.btn.btn-primary(data-bind='click: save, disable: !isValid()') 
          span(data-bind='text: saveActionText')
+
+   .alert.alert-block.alert-warning.pull-left(data-bind='visible: !$data.isValid()')
+      h4 Invalid queue
+      p Please be sure to fix the following invalid items:
+         ul(data-bind='foreach: validationErrors')
+            li(data-bind='text: $data')
 

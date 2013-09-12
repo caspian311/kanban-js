@@ -9,6 +9,23 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.newStateName = ko.observable();
       self.states = ko.observableArray([]);
       self.creationDate = ko.observable();
+      self.validStateName = ko.computed(function() {
+         return self.newStateName();
+      });
+      self.validationErrors = ko.computed(function() {
+         var errors = [];
+         if (!self.name()) {
+            errors.push('Invalid queue name');
+         }
+
+         if (self.states().length == 0) {
+            errors.push('Every queue must have at least one state');
+         }
+         return errors;
+      });
+      self.isValid = ko.computed(function() {
+         return self.name() && self.states().length > 0
+      });
 
       self.title = ko.computed(function() {
          var prefix;
