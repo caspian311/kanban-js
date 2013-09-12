@@ -9,6 +9,9 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
       self.newStateName = ko.observable();
       self.states = ko.observableArray([]);
       self.creationDate = ko.observable();
+      self.validStateName = ko.computed(function() {
+         return self.newStateName();
+      });
       self.validationErrors = ko.computed(function() {
          var errors = [];
          if (!self.name()) {
