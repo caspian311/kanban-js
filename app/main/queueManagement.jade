@@ -24,7 +24,9 @@ div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnS
                button.close(data-dismiss='modal', type='button', aria-hidden='true') &times;
                h4.modal-title Are you sure?
             .modal-body
-               p Deleting Queues will also delete all states and cards in them.  This is unrecoverable.  Are you sure you want to continue?
+               .alert.alert-danger
+                  strong WARNING!
+                  p Deleting Queues will also delete all states and cards in them.  This is unrecoverable.  Are you sure you want to continue?
             .modal-footer
                button.btn.btn-default(data-dismiss='modal') Cancel
                button.btn.btn-primary(data-bind='click: confirmDeleteQueue') Do it!
