@@ -1,7 +1,8 @@
-define(['navigation', 'services/queueService'], function(navigation, queueService) {
+define(['navigation', 'services/queueService', 'ui/queueManagementUI'], function(navigation, queueService, queueManagementUI) {
    var QueueManagement = function() {
       var self = this;
       self.queues = ko.observableArray();
+      self.queueToBeDeleted = ko.observable();
 
       var repopulateQueues = function() {
          queueService.getAllQueues(function(data) {
@@ -10,6 +11,8 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       };
 
       self.viewAttached = function() {
+         self.queueToBeDeleted(null);
+
          repopulateQueues();
       };
 
@@ -22,7 +25,15 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       };
 
       self.deleteQueue = function(queueToBeDeleted) {
-         queueService.deleteQueue(queueToBeDeleted._id, repopulateQueues);
+         self.queueToBeDeleted(queueToBeDeleted);
+         queueManagementUI.showDeleteConfirmation();
+      };
+
+      self.confirmDeleteQueue = function() {
+         queueService.deleteQueue(self.queueToBeDeleted()._id, function() { 
+            repopulateQueues(); 
+            queueManagementUI.hideDeleteConfirmation();
+         });
       };
    };
    return new QueueManagement();

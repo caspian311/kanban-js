@@ -16,3 +16,16 @@ div(data-bind='page: { id: "queueManagement", title: "Queue Management", withOnS
             td.big(data-bind='text: description, click: $parent.openQueue')
             td
                button.btn.btn-sm.btn-danger.glyphicon.glyphicon-remove.glyphicon-white(data-bind='click: $parent.deleteQueue', title='Delete queue')
+
+   .modal.fade#queue-delete-confirmation-dialog
+      .modal-dialog
+         .modal-content
+            .modal-header
+               button.close(data-dismiss='modal', type='button', aria-hidden='true') &times;
+               h4.modal-title Are you sure?
+            .modal-body
+               p Deleting Queues will also delete all states and cards in them.  This is unrecoverable.  Are you sure you want to continue?
+            .modal-footer
+               button.btn.btn-default(data-dismiss='modal') Cancel
+               button.btn.btn-primary(data-bind='click: confirmDeleteQueue') Do it!
+
