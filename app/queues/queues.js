@@ -47,6 +47,12 @@
             response.json({ message: 'worky!' });
          });
       };
+
+      this.del = function(request, response) {
+         queuesDb.deleteQueue(request.params['id'], function() {
+            response.json({ message: 'worky!' });
+         });
+      };
    };
 
    module.exports = new Queues();
