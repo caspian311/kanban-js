@@ -18,17 +18,13 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
             errors.push('Invalid queue name');
          }
 
-         if (!self.description()) {
-            errors.push('Invalid queue description');
-         }
-
          if (self.states().length == 0) {
             errors.push('Every queue must have at least one state');
          }
          return errors;
       });
       self.isValid = ko.computed(function() {
-         return self.name() && self.description() && self.states().length > 0
+         return self.name() && self.states().length > 0
       });
 
       self.title = ko.computed(function() {
