@@ -3,10 +3,14 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       var self = this;
       self.queues = ko.observableArray();
 
-      self.viewAttached = function() {
+      var repopulateQueues = function() {
          queueService.getAllQueues(function(data) {
             self.queues(data);
          });
+      };
+
+      self.viewAttached = function() {
+         repopulateQueues();
       };
 
       self.createQueue = function() {
@@ -18,7 +22,7 @@ define(['navigation', 'services/queueService'], function(navigation, queueServic
       };
 
       self.deleteQueue = function(queueToBeDeleted) {
-         queueService.deleteQueue(queueToBeDeleted._id, self.viewAttached);
+         queueService.deleteQueue(queueToBeDeleted._id, repopulateQueues);
       };
    };
    return new QueueManagement();
