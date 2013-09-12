@@ -7,17 +7,17 @@ div(data-bind='page: { id: "editQueue", title: "Queue Management", withOnShow: b
       .form-group
          label.col-lg-2.control-label(for='name') Name
          .col-lg-10
-            input.form-control#name(type='text', placeholder='', data-bind='value: name')
+            input.form-control#name(type='text', placeholder='', data-bind='value: name, valueUpdate: "keyup"')
       .form-group
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
-            textarea.form-control#description(name='description', data-bind='value: description', rows='3')
+            textarea.form-control#description(name='description', data-bind='value: description, valueUpdate: "keyup"', rows='3')
       .form-group
          label.col-lg-2.control-label(for='description') States
          .col-lg-10
 
             .input-group
-               input.form-control(type='text', data-bind='value: newStateName')
+               input.form-control(type='text', data-bind='value: newStateName, valueUpdate: "keyup"')
                span.input-group-btn
                   button.btn.btn-default.glyphicon.glyphicon-plus-sign(data-bind='click: addState, disable: !$data.validStateName()')
             ul.list-group(data-bind='sortable: states')
