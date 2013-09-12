@@ -113,5 +113,24 @@
             });
          });
       });
+
+      describe('#deleteQueue', function() {
+         it('should remove specified queue', function(done) {
+            var queue1 = { _id: new ObjectID(), name: 'to be deleted' };
+            var queue2 = { _id: new ObjectID(), name: 'to be kept' };
+
+            queuesDb.addQueue(queue1, function() {
+               queuesDb.addQueue(queue2, function() {
+                  queuesDb.deleteQueue(queue1._id.toString(), function() {
+                     queuesDb.allQueues(function(remainingQueues) {
+                        remainingQueues.should.have.length(1);
+                        done();
+                     });
+                  });
+               });
+            });
+         });
+      });
+
    });
 })();

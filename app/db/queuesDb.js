@@ -80,6 +80,14 @@
             });
          });
       };
+
+      self.deleteQueue = function(id, callback) { 
+         base.inConnection(function(db, done) {
+            db.collection('queues').remove({ _id: new ObjectID(id) }, function() {
+               callback(); 
+            });
+         });
+      };
    };
 
    module.exports = new Queues();

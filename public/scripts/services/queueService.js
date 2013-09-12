@@ -27,6 +27,15 @@ define(function() {
             error: errorHandler
          });
       };
+
+      this.deleteQueue = function(id, callback, errorHandler) {
+         return $.ajax({
+            url: '/queues/' + id,
+            type: 'DELETE',
+            success: callback,
+            error: errorHandler
+         });
+      };
    };
    return new QueueService();
 });
