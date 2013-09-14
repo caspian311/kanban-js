@@ -50,10 +50,26 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          return s1.orderBy < s2.orderBy ? -1 : s1.orderBy > s2.orderBy ? 1 : 0;
       };
 
+      var Card = function(card) {
+         var self = this;
+         self.id = ko.observable(card._id);
+         self.name = ko.observable(card.name);
+         self.description = ko.observable(card.description);
+         self.orderBy = ko.observable(card.orderBy);
+      };
+
+      var createCard = function(card) {
+         return new Card(card);
+      };
+
       var State = function(state) {
          var self = this;
          self.name = ko.observable(state.name);
          self.isEditing = ko.observable(false);
+         self.cards = ko.observableArray();
+         if (state.cards) {
+            self.cards($.map(state.cards, createCard));
+         }
          self.isReadOnly = ko.computed(function() {
             return !self.isEditing();
          });
@@ -107,6 +123,14 @@ define(['services/queueService', 'navigation'], function(queueService, navigatio
          data.states = $.map(self.states(), function(state, index) {
             return {
                name: state.name(),
+               cards: $.map(state.cards(), function(card) {
+                  return {
+                     _id: card.id(),
+                     name: card.name(),
+                     description: card.description(),
+                     orderBy: card.orderBy()
+                  };
+               }),
                orderBy: index
             };
          });
