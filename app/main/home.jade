@@ -8,9 +8,9 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
             a(data-bind='text: name, click: $parent.selectQueue')
 
       div(data-bind='with: selectedQueue')
-         .row(data-bind='foreach: states')
+         .row(data-bind='foreach: { data: states, afterRender: adjustStateWidth }')
             span.states-header(data-bind='text: name')
-         .row(data-bind='foreach: states')
+         .row(data-bind='foreach: { data: states, afterRender: adjustStateWidth }')
             .states(data-bind='sortable: { data: cards, afterMove: $parents[1].cardMoved }')
                .card.draggable
                   .title(data-bind='text: name')

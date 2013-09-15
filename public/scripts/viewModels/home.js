@@ -8,6 +8,7 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       this.name(json.name);
       this.description(json.description);
 
+
       this.getData = function() {
          return { 
             id: this.id(),
@@ -21,9 +22,11 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       this.id = ko.observable();
       this.name = ko.observable();
       this.cards = ko.observableArray([]);
+      this.orderBy = ko.observable();
 
       this.id(json._id);
       this.name(json.name);
+      this.orderBy(json.orderBy);
       if (json.cards) {
          this.cards($.map(json.cards, function(card) { return new Card(card); }));
       }
@@ -42,37 +45,43 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
    }
 
    var Queue = function(json) {
-      this.id = ko.observable();
-      this.name = ko.observable();
-      this.description = ko.observable();
-      this.states = ko.observableArray([]);
-      this.isSelected = ko.observable();
+      var self = this;
+      self.id = ko.observable();
+      self.name = ko.observable();
+      self.description = ko.observable();
+      self.states = ko.observableArray([]);
+      self.isSelected = ko.observable();
 
-      this.id(json._id);
-      this.name(json.name);
-      this.description(json.description);
-      this.isSelected(false);
+      self.id(json._id);
+      self.name(json.name);
+      self.description(json.description);
+      self.isSelected(false);
 
       var sortByOrderBy = function(s1, s2) {
          return s1.orderBy < s2.orderBy ? -1 : s1.orderBy > s2.orderBy ? 1 : 0;
       };
 
       if (json.states) {
-         this.states($.map(json.states.sort(sortByOrderBy), function(state) { return new State(state); }));
+         self.states($.map(json.states.sort(sortByOrderBy), function(state) { return new State(state); }));
       }
 
-      this.getData = function() {
+      self.getData = function() {
          return {
-            id: this.id(),
-            name: this.name(),
-            description: this.description(),
-            states: $.map(this.states(), function(state, index) {
+            id: self.id(),
+            name: self.name(),
+            description: self.description(),
+            states: $.map(self.states(), function(state, index) {
                var transformedState = state.getData();
                transformedState.orderBy = index;
                return transformedState;
             })
          };
       };
+
+      self.adjustStateWidth = function(domElements, currentState) {
+         var individualWidth = $(domElements).parent().width() / self.states().length;
+         $(domElements).width(individualWidth);
+      }
    };
 
    var Home = function() {
@@ -122,6 +131,7 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       self.newCard = function() {
          navigation.goTo('#newCard', { stateId: self.selectedQueue().states()[0].id() });
       };
+
    };
 
    return new Home();
