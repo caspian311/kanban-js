@@ -4,4 +4,5 @@ reports
 chromedriver.log
 node_modules
 Gemfile.lock
+public/css/*
 .DS_Store
