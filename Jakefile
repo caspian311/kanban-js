@@ -1,6 +1,7 @@
 (function() {
    var exec = require('child_process').exec
       , fs = require('fs')
+      , compile = require('./build-utils/compile')
 
    var run = function(command) {
       exec(command, function(err, output) {
@@ -31,15 +32,10 @@
 
    desc('Compile all LESS files');
    task('less', function() {
-      var files = fs.readdirSync('./less-src');
-      for (var i in files) {
-         var lessFile = files[i];
-         var cssFile = lessFile.substr(0, lessFile.indexOf('.less')) + '.css';
-
-         var lessFileFullPath = './less-src/' + lessFile;
-         var cssFileFullPath = './public/css/' + cssFile;
-
-         run('./node_modules/.bin/lessc ' + lessFileFullPath + ' > ' + cssFileFullPath);
-      }
+      compile('./less-src', './public/css', function(srcFile, destFile) {
+         var cssFile = destFile.substr(0, destFile.indexOf('.less')) + '.css';
+         run('./node_modules/.bin/lessc ' + srcFile + ' > ' + cssFile);
+      });
    });
+
 })()
