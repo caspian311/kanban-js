@@ -23,8 +23,12 @@ var walk = function(dir, done) {
                   }
                });
             } else {
-               results.push(file);
-               if (!--pending) done(null, results);
+               if (file.indexOf('.swp') == -1) {
+                  results.push(file);
+               }
+               if (!--pending) {
+                  done(null, results);
+               }
             }
          });
       });

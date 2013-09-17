@@ -1,3 +1,9 @@
+@borderColor: #c0c0c0;
+@headerLinkColor: #999;
+@whiteToGreyGradient: linear-gradient(to bottom, 
+                        rgba(240,240,240,1) 0%,
+                        rgba(255,255,255,1) 50%);
+
 td.big {
    width: 80%;
 }
@@ -23,7 +29,7 @@ td.big {
 }
 
 .greeting {
-   color: #999;
+   color: @headerLinkColor;
    .separater {
       display: inline;
       margin-left: 10px;;
@@ -32,7 +38,7 @@ td.big {
    }
 
    a {
-      color: #999;
+      color: @headerLinkColor;
 
       &:hover {
          color: #fff;
@@ -45,7 +51,7 @@ td.big {
 .states {
    border-width: 0px 1px 0px 0px;
    border-style: solid;
-   border-color: #c0c0c0;
+   border-color: @borderColor;
    float: left;
    width: 200px;
    height: 500px;
@@ -71,10 +77,8 @@ td.big {
 }
 
 .card {
-   background: linear-gradient(to bottom, 
-               rgba(240,240,240,1) 0%,
-               rgba(255,255,255,1) 50%);
-   border: solid 1px #c0c0c0;
+   background: @whiteToGreyGradient;
+   border: solid 1px @borderColor;
    border-radius: 5px;
    margin: 5px;
    padding: 5px;
@@ -86,7 +90,7 @@ td.big {
    .separater {
       border-style: solid;
       border-width: 0px 0px 1px 0px;
-      border-color: #c0c0c0;
+      border-color: @borderColor;
       margin: 0px -5px 0px -5px;
    }
 }
