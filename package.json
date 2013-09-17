@@ -19,7 +19,8 @@
       "sinon": "1.5.0",
       "cucumber-js": "git://github.com/cucumber/cucumber-js.git#0a62aea",
       "zombie": "2.0.0-alpha21",
-      "less": "1.4.2"
+      "less": "1.4.2",
+      "coffee-script": "1.6.3"
    },
    "keywords": [ "kanban" ],
    "main": "index",
