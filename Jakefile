@@ -13,7 +13,7 @@
    };
 
    desc('Run all tests');
-   task('default', ['test']);
+   task('default', ['compile', 'test']);
 
    desc('Run all unit tests');
    task('test', function() {
