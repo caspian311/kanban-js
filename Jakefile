@@ -30,6 +30,9 @@
       run('NODE_ENV=cukes ./node_modules/.bin/cucumber.js --format pretty --tags=@wip');
    });
 
+   desc('Compile all the things');
+   task('compile', ['less', 'coffee']);
+
    desc('Compile all coffee-script files');
    task('coffee', function() {
       run('./node_modules/.bin/coffee --compile --output app src/')
