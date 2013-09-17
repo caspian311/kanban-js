@@ -9,7 +9,7 @@
 ### make sure that the database has been started
 ```$ mongod```
 
-### run tests
+### compile and run tests
 ```$ jake```
 
 ### start server
