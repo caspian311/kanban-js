@@ -5,4 +5,5 @@ chromedriver.log
 node_modules
 Gemfile.lock
 public/css/*
+app/*
 .DS_Store
