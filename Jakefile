@@ -31,11 +31,22 @@
    });
 
    desc('Compile all the things');
-   task('compile', ['less', 'coffee']);
+   task('compile', ['less', 'coffee', 'copy views']);
 
    desc('Compile all coffee-script files');
    task('coffee', function() {
       run('./node_modules/.bin/coffee --compile --output app src/')
+   });
+
+   desc('copy all jade files over to app folder');
+   task('copy views', function() {
+      compile('src', 'app', function(srcFile, destFile) {
+         if (srcFile.indexOf('jade') != -1) {
+            var folder = destFile.substr(0, destFile.lastIndexOf('/'));
+            run('mkdir -p ' + folder);
+            run('cp ' + srcFile + ' ' + destFile);
+         }
+      })
    });
 
    desc('Compile all LESS files');
