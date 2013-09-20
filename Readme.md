@@ -9,11 +9,14 @@
 ### make sure that the database has been started
 ```$ mongod```
 
-### compile and run tests
+### compile backend and run all unit tests
 ```$ jake```
 
 ### start server
 ```$ node app.js```
+
+### run all cucumber tests
+```$ jake test:cukes```
 
 ### open browser to site
 ```$ google-chrome http://localhost:3000```
