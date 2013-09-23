@@ -47,51 +47,42 @@ td.big {
    }
 }
 
-
-.states {
-   border-width: 0px 1px 0px 0px;
-   border-style: solid;
-   border-color: @borderColor;
-   float: left;
-   width: 200px;
-   height: 500px;
-   padding: 5px;
-}
-
-.states:last-child {
-   border-width: 0px 0px 0px 0px;
-}
-
-.states-header {
-   float: left;
-   width: 200px;
-}
-
-.states-header {
-   font-weight: bold;
-   text-align: center;
-}
-
-.state {
-   padding: 10px;
-}
-
-.card {
-   background: @whiteToGreyGradient;
-   border: solid 1px @borderColor;
-   border-radius: 5px;
-   margin: 5px;
-   padding: 5px;
-
-   .title {
-      font-weight: bold;
+#homePage {
+   .states {
+      border-width: 0px 1px 0px 0px;
+      border-style: solid;
+      border-color: @borderColor;
+      float: left;
+      height: 500px;
    }
 
-   .separater {
-      border-style: solid;
-      border-width: 0px 0px 1px 0px;
-      border-color: @borderColor;
-      margin: 0px -5px 0px -5px;
+   .states:last-child {
+      border-width: 0px 0px 0px 0px;
+   }
+
+   .states-header {
+      float: left;
+      font-weight: bold;
+      text-align: center;
+   }
+
+   .card {
+      background: @whiteToGreyGradient;
+      border: solid 1px @borderColor;
+      border-radius: 5px;
+      margin: 5px;
+      padding: 5px;
+
+      .title {
+         font-weight: bold;
+      }
+
+      .separater {
+         border-style: solid;
+         border-width: 0px 0px 1px 0px;
+         border-color: @borderColor;
+         margin: 0px -5px 0px -5px;
+      }
    }
 }
 
