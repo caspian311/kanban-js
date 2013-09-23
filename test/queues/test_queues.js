@@ -81,6 +81,9 @@
          it('should update an existing queue', function() {
             var id = '4e4e1638c85e808431000003';
             var request = { 
+               user: {
+                  _id: new ObjectID()
+               },
                body: { 
                   id: id,
                   name: 'name',
@@ -91,6 +94,7 @@
             };
             var expectedQueue = {
                _id: new ObjectID(id),
+               userId: request.user._id,
                name: 'name',
                description: 'desc',
                states: [{ _id: '123', name: 'abc', cards: [] }],
@@ -103,9 +107,7 @@
          });
 
          it('should response with positive message', function() {
-            var request = { body: {
-               states: []
-            } };
+            var request = { user: {}, body: { states: [] } };
             var response = { json: sinon.spy() };
 
             queues.put(request, response);

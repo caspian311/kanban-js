@@ -30,6 +30,7 @@ class Queues
    put: (request, response) ->
       queue =
          _id: new ObjectID(request.body.id)
+         userId: request.user._id,
          name: request.body.name
          description: request.body.description
          states: request.body.states.map mapState
