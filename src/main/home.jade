@@ -1,6 +1,6 @@
 
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
-   .container
+   .container(id='homePage')
       button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
 
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
@@ -9,7 +9,7 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
 
       div(data-bind='with: selectedQueue')
          .row(data-bind='foreach: { data: states, afterRender: adjustStateWidth }')
-            span.states-header(data-bind='text: name')
+            .states-header(data-bind='text: name')
          .row(data-bind='foreach: { data: states, afterRender: adjustStateWidth }')
             .states(data-bind='sortable: { data: cards, afterMove: $parents[1].cardMoved }')
                .card.draggable
