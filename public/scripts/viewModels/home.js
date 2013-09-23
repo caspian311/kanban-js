@@ -78,9 +78,10 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
          };
       };
 
-      self.adjustStateWidth = function(domElement, currentState) {
-         var individualWidth = kanbanjs.getWidthOfParent(domElement) / self.states().length;
-         kanbanjs.setWidth(domElement, individualWidth - 10);
+      self.adjustStateWidth = function(domElements, currentState) {
+         var domElement = domElements[1];
+         var individualWidth = (kanbanjs.getWidthOfParent(domElement) / self.states().length) - 10;
+         kanbanjs.setWidth(domElement, individualWidth);
       }
    };
 
