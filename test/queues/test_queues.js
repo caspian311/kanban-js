@@ -36,6 +36,9 @@
       describe('#post', function() {
          it('should create new queue', function() {
             var request = { 
+               user: {
+                  _id: new ObjectID()
+               },
                body: { 
                   id: null,
                   name: 'name',
@@ -45,6 +48,7 @@
             };
             var expectedQueue = {
                name: 'name',
+               userId: request.user._id,
                description: 'desc',
                states: [{ name: 'abc', cards: [] }]
             };
@@ -52,6 +56,7 @@
             queues.post(request, { redirect: function() {} });
 
             var receivedQueue = queuesDb.addQueue.args[0][0];
+            receivedQueue.userId.should.equal(expectedQueue.userId);
             receivedQueue.name.should.equal(expectedQueue.name);
             receivedQueue.description.should.equal(expectedQueue.description);
             receivedQueue.states.length.should.equal(1);
@@ -61,9 +66,7 @@
          });
 
          it('should respond with positive message', function() {
-            var request = { body: {
-               states: []
-            } };
+            var request = { user: {}, body: { states: [] } };
             var response = { json: sinon.spy() };
 
             queues.post(request, response);
