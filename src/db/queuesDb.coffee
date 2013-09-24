@@ -2,7 +2,11 @@ base = require './base'
 ObjectID = require('mongodb').ObjectID
 
 class Queues
-   queuesForUser: () ->
+   queuesForUser: (userId, callback) ->
+      base.inConnection (db, done) ->
+         db.collection('queues').find({ userId: userId }).toArray (err, docs) ->
+            callback docs
+            done()
 
    allQueues: (callback) ->
       base.inConnection (db, done) ->

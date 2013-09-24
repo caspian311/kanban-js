@@ -21,7 +21,7 @@
          });
       });
 
-      describe('#addQueue', function() {
+     describe('#addQueue', function() {
          it('should add a queue', function(done) {
             queuesDb.addQueue({name: 'foo'}, function(newQueue) {
                assert(newQueue, 'should have created the new Queue');
@@ -129,6 +129,26 @@
                   });
                });
             });
+         });
+      });
+
+      describe('#queuesForUser', function() {
+         it('only find queues with same user id', function(done) {
+            var userId = new ObjectID();
+            var otherId = new ObjectID();
+
+            queuesDb.addQueue({ name: 'one', userId: otherId  }, function() {
+               queuesDb.addQueue({ name: 'two', userId: userId }, function() {
+                  queuesDb.addQueue({ name: 'three', userId: otherId }, function() {
+                     queuesDb.queuesForUser(userId, function(docs) {
+                        docs.should.have.length(1);
+                        docs[0].name.should.equal('two');
+                        done();
+                     });
+                  });
+               });
+            });
+
          });
       });
 
