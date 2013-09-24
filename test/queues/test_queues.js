@@ -5,14 +5,14 @@
 
    describe('queues', function() {
       beforeEach(function() {
-         this.allQueuesStub = sinon.stub(queuesDb, 'allQueues');
+         this.queuesForUserStub = sinon.stub(queuesDb, 'queuesForUser');
          sinon.stub(queuesDb, 'addQueue');
          sinon.stub(queuesDb, 'updateQueue');
          sinon.stub(queuesDb, 'deleteQueue');
       });
 
       afterEach(function() {
-         queuesDb.allQueues.restore();
+         queuesDb.queuesForUser.restore();
          queuesDb.addQueue.restore();
          queuesDb.updateQueue.restore();
          queuesDb.deleteQueue.restore();
@@ -20,16 +20,23 @@
 
       describe('#get', function() {
          it('should get all queues in json format', function() {
-            var response = { 
-               json: sinon.spy()
-            };
+            var request = { user: { _id: new ObjectID() } };
+            var response = { json: sinon.spy() };
 
-            queues.get({}, response);
+            queues.get(request, response);
 
             var allQueues = [{foo: 'bar'}, {fuzz: 'bucket'}];
-            this.allQueuesStub.args[0][0](allQueues);
+            this.queuesForUserStub.args[0][1](allQueues);
 
             response.json.args[0][0].should.deep.equal(allQueues);
+         });
+
+         it('should pass in userid as parameter', function() {
+            var request = { user: { _id: new ObjectID() } };
+
+            queues.get(request, {});
+
+            this.queuesForUserStub.args[0][0].should.equal(request.user._id);
          });
       });
 

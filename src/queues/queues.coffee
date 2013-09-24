@@ -3,7 +3,7 @@ queuesDb = require '../db/queuesDb'
 
 class Queues
    get: (request, response) ->
-      queuesDb.allQueues (queues) ->
+      queuesDb.queuesForUser request.user._id, (queues) ->
          response.json queues
 
    post: (request, response) ->

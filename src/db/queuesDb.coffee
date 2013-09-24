@@ -2,6 +2,8 @@ base = require './base'
 ObjectID = require('mongodb').ObjectID
 
 class Queues
+   queuesForUser: () ->
+
    allQueues: (callback) ->
       base.inConnection (db, done) ->
          db.collection('queues').find().toArray (err, docs) ->
