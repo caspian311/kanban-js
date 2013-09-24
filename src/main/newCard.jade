@@ -13,7 +13,7 @@ div(data-bind='page: { id: "newCard", title: "New card", withOnShow: bindModel }
 
    .btn-toolbar
       button.pull-right.btn.btn-default(data-bind='click: cancel') Cancel
-      button.pull-right.btn.btn-primary(data-bind='click: save') Create card
+      button.pull-right.btn.btn-primary(data-bind='click: save, disable: !isValid()') Create card
 
 
    .alert.alert-block.alert-warning.pull-left(data-bind='visible: !$data.isValid()')
