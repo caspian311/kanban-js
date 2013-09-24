@@ -1,7 +1,7 @@
 
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container(id='homePage')
-      .pull-right(data-bind='visible: canCreateCard')
+      .pull-right(data-bind='visible: hasQueues')
          button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
 
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
