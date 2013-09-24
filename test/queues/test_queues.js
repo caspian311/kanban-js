@@ -5,14 +5,14 @@
 
    describe('queues', function() {
       beforeEach(function() {
-         this.allQueuesStub = sinon.stub(queuesDb, 'allQueues');
+         this.queuesForUserStub = sinon.stub(queuesDb, 'queuesForUser');
          sinon.stub(queuesDb, 'addQueue');
          sinon.stub(queuesDb, 'updateQueue');
          sinon.stub(queuesDb, 'deleteQueue');
       });
 
       afterEach(function() {
-         queuesDb.allQueues.restore();
+         queuesDb.queuesForUser.restore();
          queuesDb.addQueue.restore();
          queuesDb.updateQueue.restore();
          queuesDb.deleteQueue.restore();
@@ -20,22 +20,32 @@
 
       describe('#get', function() {
          it('should get all queues in json format', function() {
-            var response = { 
-               json: sinon.spy()
-            };
+            var request = { user: { _id: new ObjectID() } };
+            var response = { json: sinon.spy() };
 
-            queues.get({}, response);
+            queues.get(request, response);
 
             var allQueues = [{foo: 'bar'}, {fuzz: 'bucket'}];
-            this.allQueuesStub.args[0][0](allQueues);
+            this.queuesForUserStub.args[0][1](allQueues);
 
             response.json.args[0][0].should.deep.equal(allQueues);
+         });
+
+         it('should pass in userid as parameter', function() {
+            var request = { user: { _id: new ObjectID() } };
+
+            queues.get(request, {});
+
+            this.queuesForUserStub.args[0][0].should.equal(request.user._id);
          });
       });
 
       describe('#post', function() {
          it('should create new queue', function() {
             var request = { 
+               user: {
+                  _id: new ObjectID()
+               },
                body: { 
                   id: null,
                   name: 'name',
@@ -45,6 +55,7 @@
             };
             var expectedQueue = {
                name: 'name',
+               userId: request.user._id,
                description: 'desc',
                states: [{ name: 'abc', cards: [] }]
             };
@@ -52,6 +63,7 @@
             queues.post(request, { redirect: function() {} });
 
             var receivedQueue = queuesDb.addQueue.args[0][0];
+            receivedQueue.userId.should.equal(expectedQueue.userId);
             receivedQueue.name.should.equal(expectedQueue.name);
             receivedQueue.description.should.equal(expectedQueue.description);
             receivedQueue.states.length.should.equal(1);
@@ -61,9 +73,7 @@
          });
 
          it('should respond with positive message', function() {
-            var request = { body: {
-               states: []
-            } };
+            var request = { user: {}, body: { states: [] } };
             var response = { json: sinon.spy() };
 
             queues.post(request, response);
@@ -78,6 +88,9 @@
          it('should update an existing queue', function() {
             var id = '4e4e1638c85e808431000003';
             var request = { 
+               user: {
+                  _id: new ObjectID()
+               },
                body: { 
                   id: id,
                   name: 'name',
@@ -88,6 +101,7 @@
             };
             var expectedQueue = {
                _id: new ObjectID(id),
+               userId: request.user._id,
                name: 'name',
                description: 'desc',
                states: [{ _id: '123', name: 'abc', cards: [] }],
@@ -100,9 +114,7 @@
          });
 
          it('should response with positive message', function() {
-            var request = { body: {
-               states: []
-            } };
+            var request = { user: {}, body: { states: [] } };
             var response = { json: sinon.spy() };
 
             queues.put(request, response);

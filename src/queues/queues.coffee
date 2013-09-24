@@ -3,7 +3,7 @@ queuesDb = require '../db/queuesDb'
 
 class Queues
    get: (request, response) ->
-      queuesDb.allQueues (queues) ->
+      queuesDb.queuesForUser request.user._id, (queues) ->
          response.json queues
 
    post: (request, response) ->
@@ -14,6 +14,7 @@ class Queues
 
    parseQueue = (request) ->
       queue =
+         userId: request.user._id,
          name: request.body.name
          description: request.body.description
          states: request.body.states.map mapState
@@ -29,6 +30,7 @@ class Queues
    put: (request, response) ->
       queue =
          _id: new ObjectID(request.body.id)
+         userId: request.user._id,
          name: request.body.name
          description: request.body.description
          states: request.body.states.map mapState
