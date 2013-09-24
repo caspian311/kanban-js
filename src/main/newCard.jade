@@ -5,7 +5,7 @@ div(data-bind='page: { id: "newCard", title: "New card", withOnShow: bindModel }
       .form-group
          label.col-lg-2.control-label(for='name') Name
          .col-lg-10
-            input.form-control#name(type='text', placeholder='', data-bind='value: name')
+            input.form-control#name(type='text', placeholder='', data-bind='value: name, valueUpdate: "keyup"')
       .form-group
          label.col-lg-2.control-label(for='description') Description
          .col-lg-10
@@ -16,3 +16,8 @@ div(data-bind='page: { id: "newCard", title: "New card", withOnShow: bindModel }
       button.pull-right.btn.btn-primary(data-bind='click: save') Create card
 
 
+   .alert.alert-block.alert-warning.pull-left(data-bind='visible: !$data.isValid()')
+      h4 Invalid card
+      p Please be sure to fix the following invalid items:
+         ul(data-bind='foreach: validationErrors')
+            li(data-bind='text: $data')
