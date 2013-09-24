@@ -108,6 +108,8 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
 
          if (self.queues().length > 0) {
             self.selectQueue(self.queues()[0]);
+         } else {
+            self.selectedQueue(null);
          }
       };
 
