@@ -1,7 +1,8 @@
 
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container(id='homePage')
-      button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
+      .pull-right(data-bind='visible: canCreateCard')
+         button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
 
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
          li(data-bind='css: {active: isSelected}')
