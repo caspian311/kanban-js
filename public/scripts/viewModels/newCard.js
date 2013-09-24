@@ -26,6 +26,18 @@ define(['navigation', 'services/cardService'], function(navigation, cardService)
       self.cancel = function() {
          navigation.goTo('#home');
       };
+
+      self.isValid = ko.computed(function() {
+         return self.name();
+      });
+
+      self.validationErrors = ko.computed(function() {
+         var errors = [];
+         if (!self.name()) {
+            errors.push('Invalid card name');
+         }
+         return errors;
+      });
    };
 
    return new NewCard();
