@@ -18,3 +18,9 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
                   .separater
                   span(data-bind='text: description')
 
+   .alert.alert-block.alert-warning(data-bind='visible: !hasQueues()')
+      h4 No boards yet!
+      p
+         | It looks like you don't have any boards yet.  To create a board click on 
+         a(href='#queueManagement') Manage Boards
+         |.
