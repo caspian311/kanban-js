@@ -2,8 +2,8 @@ users = require '../db/users'
 encryptionUtils = require '../../app/authentication/encryption_utils'
 
 class Registration
-   form: (request, response) ->
-      response.render 'form'
+   index: (request, response) ->
+      response.render 'index'
 
    create: (request, response) ->
       user =
