@@ -13,7 +13,7 @@
 ```$ jake```
 
 ### start server
-```$ node app.js```
+```$ node app```
 
 ### run all cucumber tests
 ```$ jake test:cukes```
