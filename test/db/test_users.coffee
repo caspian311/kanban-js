@@ -5,8 +5,8 @@ describe "users", () ->
    cleanUp = (done) ->
       users.removeAllUsers done
 
-   before cleanUp
-   after cleanUp
+   beforeEach cleanUp
+   afterEach cleanUp
 
    describe '#allUsers', () ->
       it 'initially should be empty', (done) ->
