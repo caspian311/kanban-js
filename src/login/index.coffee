@@ -1,11 +1,12 @@
 app = require('express')()
 login = require './login'
+setupViews = require('../../module_helper').setupViews
 
-app.locals.pretty = true;
-app.set 'views', __dirname
+app.locals.pretty = true
+setupViews app, __dirname
 
-app.get '/login', login.form
+app.get '/login', login.index
 app.post '/login', login.submit
 
-module.exports = app;
+module.exports = app
 

@@ -1,9 +1,11 @@
 app = require('express')()
+path = require('path')
 main = require './main'
+setupViews = require('../../module_helper').setupViews
 
 app.locals.pretty = true
 
-app.set 'views', __dirname
+setupViews app, __dirname
 app.get '/', main.main
 
 module.exports = app
