@@ -89,7 +89,7 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       var self = this;
       self.queues = ko.observableArray([]);
       self.selectedQueue = ko.observable();
-      self.canCreateCard = ko.computed(function() {
+      self.hasQueues = ko.computed(function() {
          return self.queues().length > 0;
       });
 
@@ -138,6 +138,9 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
          navigation.goTo('#newCard', { stateId: self.selectedQueue().states()[0].id() });
       };
 
+      self.goToManageBoards = function() {
+         navigation.menuNav('#queueManagement')();
+      };
    };
 
    return new Home();

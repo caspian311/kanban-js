@@ -1,7 +1,7 @@
 
 div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
    .container(id='homePage')
-      .pull-right(data-bind='visible: canCreateCard')
+      .pull-right(data-bind='visible: hasQueues')
          button.btn.btn-default.btn-small.pull-right(data-bind='click: newCard') New card
 
       ul.nav.nav-tabs.nav-justified(data-bind='foreach: queues')
@@ -18,3 +18,9 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
                   .separater
                   span(data-bind='text: description')
 
+   .alert.alert-block.alert-info(data-bind='visible: !hasQueues()')
+      h4 No boards yet!
+      p
+         | It looks like you don't have any boards yet.  To create a board click on 
+         a(data-bind='click: goToManageBoards') Manage Boards
+         |.
