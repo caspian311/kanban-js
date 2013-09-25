@@ -1,5 +1,4 @@
 app = require('express')()
-path = require('path')
 main = require './main'
 setupViews = require('../../module_helper').setupViews
 
