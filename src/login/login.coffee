@@ -2,11 +2,11 @@ passport = require 'passport'
 callbackGenerator = require './callback_generator.js'
 
 class Login
-   form:  (request, response) ->
+   index:  (request, response) ->
       data =
          bad_login: request.query.bad_login
          created_user_successfully: request.query.created_user_successfully
-      response.render 'form', data
+      response.render 'index', data
 
    submit: (request, response, next) ->
       callback = callbackGenerator.generateCallback request, response
