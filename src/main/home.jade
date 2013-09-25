@@ -22,5 +22,5 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
       h4 No boards yet!
       p
          | It looks like you don't have any boards yet.  To create a board click on 
-         a(href='#queueManagement') Manage Boards
+         a(data-bind='click: goToManageBoards') Manage Boards
          |.

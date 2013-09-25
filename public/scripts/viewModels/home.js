@@ -138,6 +138,9 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
          navigation.goTo('#newCard', { stateId: self.selectedQueue().states()[0].id() });
       };
 
+      self.goToManageBoards = function() {
+         navigation.goTo('#queueManagement');
+      };
    };
 
    return new Home();
