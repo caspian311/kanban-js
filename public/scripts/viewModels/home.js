@@ -139,7 +139,7 @@ define(['services/queueService', 'navigation', 'growler'], function(queueService
       };
 
       self.goToManageBoards = function() {
-         navigation.goTo('#queueManagement');
+         navigation.menuNav('#queueManagement')();
       };
    };
 
