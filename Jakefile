@@ -16,7 +16,7 @@
    namespace('test', function() {
       desc('Run all unit tests');
       task('test', [], function() {
-         run('NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --require test/test_helper.js --colors --recursive --compilers coffee:coffee-script');
+         run('NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --require test/test_helper.coffee --colors --recursive --compilers coffee:coffee-script');
       });
 
       desc('Run all cucumber tests');
