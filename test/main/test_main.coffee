@@ -9,5 +9,5 @@ describe 'main', () ->
 
          main.main request, response
 
-         response.render.args[0][0].should.equal('main')
+         response.render.args[0][0].should.equal('index')
 
