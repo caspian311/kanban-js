@@ -1,19 +1,23 @@
 define(['services/queueService', 'navigation', 'growler'], function(queueService, navigation, growler) {
    var Card = function(json) {
-      this.id = ko.observable();
-      this.name = ko.observable();
-      this.description = ko.observable();
+      var self = this;
+      self.id = ko.observable();
+      self.name = ko.observable();
+      self.description = ko.observable();
 
-      this.id(json._id);
-      this.name(json.name);
-      this.description(json.description);
+      self.id(json._id);
+      self.name(json.name);
+      self.description(json.description);
 
+      self.editCard = function() {
+         navigation.goTo('#newCard', { cardId: self.id() });
+      }
 
-      this.getData = function() {
+      self.getData = function() {
          return { 
-            id: this.id(),
-            name: this.name(),
-            description: this.description()
+            id: self.id(),
+            name: self.name(),
+            description: self.description()
          };
       };
    }
