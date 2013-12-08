@@ -38,6 +38,7 @@ class Queues
                   return state._id.equals stateId
                state = matchingStates[0]
 
+               newCard._id = new ObjectID()
                state.cards.push newCard
 
                db.collection('queues').update { '_id': queue._id }, queue, { w: 0 }, callback

@@ -86,14 +86,16 @@ describe "queuesDb", () ->
 
             queuesDb.addCard stateId.toHexString(), { name: cardName }, () ->
 
-               filter = (state) ->
+               theOnesFromThisState = (state) ->
                      return state._id.equals(stateId)
+
                queuesDb.allQueues (allQueues) ->
-                  updatedStates = allQueues[0].states.filter filter
+                  updatedStates = allQueues[0].states.filter theOnesFromThisState
                   updatedState = updatedStates[0]
 
                   assert(updatedState.cards.length is 1, 'should have one card, but had ' + updatedState.cards.length)
-                  updatedState.cards[0].name.should.equal(cardName)
+                  updatedState.cards[0].name.should.equal cardName
+                  assert updatedState.cards[0]._id, 'should have set an id'
 
                   done()
 
