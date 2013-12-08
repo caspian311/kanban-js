@@ -3,10 +3,22 @@ define(['navigation', 'services/cardService'], function(navigation, cardService)
       var self = this;
       self.name = ko.observable();
       self.description = ko.observable();
+      self.stateId = ko.observable();
 
       self.viewAttached = function() {
-         self.name('');
-         self.description('');
+         if (navigation.parameters().cardId) {
+            cardService.loadCard(navigation.parameters().cardId, populateCardForm);
+         } else {
+            populateCardForm({
+                  name: '',
+                  description: '',
+                  stateId: navigation.parameters().stateId,
+               });
+         }
+      };
+
+      var populateCardForm = function(card) {
+         console.log('populate card: ' +  card);
       };
 
       var getData = function() {
