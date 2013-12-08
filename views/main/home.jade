@@ -16,7 +16,7 @@ div(data-bind='page: { id: "home", title: "Home", withOnShow: bindModel }')
                .card.draggable
                   .title(data-bind='text: name')
                   .separater
-                  span(data-bind='text: description')
+                  .description(data-bind='text: description')
 
    .alert.alert-block.alert-info(data-bind='visible: !hasQueues()')
       h4 No boards yet!
