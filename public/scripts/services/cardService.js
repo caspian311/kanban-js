@@ -11,6 +11,15 @@ define(function() {
             failure: errorHandler
          });
       };
+
+      this.loadCard = function(cardId, callback, errorHandler) {
+         return $.ajax({
+            url: '/cards/' + cardId,
+            type: 'GET',
+            success: callback,
+            failure: errorHandler
+         });
+      }
    };
 
    return new CardService();
