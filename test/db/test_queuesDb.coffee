@@ -124,3 +124,29 @@ describe "queuesDb", () ->
                      docs[0].name.should.equal('two')
                      done()
 
+   describe '#getCard', () ->
+      it 'pass back the specified card', (done) ->
+         cardId = 456
+         queue = 
+               states: [
+                  cards: [
+                     {
+                        _id: 123,
+                        name: 'first'
+                     },
+                     {
+                        _id: cardId,
+                        name: 'second'
+                     },
+                     {
+                        _id: 789,
+                        name: 'third'
+                     }
+                  ]
+               ]
+
+         queuesDb.addQueue queue, () ->
+            queuesDb.getCard cardId, (foundCard) ->
+               foundCard.name.should.equal 'second'
+               done()
+
