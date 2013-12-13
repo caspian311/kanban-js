@@ -1,12 +1,12 @@
    cards = require('../../app/cards/cards')
-   queuesDb = require('../../app/db/queuesDb')
+   cardsDb = require('../../app/db/cardsDb')
 
    describe 'cards', () ->
       beforeEach () ->
-         this.getCardStub = sinon.stub(queuesDb, 'getCard')
+         this.getCardStub = sinon.stub(cardsDb, 'getCard')
 
       afterEach () ->
-         queuesDb.getCard.restore()
+         cardsDb.getCard.restore()
 
       describe '#get:id', () ->
          it 'should return the card in json format', () ->

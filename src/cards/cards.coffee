@@ -1,4 +1,4 @@
-queuesDb = require '../db/queuesDb'
+cardsDb = require '../db/cardsDb'
 
 class Cards
    post: (request, response) ->
@@ -6,11 +6,11 @@ class Cards
          name: request.body.name,
          description: request.body.description
       }
-      queuesDb.addCard request.body.stateId, newCard, () ->
+      cardsDb.addCard request.body.stateId, newCard, () ->
          response.json { message: 'worky!' }
 
    get: (request, response) =>
-      queuesDb.getCard request.params['id'], (data) ->
+      cardsDb.getCard request.params['id'], (data) ->
          response.json data
 
 module.exports = new Cards()
