@@ -1,4 +1,5 @@
 base = require './base'
+inspect = require('util').inspect
 ObjectID = require('mongodb').ObjectID
 
 class Queues
@@ -72,8 +73,16 @@ class Queues
             callback()
 
    getCard: (cardId, callback) ->
-      # TODO
-      callback()
+      base.inConnection (db, done) ->
+         query = { 'states.cards._id': cardId }
+         projection = { 'states.cards.$': 1 }
+
+         db.collection('queues').find(query, projection).toArray (err, docs) ->
+            console.log 'docs: ' + inspect docs[0].states[0].cards
+            card = docs[0]['states'][0]['cards'][0]
+            console.log 'card: ' + inspect card
+            callback card
+            done()
 
 module.exports = new Queues
 

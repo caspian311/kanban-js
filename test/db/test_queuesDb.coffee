@@ -126,24 +126,24 @@ describe "queuesDb", () ->
 
    describe '#getCard', () ->
       it 'pass back the specified card', (done) ->
-         cardId = 456
          queue = 
                states: [
                   cards: [
                      {
-                        _id: 123,
+                        _id: new ObjectID(),
                         name: 'first'
                      },
                      {
-                        _id: cardId,
+                        _id: new ObjectID(),
                         name: 'second'
                      },
                      {
-                        _id: 789,
+                        _id: new ObjectID(),
                         name: 'third'
                      }
                   ]
                ]
+         cardId = queue.states[0].cards[1]._id
 
          queuesDb.addQueue queue, () ->
             queuesDb.getCard cardId, (foundCard) ->
