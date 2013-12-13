@@ -78,9 +78,7 @@ class Queues
          projection = { 'states.cards.$': 1 }
 
          db.collection('queues').find(query, projection).toArray (err, docs) ->
-            console.log 'docs: ' + inspect docs[0].states[0].cards
-            card = docs[0]['states'][0]['cards'][0]
-            console.log 'card: ' + inspect card
+            card = (docs[0].states[0].cards.filter (c) -> c._id.equals cardId)[0]
             callback card
             done()
 
