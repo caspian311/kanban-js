@@ -1,25 +1,24 @@
-base = require('./base');
+base = require('./base')
+
 class Users
    allUsers: (callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('users').find().toArray (err, docs) ->
             if err
                throw err
 
             callback docs
-            done()
 
    addUser: (user, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('users').insert user, (err, users) ->
             if err
                throw err
 
             callback users[0]
-            done()
 
    findUserByCredentials: (email, password, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          query = 
             email: email
             password: password
@@ -28,13 +27,11 @@ class Users
                throw err
 
             callback results
-            done()
 
    removeAllUsers: (callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('users').remove {}, () ->
             callback()
-            done()
 
 module.exports = new Users
 

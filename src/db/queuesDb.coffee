@@ -3,31 +3,28 @@ ObjectID = require('mongodb').ObjectID
 
 class Queues
    queuesForUser: (userId, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').find({ userId: userId }).toArray (err, docs) ->
             callback docs
-            done()
 
    allQueues: (callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').find().toArray (err, docs) ->
             if err
                throw err
 
             callback docs
-            done()
 
    addQueue: (queue, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').insert queue, (err, queues) ->
             if err
                throw err
 
             callback queues[0]
-            done()
 
    addCard: (stateId, newCard, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          queryObj =
             'states._id': new ObjectID stateId
          db.collection('queues').findOne queryObj, (err, queue) ->
@@ -42,8 +39,6 @@ class Queues
 
                db.collection('queues').update { '_id': queue._id }, queue, { w: 0 }, callback
 
-               done()
-
    updateQueue: (queue, callback) ->
       if queue.states && queue.states.length > 0
          queue.states = queue.states.map (state) ->
@@ -51,22 +46,20 @@ class Queues
                state._id = new ObjectID state._id
             return state
 
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').update {'_id': queue._id}, queue, (err, numberOfUpdates) ->
             if err
                throw err
 
             callback numberOfUpdates
-            done()
 
    removeAllQueues: (callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').remove {}, () ->
             callback()
-            done()
 
    deleteQueue: (id, callback) ->
-      base.inConnection (db, done) ->
+      base.inConnection (db) ->
          db.collection('queues').remove { _id: new ObjectID(id) }, () ->
             callback()
 
