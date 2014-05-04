@@ -8,7 +8,10 @@ class DbHelper
       return dbName
 
    getConnectionString: () ->
-      return 'mongodb://localhost:27017/' + db()
+      if process.env.MONGODB_URL
+         return process.env.MONGODB_URL
+      else
+         return 'mongodb://localhost:27017/' + db()
 
 module.exports = new DbHelper
 
