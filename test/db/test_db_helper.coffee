@@ -4,9 +4,11 @@
    describe "dbHelper", () ->
       before () ->
          this.origEnv = process.env.NODE_ENV
+         process.env.MONGODB_URL = ''
 
       after () ->
          process.env.NODE_ENV = this.origEnv
+         process.env.MONGODB_URL = ''
 
       describe '#getConnectionString', () ->
          it 'should use kanbanjs if no env is set', () ->
@@ -29,3 +31,11 @@
             connectionString = dbHelper.getConnectionString()
 
             connectionString.should.be.equal(prefix + 'kanbanjs-foo bar baz')
+
+         it 'should use complete env var if available', () ->
+            url = 'mongo://user:pass@hostname:port/dbname'
+            process.env.MONGODB_URL = url
+
+            connectionString = dbHelper.getConnectionString()
+
+            url.should.be.equal connectionString
