@@ -12,10 +12,10 @@
 
    var app = express()
 
+   app.use(express.logger('dev'))
    app.use(express.static(path.join(__dirname, 'public')))
    app.set('view engine', 'jade')
 
-   app.use(express.logger('dev'))
    app.use(express.bodyParser())
    app.use(express.methodOverride())
    app.use(express.favicon())
