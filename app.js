@@ -7,29 +7,46 @@ var express = require('express')
   , login = require('./app/login')
   , logout = require('./app/logout')
   , registration = require('./app/registration')
-  , authentication = require('./app/authentication');
+  , authentication = require('./app/authentication')
+  , cluster = require('cluster')
+  , os = require('os');
 
-var app = express()
+function startApp() {
+   var app = express()
 
-app.use(express.logger('dev'))
-app.use(express.static(path.join(__dirname, 'public')))
-app.set('view engine', 'jade')
+   app.use(express.logger('dev'))
+   app.use(express.static(path.join(__dirname, 'public')))
+   app.set('view engine', 'jade')
 
-app.use(express.bodyParser())
-app.use(express.methodOverride())
-app.use(express.favicon())
-app.use(express.cookieParser())
-app.use(express.session({ secret: 'keyboard cat' }))
+   app.use(express.bodyParser())
+   app.use(express.methodOverride())
+   app.use(express.favicon())
+   app.use(express.cookieParser())
+   app.use(express.session({ secret: 'keyboard cat' }))
 
-app.use(authentication)
+   app.use(authentication)
 
-app.use(main)
-app.use(queues)
-app.use(cards)
-app.use(login)
-app.use(logout)
-app.use(registration)
+   app.use(main)
+   app.use(queues)
+   app.use(cards)
+   app.use(login)
+   app.use(logout)
+   app.use(registration)
 
-http.createServer(app).listen(3000, function(){
-  console.log("Express server listening on port 3000")
-});
+   http.createServer(app).listen(3000, function(){
+     console.log("Express server listening on port 3000")
+   });
+}
+
+if (cluster.isMaster) {
+   for (var i = 0; i < os.cpus().length; i++) {
+      cluster.fork();
+   }
+
+   cluster.on('exit', function(worker, code, signal) {
+      console.log('worker ' + worker.process.pid + ' died');
+   });
+} else {
+   startApp();
+}
+
