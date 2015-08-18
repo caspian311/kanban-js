@@ -10,7 +10,8 @@
 ```$ mongod```
 
 ### compile backend and run all unit tests
-```$ jake```
+```$ jake compile:compile```
+```$ jake test:test```
 
 ### start server
 ```$ node app```
